@@ -1,0 +1,46 @@
+<div class="app-container">
+    <mat-card class="app-card">
+        <mat-card-header>
+            <mat-card-title>Lista de Tarefas</mat-card-title>
+        </mat-card-header>
+  
+        <mat-card-content>
+            <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+              <ng-container matColumnDef="descricao">
+                <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
+                <mat-cell *matCellDef="let tarefa">{{ tarefa.descricao }}</mat-cell>
+              </ng-container>
+        
+              <ng-container matColumnDef="datalimite">
+                <mat-header-cell *matHeaderCellDef>Data Limite</mat-header-cell>
+                <mat-cell *matCellDef="let tarefa">{{ parseDate(tarefa.dataLimite) }}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                <mat-cell *matCellDef="let tarefa">{{ tarefa.status }}</mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="instrucoes">
+                <mat-header-cell *matHeaderCellDef>Intruções</mat-header-cell>
+                <mat-cell *matCellDef="let tarefa">
+                    <button mat-raised-button color="primary" (click)="abrirAnexo(tarefa.anexo)" >Ver Anexo</button>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                <mat-cell *matCellDef="let tarefa">
+                    <button [disabled]="tarefa.status == 'Entregue' " mat-raised-button color="primary" >Enviar Atividade</button>
+                </mat-cell>
+              </ng-container>
+        
+              <!-- Adicione mais colunas conforme necessário -->
+        
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+            </mat-table>
+            
+        </mat-card-content>
+    </mat-card>
+</div>

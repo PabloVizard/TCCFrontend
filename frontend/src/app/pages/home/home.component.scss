@@ -10,3 +10,10 @@
   .title-center{
     align-self: center;
   }
+
+  .centered-and-resized {
+    display: block; /* Certifica-se de que a imagem seja exibida como bloco */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    max-width: 50%; /* Redimensiona para caber no contêiner */
+    height: auto; /* Mantém a proporção original da imagem */
+  }

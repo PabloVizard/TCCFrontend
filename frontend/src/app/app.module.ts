@@ -33,7 +33,8 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SidenavComponent } from './shared/pages/sidenav/sidenav.component';
 import { AuthService } from './core/services/auth.service';
 import { MinhaContaComponent } from './pages/configuracoes/minha-conta/minha-conta.component';
-
+import { TarefaAlunoComponent } from './pages/aluno/tarefa-aluno/tarefa-aluno.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 
@@ -45,6 +46,7 @@ import { MinhaContaComponent } from './pages/configuracoes/minha-conta/minha-con
     HomeComponent,
     SidenavComponent,
     MinhaContaComponent,
+    TarefaAlunoComponent,
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import { MinhaContaComponent } from './pages/configuracoes/minha-conta/minha-con
     MatSidenavModule,
     MatDividerModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

@@ -4,6 +4,7 @@ import { TipoUsuarioEnumerator } from 'src/app/core/enumerators/usuario.enumerat
 import { UsuarioLogadoModel } from 'src/app/core/models/usuario-logado-model';
 import { TurmaService } from 'src/app/core/services/turma.service';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { TurmaModel } from 'src/app/core/models/turma-model';
 
 @Component({
   selector: 'app-sidenav',
@@ -13,7 +14,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 export class SidenavComponent implements OnInit {
   
   usuarioLogado!: UsuarioLogadoModel;
-  turmaUsuario: any;
+  turmaUsuario!: TurmaModel;
   tipoUsuario!: string;
 
   constructor(private authService: AuthService,
@@ -37,7 +38,7 @@ export class SidenavComponent implements OnInit {
   async obterTurmaUsuario(){
     await this.turmaService.obterTurmaDoUsuario(this.usuarioLogado.id).then(result => {
       this.turmaUsuario = result;
-      console.log(this.turmaUsuario)
+      localStorage.setItem("turmaUsuario", this.turmaUsuario.id.toString())
     }, fail => {
       this.toastService.show('fail', "Erro ao buscar turma do usuário!");
     })
