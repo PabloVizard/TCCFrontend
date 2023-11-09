@@ -34,11 +34,6 @@ export class BaseService {
             })
         };
     }
-
-    public obterUsuario() {
-        return JSON.parse(localStorage.getItem('user')!);
-    }
-
     protected obterTokenUsuario(): string {
         return localStorage.getItem('token')!;
     }

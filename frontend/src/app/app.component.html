@@ -7,4 +7,13 @@
   </mat-progress-spinner>
 </div>
 
-<router-outlet></router-outlet>
+
+<ng-container  *ngIf="mostrarMenu">
+  <app-sidenav></app-sidenav>
+</ng-container >
+
+<ng-container  *ngIf="!mostrarMenu">
+  <router-outlet>
+  </router-outlet>
+</ng-container >
+

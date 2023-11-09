@@ -25,6 +25,16 @@ import { HttpLoadingInterceptor } from './core/interceptor/http-request-intercep
 import { RealizarCadastroComponent } from './pages/login/realizar-cadastro/realizar-cadastro.component';
 import { CommonModule } from '@angular/common';
 import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
+import { HomeComponent } from './pages/home/home.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { SidenavComponent } from './shared/pages/sidenav/sidenav.component';
+import { AuthService } from './core/services/auth.service';
+import { MinhaContaComponent } from './pages/configuracoes/minha-conta/minha-conta.component';
+
+
 
 
 @NgModule({
@@ -32,6 +42,9 @@ import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask, provideNgxMas
     AppComponent,
     LoginComponent,
     RealizarCadastroComponent,
+    HomeComponent,
+    SidenavComponent,
+    MinhaContaComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,14 +68,19 @@ import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask, provideNgxMas
     CommonModule, 
     ReactiveFormsModule,
     NgxMaskDirective,
-    NgxMaskPipe
+    NgxMaskPipe,
+    MatSidenavModule,
+    MatDividerModule,
+    MatListModule,
+    MatExpansionModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: HttpLoadingInterceptor,
-    multi: true
+    multi: true,
   },
-  provideNgxMask()],
+  provideNgxMask(),
+  AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

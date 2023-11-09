@@ -1,0 +1,28 @@
+.toolbar-item-spacer {
+    flex: 1 1 auto;
+}
+
+.app-sidenav-tolbar{
+    height: 3.5rem;
+}
+
+.app-sidenav-footer{
+    height: 1.5rem;
+}
+
+.app-sidenav-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin: 0;
+    height: calc(100vh - 5rem);
+}  
+.app-sidenav {
+    width: 230px;
+}
+.app-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+} 

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { ToastService } from 'src/app/shared/services/toast.service';
-import { LoginService } from '../services/login.service';
+import { LoginService } from '../../../core/services/login.service';
+import { ToastService } from 'src/app/core/services/toast.service';
 
 @Component({
   selector: 'app-realizar-cadastro',

@@ -9,9 +9,11 @@
       <mat-card-content>
         <form>
           <mat-form-field class="full-width">
+            <mat-label>E-mail</mat-label>
             <input matInput placeholder="E-mail" name="email" type="email" [(ngModel)]="loginModel.email" required>
           </mat-form-field>
           <mat-form-field class="full-width">
+            <mat-label>Senha</mat-label>
             <input matInput placeholder="Senha" name="senha" [type]="tipoSenha" [(ngModel)]="loginModel.senha" required>
             <button mat-icon-button matSuffix (click)="mostrarSenha()">
               <mat-icon>{{ tipoSenha === 'password' ? 'visibility' : 'visibility_off' }}</mat-icon>

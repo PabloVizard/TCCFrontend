@@ -23,3 +23,44 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         --mdc-snackbar-supporting-text-color: #000;
       }
   }
+
+  .sidebar-container{
+    height: 100%;
+  }
+
+  .login-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #3f51b5; /* Azul */
+  }
+
+  .app-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+  }
+
+  .app-card {
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff !important; /* Azul */
+  }
+
+  button{
+    margin: 2px;
+  }
+  
+  .button-yellow{
+    background-color: gold !important;
+    color: #000 !important;
+  }
+
+  .button-position-end{
+    text-align: end;
+  }
