@@ -5,37 +5,42 @@
         </mat-card-header>
   
         <mat-card-content>
-            <form [formGroup]="minhaContaForm">
+            <form>
                 <div class="form-container">
                     <mat-form-field class="form-row">
                         <mat-label>Nome Completo</mat-label>
-                        <input matInput formControlName="nomeCompleto" placeholder="Nome Completo">
+                        <input matInput [(ngModel)]="minhaContaForm.value.nomeCompleto" placeholder="Nome Completo">
                     </mat-form-field>
                 </div>
 
                 <div class="form-container">
-                        <mat-form-field class="form-row">
-                            <mat-label>CPF</mat-label>
-                            <input matInput [readonly]="true" formControlName="cpf" placeholder="CPF" mask="000.000.000-00">
-                        </mat-form-field>
-                        <mat-form-field class="form-row">
-                            <mat-label>Tipo Usuário</mat-label>
-                            <input matInput [readonly]="true" formControlName="tipoUsuario" placeholder="Tipo de Usuário">
-                        </mat-form-field>
-                    
+                    <mat-form-field class="form-row">
+                        <mat-label>CPF</mat-label>
+                        <input matInput [readonly]="true" [(ngModel)]="minhaContaForm.value.cpf" placeholder="CPF" mask="000.000.000-00">
+                    </mat-form-field>
+                </div>
+
+                <div class="form-container">
+                    <mat-form-field class="form-row">
+                        <mat-label>Tipo Usuário</mat-label>
+                        <input matInput [readonly]="true" [(ngModel)]="minhaContaForm.value.tipoUsuario" placeholder="Tipo de Usuário">
+                    </mat-form-field>
                 </div>
 
                 <div class="form-container">
                     <mat-form-field class="form-row">
                         <mat-label>Senha</mat-label>
-                        <input matInput formControlName="senha" [type]="tipoSenha" placeholder="Senha">
+                        <input matInput [(ngModel)]="minhaContaForm.value.senha" [type]="tipoSenha" placeholder="Senha">
                         <button mat-icon-button matSuffix (click)="mostrarSenha()">
                             <mat-icon>{{ tipoSenha === 'password' ? 'visibility' : 'visibility_off' }}</mat-icon>
-                          </button>
+                        </button>
                     </mat-form-field>
+                </div>
+
+                <div class="form-container">
                     <mat-form-field class="form-row">
                         <mat-label>Confirmação de senha</mat-label>
-                        <input matInput [disabled]="!editarAtivo" [(ngModel)]="confirmacaoSenha" [ngModelOptions]="{standalone: true}" [type]="tipoSenha" placeholder="Confirmação de Senha">
+                        <input matInput [disabled]="!editarAtivo" [(ngModel)]="confirmacaoSenha" [type]="tipoSenha" placeholder="Confirmação de Senha">
                         <button mat-icon-button matSuffix (click)="mostrarSenha()">
                             <mat-icon>{{ tipoSenha === 'password' ? 'visibility' : 'visibility_off' }}</mat-icon>
                         </button>

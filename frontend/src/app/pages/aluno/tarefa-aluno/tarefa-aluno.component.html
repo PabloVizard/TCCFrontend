@@ -5,7 +5,7 @@
         </mat-card-header>
   
         <mat-card-content>
-          <ng-container *ngIf="dataSource.data.length > 0; else semInformacoes">
+          <ng-container *ngIf=" tarefas.length > 0; else semInformacoes">
             <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
               <ng-container matColumnDef="descricao">
                 <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
@@ -37,7 +37,7 @@
               <ng-container matColumnDef="actions">
                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let tarefa">
-                    <button [disabled]="tarefa.status == 'Entregue' " mat-raised-button color="primary" >Enviar Atividade</button>
+                    <button [disabled]="tarefa.status == 'Entregue' " mat-raised-button color="primary" (click)="abrirModalEnviarTarefa(tarefa)">Enviar Atividade</button>
                 </mat-cell>
               </ng-container>
         

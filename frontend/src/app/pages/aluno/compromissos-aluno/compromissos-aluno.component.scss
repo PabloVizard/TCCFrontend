@@ -1,0 +1,9 @@
+.table-and-button-container {
+    display: flex; /* Torna os elementos filhos flexíveis */
+    align-items: center; /* Alinha os elementos verticalmente ao centro */
+  }
+  
+  .table-container {
+    flex: 1; /* A tabela ocupará todo o espaço disponível */
+    margin-right: 16px; /* Adiciona um espaço à direita do botão */
+  }

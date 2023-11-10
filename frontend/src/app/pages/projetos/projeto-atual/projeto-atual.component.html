@@ -1,42 +1,44 @@
 <div class="app-container">
     <mat-card class="app-card">
         <mat-card-header>
-            <mat-card-title>Detalhes do Projeto</mat-card-title>
+            <mat-card-title>Detalhes do TCC</mat-card-title>
         </mat-card-header>
   
         <mat-card-content>
-            <ng-container *ngIf="projeto; else semInformacoesForm">
+            <ng-container *ngIf="orientacao; else semInformacoesForm">
                 <form>
                     <div class="form-container">
                         <mat-form-field class="form-row">
                             <mat-label>Orientador</mat-label>
-                            <input matInput [(ngModel)]="projeto.professorResponsavel.nomeCompleto" name="responsavel" readonly>
+                            <input matInput [(ngModel)]="orientacao.professorOrientador.nomeCompleto" name="responsavel" readonly>
                         </mat-form-field>
+                        
                         <mat-form-field class="form-row">
                             <mat-label>E-mail do Orientador</mat-label>
-                            <input matInput [(ngModel)]="projeto.professorResponsavel.email" name="emailResponsavel" readonly>
+                            <input matInput [(ngModel)]="orientacao.professorOrientador.email" name="emailResponsavel" readonly>
                         </mat-form-field>
                     </div>
+
                     <div class="form-container">
                         <mat-form-field class="form-row">
                             <mat-label>Nome</mat-label>
-                            <input matInput [(ngModel)]="projeto.nome" name="nome" readonly>
+                            <input matInput [(ngModel)]="orientacao.projeto.nome" name="nome" readonly>
+                        </mat-form-field>
+                        <mat-form-field class="form-row">
+                            <mat-label>Status</mat-label>
+                            <input matInput [(ngModel)]="statusAprovacao" name="status" readonly>
                         </mat-form-field>
                     </div>
+                    
 
                     <div class="form-container">
                         <mat-form-field class="form-row">
                             <mat-label>Descrição</mat-label>
-                            <textarea class="text-justify" matInput [(ngModel)]="projeto.descricao" name="descricao" cdkTextareaAutosize #autosize="cdkTextareaAutosize"cdkAutosizeMinRows="1" cdkAutosizeMaxRows="25"></textarea>
+                            <textarea class="text-justify" matInput [(ngModel)]="orientacao.projeto.descricao" name="descricao" cdkTextareaAutosize #autosize="cdkTextareaAutosize"cdkAutosizeMinRows="1" cdkAutosizeMaxRows="25"></textarea>
                         </mat-form-field>
                     </div>
 
-                    <!-- <div class="form-container">
-                        <mat-form-field class="form-row">
-                            <mat-label>Status</mat-label>
-                            <input matInput [(ngModel)]="orientacao.status" name="nome" readonly>
-                        </mat-form-field>
-                    </div> -->
+                    
 
                     
                 </form>
@@ -46,8 +48,8 @@
                 <app-sem-informacoes></app-sem-informacoes>
             </ng-template>
         </mat-card-content>
-        <div class="button-position-end" *ngIf="projeto">
-            <button mat-raised-button color="primary" (click)="enviarEmail(projeto.professorResponsavel.email, projeto.nome)">
+        <div class="button-position-end" *ngIf="orientacao">
+            <button mat-raised-button color="primary" (click)="enviarEmail(orientacao.professorOrientador.email, orientacao.projeto.nome)">
                 Entrar em Contato
             </button>
         </div>

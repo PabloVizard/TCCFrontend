@@ -7,6 +7,8 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { format } from 'date-fns';
 import { UsuarioModel } from 'src/app/core/models/usuario-model';
 import { TarefaAlunoModel } from 'src/app/core/models/tarefa-aluno-model';
+import { MatDialog } from '@angular/material/dialog';
+import { EnviarTarefaAlunoComponent } from './enviar-tarefa-aluno/enviar-tarefa-aluno.component';
 
 @Component({
   selector: 'app-tarefa-aluno',
@@ -14,7 +16,7 @@ import { TarefaAlunoModel } from 'src/app/core/models/tarefa-aluno-model';
   styleUrls: ['./tarefa-aluno.component.scss']
 })
 export class TarefaAlunoComponent implements OnInit {
-  tarefas!: Array<TarefaModel>;
+  tarefas: Array<TarefaModel> = new Array<TarefaModel>();
   tarefasEnviadas!: Array<TarefaAlunoModel>;
   dataSource: any;
   usuarioLogado!: UsuarioModel;
@@ -24,7 +26,8 @@ export class TarefaAlunoComponent implements OnInit {
 
   constructor(private tarefasService: TarefasService,
               private authService: AuthService,
-              private toastService: ToastService){
+              private toastService: ToastService,
+              private dialog: MatDialog){
 
   }
   async ngOnInit() {
@@ -37,10 +40,12 @@ export class TarefaAlunoComponent implements OnInit {
   async obterTarefas(){
     await this.tarefasService.obterTarefasPorTurmaId(this.authService.ObterIdTurmaUsuario()).then(result => {
       console.log(result)
+      console.log(new Date())
       this.tarefas = result;
 
       this.tarefas = result.map((tarefa: TarefaModel) => {
-        var tarefasEnviadasAluno = this.tarefasEnviadas.find(x => x.id == tarefa.id)
+        
+        var tarefasEnviadasAluno = this.tarefasEnviadas.find(x => x.idTarefa == tarefa.id)
         
         var atrasada = tarefasEnviadasAluno!?.dataEntrega < tarefa.dataLimite;
 
@@ -73,5 +78,12 @@ export class TarefaAlunoComponent implements OnInit {
 
   abrirAnexo(anexo:string){
     window.open(anexo)
+  }
+
+  abrirModalEnviarTarefa(tarefaAluno: any): void {
+    this.dialog.open(EnviarTarefaAlunoComponent, {
+      width: '400px', 
+      data: tarefaAluno
+    });
   }
 }

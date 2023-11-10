@@ -7,6 +7,7 @@ import { MinhaContaComponent } from './pages/configuracoes/minha-conta/minha-con
 import { TarefaAlunoComponent } from './pages/aluno/tarefa-aluno/tarefa-aluno.component';
 import { ProjetosComponent } from './pages/projetos/projetos.component';
 import { ProjetoAtualComponent } from './pages/projetos/projeto-atual/projeto-atual.component';
+import { CompromissosAlunoComponent } from './pages/aluno/compromissos-aluno/compromissos-aluno.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'tarefasaluno', component: TarefaAlunoComponent },
   { path: 'projetosdisponiveis', component: ProjetosComponent },
   { path: 'meuprojeto', component: ProjetoAtualComponent },
+  { path: 'compromissosaluno', component: CompromissosAlunoComponent },
   { path: '**', redirectTo: '/home' },
 ];
 @NgModule({

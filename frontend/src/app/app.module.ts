@@ -39,6 +39,8 @@ import { MenuAlunoComponent } from './shared/pages/sidenav/menu-aluno/menu-aluno
 import { ProjetosComponent } from './pages/projetos/projetos.component';
 import { ProjetoAtualComponent } from './pages/projetos/projeto-atual/projeto-atual.component';
 import { SemInformacoesComponent } from './shared/pages/sem-informacoes/sem-informacoes.component';
+import { CompromissosAlunoComponent } from './pages/aluno/compromissos-aluno/compromissos-aluno.component';
+import { EnviarTarefaAlunoComponent } from './pages/aluno/tarefa-aluno/enviar-tarefa-aluno/enviar-tarefa-aluno.component';
 
 
 
@@ -55,6 +57,8 @@ import { SemInformacoesComponent } from './shared/pages/sem-informacoes/sem-info
     ProjetosComponent,
     ProjetoAtualComponent,
     SemInformacoesComponent,
+    CompromissosAlunoComponent,
+    EnviarTarefaAlunoComponent,
   ],
   imports: [
     BrowserModule,

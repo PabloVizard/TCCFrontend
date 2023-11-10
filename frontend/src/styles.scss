@@ -56,9 +56,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     margin: 2px;
   }
   
-  .button-yellow{
-    background-color: gold !important;
-    color: #000 !important;
+  .yellow{
+    color: gold !important;
+  }
+  .red{
+    color: rgb(156, 7, 7) !important;
   }
 
   .button-position-end{
@@ -67,4 +69,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   .text-justify{
     text-align: justify !important;
+  }
+
+  .form-container{
+    display: flex;
+    justify-content: space-between;
+  }
+  .form-row{
+    flex-grow: 1;
+    margin: 5px;
   }

@@ -1,0 +1,45 @@
+<mat-toolbar>
+    <div>
+        <span>Enviar Tarefa</span>
+    </div>
+    <div class="close-button">
+        <button  mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    
+</mat-toolbar>
+  
+  <mat-dialog-content>
+    <ng-container *ngIf="dados; else semInformacoesForm">
+      <form>
+        <div >
+          <mat-form-field class="full-width">
+            <mat-label>Anexo</mat-label>
+            <mat-hint align="start" class="red">Enviar um link do Google Drive com o anexo.</mat-hint>
+            <input matInput [(ngModel)]="tarefaAluno.anexo" name="anexo">
+            
+          </mat-form-field>
+  
+          <mat-form-field class="full-width">
+            <mat-label>Data Limite</mat-label>
+            <input matInput [value]="parseDate(tarefaAluno.dataLimite.toString())" name="dataLimite" readonly>
+          </mat-form-field>
+
+
+          <mat-dialog-actions>
+            <button mat-raised-button color="primary" (click)="enviar()"> 
+              <mat-icon>send</mat-icon> Enviar
+            </button>
+          </mat-dialog-actions>
+        </div>
+       </form>
+    </ng-container>
+  
+    <ng-template #semInformacoesForm>
+      <app-sem-informacoes></app-sem-informacoes>
+    </ng-template>
+  </mat-dialog-content>
+  
+ 
+  

@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { StatusAprovacaoEnumerator } from 'src/app/core/enumerators/status-aprovacao.enumerator';
+import { OrientacoesModel } from 'src/app/core/models/orientacoes-model';
 import { ProjetoModel } from 'src/app/core/models/projeto-model';
 import { UsuarioModel } from 'src/app/core/models/usuario-model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { OrientacoesService } from 'src/app/core/services/orientacoes.service';
 import { ProjetosService } from 'src/app/core/services/projetos.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 
@@ -12,15 +15,14 @@ import { ToastService } from 'src/app/core/services/toast.service';
   styleUrls: ['./projeto-atual.component.scss']
 })
 export class ProjetoAtualComponent implements OnInit {
-  projeto!: ProjetoModel;
+  orientacao!: OrientacoesModel;
   usuarioLogado!: UsuarioModel;
-
-  displayedColumns: string[] = ['nome', 'descricao', 'professorResponsavel', 'contato', 'actions']; // Adicione mais colunas aqui conforme necessário
+  statusAprovacao!: string;
   
-
   constructor(private projetosService: ProjetosService,
               private authService: AuthService,
-              private toastService: ToastService){
+              private toastService: ToastService,
+              private orientacoesService: OrientacoesService){
 
   }
   async ngOnInit() {
@@ -29,11 +31,12 @@ export class ProjetoAtualComponent implements OnInit {
   }
 
   async obterProjetoAtual(){
-    await this.projetosService.ObterProjetoAluno().then(result => {
-      this.projeto = result;
+    await this.orientacoesService.ObterOrientacaoAluno().then(result => {
+      this.orientacao = result;
+      this.statusAprovacao = StatusAprovacaoEnumerator[this.orientacao.statusAprovacao];
       
     },fail => {
-      this.toastService.show('fail', "Erro ao obter TCC do Aluno!" + fail.error)
+      this.toastService.show('fail', "Erro ao obter orientacao!" + fail.error)
     })
   }
 

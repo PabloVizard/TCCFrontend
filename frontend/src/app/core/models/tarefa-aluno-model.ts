@@ -1,7 +1,7 @@
 export class TarefaAlunoModel{
     id!: number;
     idAluno!: number;
-    idTurma!: number;
+    idTarefa!: number;
     dataLimite!: Date;
     dataEntrega!: Date;
     anexo!: string;

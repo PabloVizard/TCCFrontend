@@ -24,5 +24,11 @@ export class TarefasService extends BaseService {
       .pipe(catchError(super.serviceError))); 
   }
 
+  async registrarEnvioDeTarefa(tarefa: any): Promise<any> {
+    return await lastValueFrom(this.http
+      .post(this.urlApi + `tarefaaluno/registrar`, tarefa, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+
 
 }
