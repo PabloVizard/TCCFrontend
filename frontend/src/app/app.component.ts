@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingService } from './core/services/loading.service';
 import { delay } from 'rxjs';
-import { UsuarioLogadoModel } from './core/models/usuario-logado-model';
+import { UsuarioModel } from './core/models/usuario-model';
 import { AuthService } from './core/services/auth.service';
 import { Router } from '@angular/router';
 @Component({

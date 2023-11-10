@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UsuarioLogadoModel } from '../../../core/models/usuario-logado-model';
+import { UsuarioModel } from '../../../core/models/usuario-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TipoUsuarioEnumerator, TipoUsuarioEnumeratorString } from 'src/app/core/enumerators/usuario.enumerator';
 import { LoginService } from 'src/app/core/services/login.service';
@@ -14,9 +14,9 @@ import { ToastService } from 'src/app/core/services/toast.service';
 export class MinhaContaComponent implements OnInit {
   tipoSenha: string = 'password';
   minhaContaForm!: FormGroup;
-  usuario: UsuarioLogadoModel;
+  usuario: UsuarioModel;
   confirmacaoSenha!: string;
-  usuarioAtualizar!: UsuarioLogadoModel;
+  usuarioAtualizar!: UsuarioModel;
   editarAtivo: boolean = false;
 
   constructor(private formBuilder: FormBuilder,

@@ -35,6 +35,10 @@ import { AuthService } from './core/services/auth.service';
 import { MinhaContaComponent } from './pages/configuracoes/minha-conta/minha-conta.component';
 import { TarefaAlunoComponent } from './pages/aluno/tarefa-aluno/tarefa-aluno.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MenuAlunoComponent } from './shared/pages/sidenav/menu-aluno/menu-aluno.component';
+import { ProjetosComponent } from './pages/projetos/projetos.component';
+import { ProjetoAtualComponent } from './pages/projetos/projeto-atual/projeto-atual.component';
+import { SemInformacoesComponent } from './shared/pages/sem-informacoes/sem-informacoes.component';
 
 
 
@@ -47,6 +51,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     SidenavComponent,
     MinhaContaComponent,
     TarefaAlunoComponent,
+    MenuAlunoComponent,
+    ProjetosComponent,
+    ProjetoAtualComponent,
+    SemInformacoesComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { TipoUsuarioEnumerator } from 'src/app/core/enumerators/usuario.enumerator';
-import { UsuarioLogadoModel } from 'src/app/core/models/usuario-logado-model';
+import { UsuarioModel } from 'src/app/core/models/usuario-model';
 import { TurmaService } from 'src/app/core/services/turma.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { TurmaModel } from 'src/app/core/models/turma-model';
@@ -13,7 +13,7 @@ import { TurmaModel } from 'src/app/core/models/turma-model';
 })
 export class SidenavComponent implements OnInit {
   
-  usuarioLogado!: UsuarioLogadoModel;
+  usuarioLogado!: UsuarioModel;
   turmaUsuario!: TurmaModel;
   tipoUsuario!: string;
 

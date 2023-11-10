@@ -1,16 +1,22 @@
 <div class="app-container">
     <mat-card class="app-card">
         <mat-card-header>
-            <mat-card-title>Lista de Tarefas</mat-card-title>
+            <mat-card-title>Tarefas</mat-card-title>
         </mat-card-header>
   
         <mat-card-content>
+          <ng-container *ngIf="dataSource.data.length > 0; else semInformacoes">
             <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
               <ng-container matColumnDef="descricao">
                 <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
                 <mat-cell *matCellDef="let tarefa">{{ tarefa.descricao }}</mat-cell>
               </ng-container>
         
+              <ng-container matColumnDef="dataentrega">
+                <mat-header-cell *matHeaderCellDef>Data Entrega</mat-header-cell>
+                <mat-cell *matCellDef="let tarefa">{{ tarefa.dataEntrega != null ? parseDate(tarefa.dataEntrega) : '-' }}</mat-cell>
+              </ng-container>
+
               <ng-container matColumnDef="datalimite">
                 <mat-header-cell *matHeaderCellDef>Data Limite</mat-header-cell>
                 <mat-cell *matCellDef="let tarefa">{{ parseDate(tarefa.dataLimite) }}</mat-cell>
@@ -35,11 +41,15 @@
                 </mat-cell>
               </ng-container>
         
-              <!-- Adicione mais colunas conforme necessário -->
-        
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
               <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
             </mat-table>
+          </ng-container>
+
+          <ng-template #semInformacoes>
+            <app-sem-informacoes></app-sem-informacoes>
+          </ng-template>
+            
             
         </mat-card-content>
     </mat-card>

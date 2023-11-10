@@ -5,7 +5,7 @@ import { LoginModel } from '../models/login-model';
 import { lastValueFrom } from 'rxjs';
 import { BaseService } from 'src/app/core/services/base.service';
 import { CadastroUsuarioModel } from '../models/cadastro-usuario-model';
-import { UsuarioLogadoModel } from '../models/usuario-logado-model';
+import { UsuarioModel } from '../models/usuario-model';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +26,9 @@ export class LoginService extends BaseService {
       .post(this.urlApi + 'login/RegistrarUsuario', cadastroUsuarioModel)
       .pipe(catchError(super.serviceError))); 
   }
-  async atualizarUsuario(usuarioLogadoModel: UsuarioLogadoModel): Promise<any> {
+  async atualizarUsuario(UsuarioModel: UsuarioModel): Promise<any> {
     return await lastValueFrom(this.http
-      .put(this.urlApi + 'login/AtualizarUsuario', usuarioLogadoModel)
+      .put(this.urlApi + 'login/AtualizarUsuario', UsuarioModel)
       .pipe(catchError(super.serviceError))); 
   }
 }

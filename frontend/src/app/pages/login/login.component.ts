@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginModel } from '../../core/models/login-model';
 import { LoginService } from '../../core/services/login.service';
-import { UsuarioLogadoModel } from '../../core/models/usuario-logado-model';
+import { UsuarioModel } from '../../core/models/usuario-model';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
@@ -14,7 +14,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 export class LoginComponent implements OnInit {
   
   public loginModel: LoginModel = new LoginModel('','');
-  public usuarioLogadoModel: UsuarioLogadoModel = new UsuarioLogadoModel();
+  public UsuarioModel: UsuarioModel = new UsuarioModel();
   public tokenUsuarioLogado: string = '';
   
   tipoSenha: string = 'password';
@@ -41,9 +41,9 @@ export class LoginComponent implements OnInit {
 
   async LoginUsuario(){
     await this.loginService.loginUsuario(this.loginModel).then(result => {
-      this.usuarioLogadoModel = result.data;
+      this.UsuarioModel = result.data;
       this.tokenUsuarioLogado = result.token;
-      localStorage.setItem("user", JSON.stringify(this.usuarioLogadoModel))
+      localStorage.setItem("user", JSON.stringify(this.UsuarioModel))
       localStorage.setItem("token", this.tokenUsuarioLogado)
       this.toastService.show('success',"Login realizado com sucesso!")
       this.authService.MostrarMenu()

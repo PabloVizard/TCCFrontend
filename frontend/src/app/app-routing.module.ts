@@ -5,6 +5,8 @@ import { RealizarCadastroComponent } from './pages/login/realizar-cadastro/reali
 import { HomeComponent } from './pages/home/home.component';
 import { MinhaContaComponent } from './pages/configuracoes/minha-conta/minha-conta.component';
 import { TarefaAlunoComponent } from './pages/aluno/tarefa-aluno/tarefa-aluno.component';
+import { ProjetosComponent } from './pages/projetos/projetos.component';
+import { ProjetoAtualComponent } from './pages/projetos/projeto-atual/projeto-atual.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -13,6 +15,8 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'minhaconta', component: MinhaContaComponent },
   { path: 'tarefasaluno', component: TarefaAlunoComponent },
+  { path: 'projetosdisponiveis', component: ProjetosComponent },
+  { path: 'meuprojeto', component: ProjetoAtualComponent },
   { path: '**', redirectTo: '/home' },
 ];
 @NgModule({

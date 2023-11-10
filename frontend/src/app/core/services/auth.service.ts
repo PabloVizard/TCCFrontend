@@ -1,7 +1,7 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastService } from "./toast.service";
-import { UsuarioLogadoModel } from "../models/usuario-logado-model";
+import { UsuarioModel } from "../models/usuario-model";
 
 @Injectable()
 export class AuthService{
@@ -29,7 +29,7 @@ export class AuthService{
         return usuarioLogado != null ? true : false;
     }
 
-    ObterUsuarioLogado(): UsuarioLogadoModel{
+    ObterUsuarioLogado(): UsuarioModel{
         
         var usuarioLogado = JSON.parse(localStorage.getItem('user')!)
 

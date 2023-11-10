@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { TarefasService } from 'src/app/core/services/tarefas.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { format } from 'date-fns';
-import { UsuarioLogadoModel } from 'src/app/core/models/usuario-logado-model';
+import { UsuarioModel } from 'src/app/core/models/usuario-model';
 import { TarefaAlunoModel } from 'src/app/core/models/tarefa-aluno-model';
 
 @Component({
@@ -17,9 +17,9 @@ export class TarefaAlunoComponent implements OnInit {
   tarefas!: Array<TarefaModel>;
   tarefasEnviadas!: Array<TarefaAlunoModel>;
   dataSource: any;
-  usuarioLogado!: UsuarioLogadoModel;
+  usuarioLogado!: UsuarioModel;
 
-  displayedColumns: string[] = ['descricao', 'datalimite', 'status', 'instrucoes', 'actions']; // Adicione mais colunas aqui conforme necessário
+  displayedColumns: string[] = ['descricao', 'dataentrega', 'datalimite', 'status', 'instrucoes', 'actions']; // Adicione mais colunas aqui conforme necessário
   
 
   constructor(private tarefasService: TarefasService,
@@ -40,8 +40,15 @@ export class TarefaAlunoComponent implements OnInit {
       this.tarefas = result;
 
       this.tarefas = result.map((tarefa: TarefaModel) => {
-        return { ...tarefa, status: this.tarefasEnviadas.findIndex(x => x.id == tarefa.id) != -1 ? 'Entregue' : "Não Entregue" };
+        var tarefasEnviadasAluno = this.tarefasEnviadas.find(x => x.id == tarefa.id)
+        
+        var atrasada = tarefasEnviadasAluno!?.dataEntrega < tarefa.dataLimite;
+
+        return { ...tarefa, 
+          status: tarefasEnviadasAluno != null ? 'Entregue' : atrasada ? 'Entregue Atrasada' : "Não Entregue",
+          dataEntrega: tarefasEnviadasAluno!?.dataEntrega };
       });
+      console.log(this.tarefas)
       
     },fail => {
       this.toastService.show('fail', "Erro ao obter tarefas!" + fail.error)

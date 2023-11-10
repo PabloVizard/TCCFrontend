@@ -3,6 +3,6 @@ export class TarefaAlunoModel{
     idAluno!: number;
     idTurma!: number;
     dataLimite!: Date;
-    dataEntreta!: Date;
+    dataEntrega!: Date;
     anexo!: string;
 }

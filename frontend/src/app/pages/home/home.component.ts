@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioLogadoModel } from '../../core/models/usuario-logado-model';
+import { UsuarioModel } from '../../core/models/usuario-model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 })
 export class HomeComponent implements OnInit {
   
-  usuarioLogado!: UsuarioLogadoModel;
+  usuarioLogado!: UsuarioModel;
 
   constructor(private authService: AuthService){
 
