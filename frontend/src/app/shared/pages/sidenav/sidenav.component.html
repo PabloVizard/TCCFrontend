@@ -32,13 +32,27 @@
         <mat-nav-list>
             <mat-list-item [routerLink]="'/home'">
                 <div class="centered-content">
-                    <mat-icon>dashboard</mat-icon><span class="title-menu">{{turmaUsuario?.descricao}}</span>
+                    <mat-icon>dashboard</mat-icon><span class="title-menu">{{(usuarioLogado.tipoUsuario == 1 ? turmaUsuario?.descricao : tipoUsuarioString(usuarioLogado.tipoUsuario))}}</span>
                 </div>
                 
             </mat-list-item>
             <ng-container *ngIf="turmaUsuario?.nPoc == 1">
                 <app-menu-aluno></app-menu-aluno>
             </ng-container>
+
+            <ng-container *ngIf="turmaUsuario?.nPoc == 5">
+                <app-menu-coordenador></app-menu-coordenador>
+            </ng-container>
+
+            <ng-container *ngIf="turmaUsuario?.nPoc == 2 || turmaUsuario?.nPoc == 4">
+                <app-menu-professor></app-menu-professor>
+            </ng-container>
+
+            <ng-container *ngIf="turmaUsuario?.nPoc == 3 || turmaUsuario?.nPoc == 4">
+                <app-menu-orientador></app-menu-orientador>
+            </ng-container>
+
+            
             
         </mat-nav-list>
     </mat-sidenav>

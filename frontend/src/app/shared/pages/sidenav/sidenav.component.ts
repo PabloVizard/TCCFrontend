@@ -44,4 +44,8 @@ export class SidenavComponent implements OnInit {
     })
   }
 
+  tipoUsuarioString(tipoUsuario: number){
+    return TipoUsuarioEnumerator[tipoUsuario];
+  }
+
 }
