@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { StatusAprovacaoEnumerator } from 'src/app/core/enumerators/status-aprovacao.enumerator';
+import { BancasModel } from 'src/app/core/models/bancas-model';
 import { OrientacoesModel } from 'src/app/core/models/orientacoes-model';
 import { ProjetoModel } from 'src/app/core/models/projeto-model';
 import { UsuarioModel } from 'src/app/core/models/usuario-model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { BancasService } from 'src/app/core/services/bancas.service';
 import { OrientacoesService } from 'src/app/core/services/orientacoes.service';
 import { ProjetosService } from 'src/app/core/services/projetos.service';
 import { ToastService } from 'src/app/core/services/toast.service';
@@ -16,18 +18,21 @@ import { ToastService } from 'src/app/core/services/toast.service';
 })
 export class ProjetoAtualComponent implements OnInit {
   orientacao!: OrientacoesModel;
+  banca!: BancasModel;
   usuarioLogado!: UsuarioModel;
   statusAprovacao!: string;
   
   constructor(private projetosService: ProjetosService,
               private authService: AuthService,
               private toastService: ToastService,
-              private orientacoesService: OrientacoesService){
+              private orientacoesService: OrientacoesService,
+              private bancasService: BancasService){
 
   }
   async ngOnInit() {
     this.usuarioLogado = this.authService.ObterUsuarioLogado();
     await this.obterProjetoAtual();
+    await this.obterBanca();
   }
 
   async obterProjetoAtual(){
@@ -53,4 +58,12 @@ export class ProjetoAtualComponent implements OnInit {
 
     window.open(url, '_blank');
   }
+  obterBanca(){
+    this.bancasService.obterBancaAluno().then(result => {
+      this.banca = result
+    }, fail => {
+      this.toastService.show("fail", "Erro ao obter banca do aluno.")
+    })
+  }
+
 }

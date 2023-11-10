@@ -30,16 +30,28 @@
                         </mat-form-field>
                     </div>
                     
+        <ng-container *ngIf="banca != null">
+            <mat-card-header>
+                <mat-card-title>Banca Avaliadora {{banca.ano}}/{{banca.semestre}}</mat-card-title>
+            </mat-card-header>
+                        
+            <div class="form-container">
+                <mat-form-field class="form-row">
+                    <mat-label>Professor Orientador</mat-label>
+                    <input matInput [(ngModel)]="banca.professorOrientador" name="professorOrientador" readonly>
+                </mat-form-field>
+                <mat-form-field class="form-row">
+                    <mat-label>Avaliador</mat-label>
+                    <input matInput [(ngModel)]="banca.avaliador01" name="avaliador01" readonly>
+                </mat-form-field>
 
-                    <div class="form-container">
-                        <mat-form-field class="form-row">
-                            <mat-label>Descrição</mat-label>
-                            <textarea class="text-justify" matInput [(ngModel)]="orientacao.projeto.descricao" name="descricao" cdkTextareaAutosize #autosize="cdkTextareaAutosize"cdkAutosizeMinRows="1" cdkAutosizeMaxRows="25"></textarea>
-                        </mat-form-field>
-                    </div>
-
-                    
-
+                <mat-form-field class="form-row">
+                    <mat-label>Avaliador</mat-label>
+                    <input matInput [(ngModel)]="banca.avaliador02" name="avaliador02" readonly>
+                </mat-form-field>
+            </div>
+        </ng-container>
+        
                     
                 </form>
             </ng-container>
