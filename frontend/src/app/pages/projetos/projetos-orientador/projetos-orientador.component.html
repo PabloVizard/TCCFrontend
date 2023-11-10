@@ -1,0 +1,63 @@
+<div class="app-container">
+    <mat-card class="app-card">
+        <mat-card-header>
+            <mat-card-title>Projetos Disponiveis</mat-card-title>
+            
+            
+        </mat-card-header>
+        <div class="button-position-end">
+          <button mat-raised-button color="primary" (click)="adicionarProjeto()">Adicionar Projeto</button>
+        </div>
+        <mat-card-content>
+            <ng-container *ngIf="projetos.length > 0; else semInformacoes">
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="nome">
+                      <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+                      <mat-cell *matCellDef="let projeto">{{ projeto.nome }}</mat-cell>
+                    </ng-container>
+              
+                    <ng-container matColumnDef="descricao">
+                      <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
+                      <mat-cell class="text-justify" *matCellDef="let projeto">{{ projeto.descricao }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="alunoResponsavel">
+                      <mat-header-cell *matHeaderCellDef>Aluno Responsável</mat-header-cell>
+                      <mat-cell *matCellDef="let projeto">{{ projeto?.alunoResponsavel?.nomeCompleto || '-'  }}</mat-cell>
+                    </ng-container>
+      
+                    <ng-container matColumnDef="professorResponsavel">
+                      <mat-header-cell *matHeaderCellDef>Orientador</mat-header-cell>
+                      <mat-cell *matCellDef="let projeto">{{ projeto.professorResponsavel.nomeCompleto }}</mat-cell>
+                    </ng-container>
+      
+                    <ng-container matColumnDef="contato">
+                      <mat-header-cell *matHeaderCellDef>E-mail</mat-header-cell>
+                      <mat-cell *matCellDef="let projeto">{{ projeto.professorResponsavel.email }}</mat-cell>
+                    </ng-container>
+      
+                    <ng-container matColumnDef="actions">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                      <mat-cell *matCellDef="let projeto">
+                          <button mat-raised-button class="button-yellow" (click)="editarProjeto(projeto.id)">Editar</button>
+
+                          <button mat-raised-button color="warn" (click)="enviarEmail(projeto.professorResponsavel.email, projeto.nome)">Excluir</button>
+                      </mat-cell>
+                    </ng-container>
+              
+                    <!-- Adicione mais colunas conforme necessário -->
+              
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                  </mat-table>
+
+                  
+            </ng-container>
+            
+            <ng-template #semInformacoes>
+                <app-sem-informacoes></app-sem-informacoes>
+            </ng-template>
+            
+        </mat-card-content>
+    </mat-card>
+</div>

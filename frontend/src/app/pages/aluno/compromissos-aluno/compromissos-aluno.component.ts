@@ -37,7 +37,6 @@ export class CompromissosAlunoComponent implements OnInit {
 
   async obterCompromissosAluno(){
     await this.compromissosService.ObterCompromissosAluno().then(result => {
-      console.log(result)
       this.compromissos = result;
     
     },fail => {

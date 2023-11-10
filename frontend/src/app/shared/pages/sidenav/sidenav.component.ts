@@ -26,9 +26,9 @@ export class SidenavComponent implements OnInit {
   async ngOnInit() {
     this.usuarioLogado = this.authService.ObterUsuarioLogado()
     await this.obterTurmaUsuario();
-    console.log(this.turmaUsuario.descricao)
     this.tipoUsuario = TipoUsuarioEnumerator[this.usuarioLogado.tipoUsuario];
-    console.log(this.tipoUsuario)
+
+    console.log(this.usuarioLogado.tipoUsuario)
   }
 
   LogOut(){

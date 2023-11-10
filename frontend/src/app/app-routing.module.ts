@@ -8,6 +8,7 @@ import { TarefaAlunoComponent } from './pages/aluno/tarefa-aluno/tarefa-aluno.co
 import { ProjetosComponent } from './pages/projetos/projetos.component';
 import { ProjetoAtualComponent } from './pages/projetos/projeto-atual/projeto-atual.component';
 import { CompromissosAlunoComponent } from './pages/aluno/compromissos-aluno/compromissos-aluno.component';
+import { ProjetosOrientadorComponent } from './pages/projetos/projetos-orientador/projetos-orientador.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'minhaconta', component: MinhaContaComponent },
   { path: 'tarefasaluno', component: TarefaAlunoComponent },
   { path: 'projetosdisponiveis', component: ProjetosComponent },
+  { path: 'projetosorientador', component: ProjetosOrientadorComponent },
   { path: 'meuprojeto', component: ProjetoAtualComponent },
   { path: 'compromissosaluno', component: CompromissosAlunoComponent },
   { path: '**', redirectTo: '/home' },

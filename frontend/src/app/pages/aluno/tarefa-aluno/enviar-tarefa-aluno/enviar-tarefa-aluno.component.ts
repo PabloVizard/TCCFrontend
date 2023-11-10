@@ -21,7 +21,7 @@ export class EnviarTarefaAlunoComponent implements OnInit {
     
   }
   ngOnInit(): void {
-    console.log(this.dados)
+
     this.tarefaAluno = {
       id: undefined!,
       anexo: '',
@@ -30,7 +30,7 @@ export class EnviarTarefaAlunoComponent implements OnInit {
       idAluno: this.authService.ObterUsuarioLogado().id,
       idTarefa: this.dados.id
     }
-    console.log(this.tarefaAluno)
+
   }
 
   parseDate(dateString: string): string  {
@@ -39,7 +39,7 @@ export class EnviarTarefaAlunoComponent implements OnInit {
     return dataformatada;
   }
   async enviar(){
-    console.log(this.dados)
+
     if (!this.tarefaAluno.anexo) {
       this.toastService.show('fail', "Preencha o anexo!")
       return;

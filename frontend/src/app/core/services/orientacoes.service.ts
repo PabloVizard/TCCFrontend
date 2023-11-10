@@ -18,4 +18,10 @@ export class OrientacoesService extends BaseService {
       .pipe(catchError(super.serviceError))); 
   }
 
+  async obterAlunosDisponiveis(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `orientacoes/ObterAlunosDisponiveis`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+
 }

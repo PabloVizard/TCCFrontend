@@ -44,7 +44,8 @@ import { EnviarTarefaAlunoComponent } from './pages/aluno/tarefa-aluno/enviar-ta
 import { MenuProfessorComponent } from './shared/pages/sidenav/menu-professor/menu-professor.component';
 import { MenuOrientadorComponent } from './shared/pages/sidenav/menu-orientador/menu-orientador.component';
 import { MenuCoordenadorComponent } from './shared/pages/sidenav/menu-coordenador/menu-coordenador.component';
-
+import { AdicionarProjetoComponent } from './pages/projetos/adicionar-projeto/adicionar-projeto.component';
+import { ProjetosOrientadorComponent } from './pages/projetos/projetos-orientador/projetos-orientador.component';
 
 
 @NgModule({
@@ -65,6 +66,8 @@ import { MenuCoordenadorComponent } from './shared/pages/sidenav/menu-coordenado
     MenuProfessorComponent,
     MenuOrientadorComponent,
     MenuCoordenadorComponent,
+    AdicionarProjetoComponent,
+    ProjetosOrientadorComponent,
   ],
   imports: [
     BrowserModule,

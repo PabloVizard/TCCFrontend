@@ -51,6 +51,18 @@
                 </mat-form-field>
             </div>
         </ng-container>
+
+        <ng-container *ngIf="banca == null">
+            <mat-card-header>
+                <ng-container >
+                    <mat-card-title>Banca Avaliadora</mat-card-title>
+                </ng-container>
+            </mat-card-header>
+            <div class="sem-informacoes-container">
+                <p class="sem-informacoes-text">Pendente</p>
+            </div>
+        </ng-container>
+        
         
                     
                 </form>

@@ -1,13 +1,30 @@
+
+<mat-list-item [routerLink]="'/home'">
+    <div class="centered-content">
+        <mat-icon>dashboard</mat-icon><span class="title-menu">Orientador</span>
+    </div>
+    
+</mat-list-item>
 <mat-expansion-panel [class.mat-elevation-z0]="true">
     <mat-expansion-panel-header>
         Agenda
     </mat-expansion-panel-header>
     <mat-nav-list>
-        <!-- <a mat-list-item routerLink="#">
-            <span class="text-list-item">Calendário</span>
-        </a> -->
-        <a mat-list-item [routerLink]="'/compromissosaluno'">
-            <span class="text-list-item">Próximos Compromissos</span>
+        <a mat-list-item [routerLink]="'/compromissos'">
+            <span class="text-list-item">Compromissos</span>
+        </a>
+    </mat-nav-list>
+</mat-expansion-panel>
+<mat-expansion-panel [class.mat-elevation-z0]="true">
+    <mat-expansion-panel-header>
+        Orientações
+    </mat-expansion-panel-header>
+    <mat-nav-list>
+        <a mat-list-item [routerLink]="'/meusalunos'">
+            <span class="text-list-item">Meus Alunos</span>
+        </a>
+        <a mat-list-item [routerLink]="'/bancasdefesa'">
+            <span class="text-list-item">Bancas</span>
         </a>
     </mat-nav-list>
 </mat-expansion-panel>
@@ -16,11 +33,8 @@
         Projetos
     </mat-expansion-panel-header>
     <mat-nav-list>
-        <a mat-list-item [routerLink]="'/meuprojeto'">
-            <span class="text-list-item">Projeto Atual</span>
-        </a>
-        <a mat-list-item [routerLink]="'/projetosdisponiveis'">
-            <span class="text-list-item">Projetos Disponíveis</span>
+        <a mat-list-item [routerLink]="'/projetosorientador'">
+            <span class="text-list-item">Meus Projetos</span>
         </a>
     </mat-nav-list>
 </mat-expansion-panel>
@@ -29,8 +43,12 @@
         Tarefas
     </mat-expansion-panel-header>
     <mat-nav-list>
-        <a mat-list-item [routerLink]="'/tarefasaluno'">
-            <span class="text-list-item">Ver Tarefas</span>
+        <a mat-list-item [routerLink]="'/tarefas'">
+            <span class="text-list-item">Minhas Tarefas</span>
         </a>
     </mat-nav-list>
 </mat-expansion-panel>
+
+
+
+

@@ -39,8 +39,6 @@ export class TarefaAlunoComponent implements OnInit {
 
   async obterTarefas(){
     await this.tarefasService.obterTarefasPorTurmaId(this.authService.ObterIdTurmaUsuario()).then(result => {
-      console.log(result)
-      console.log(new Date())
       this.tarefas = result;
 
       this.tarefas = result.map((tarefa: TarefaModel) => {
@@ -53,7 +51,6 @@ export class TarefaAlunoComponent implements OnInit {
           status: tarefasEnviadasAluno != null ? 'Entregue' : atrasada ? 'Entregue Atrasada' : "Não Entregue",
           dataEntrega: tarefasEnviadasAluno!?.dataEntrega };
       });
-      console.log(this.tarefas)
       
     },fail => {
       this.toastService.show('fail', "Erro ao obter tarefas!" + fail.error)
@@ -61,7 +58,6 @@ export class TarefaAlunoComponent implements OnInit {
   }
   async obterTarefasEnviadas(){
     await this.tarefasService.obterTarefasEnviadas(this.usuarioLogado.id).then(result => {
-      console.log(result)
       this.tarefasEnviadas = result;
 
    

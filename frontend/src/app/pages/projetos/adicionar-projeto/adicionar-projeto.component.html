@@ -1,0 +1,48 @@
+<mat-toolbar>
+    <div>
+        <span>Adicionar Projeto</span>
+    </div>
+    <div class="close-button">
+        <button mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<mat-dialog-content>
+        <form [formGroup]="projetoForm" >
+            <div class="form-container">
+                <mat-form-field class="form-row">
+                    <mat-label>Nome</mat-label>
+                    <input matInput placeholder="Nome do Projeto" [value]="projetoAtual?.nome" formControlName="nome" required>
+                </mat-form-field>
+                
+            </div>
+            <div class="form-container">
+                <mat-form-field class="form-row">
+                    <mat-label>Descrição</mat-label>
+                    <textarea matInput placeholder="Descrição do Projeto" [value]="projetoAtual?.descricao" formControlName="descricao" cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="10" required></textarea>
+                </mat-form-field>
+            </div>
+
+            
+            <div class="form-container">
+                <mat-form-field class="form-row">
+                    <mat-label>Professor Responsável</mat-label>
+                    <input matInput [value]="usuarioLogado.nomeCompleto" readonly>
+                </mat-form-field>
+    
+                <mat-form-field class="form-row">
+                    <mat-label>Aluno Responsável</mat-label>
+                    <mat-select formControlName="idAlunoResponsavel" [compareWith]="compareAlunos">
+                        <mat-option *ngFor="let aluno of alunosDisponiveis" [value]="aluno.id" >{{aluno.nomeCompleto}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            <div class="full-width button-position-end">
+                <button mat-raised-button color="primary" type="submit"  (click)="salvarProjeto()">Salvar</button>
+            </div>
+            
+        </form>
+</mat-dialog-content>
