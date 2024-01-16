@@ -44,12 +44,12 @@ export class ProjetosService extends BaseService {
   }
   async AtualizarProjeto(projeto: ProjetoRetornoModel): Promise<any> {
     return await lastValueFrom(this.http
-      .post(this.urlApi + `projetos/Atualizar`,projeto, super.ObterAuthHeaderJson())
+      .put(this.urlApi + `projetos/Atualizar`,projeto, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
-  async ExcluirProjeto(projeto: ProjetoRetornoModel): Promise<any> {
+  async ExcluirProjeto(idProjeto: number): Promise<any> {
     return await lastValueFrom(this.http
-      .post(this.urlApi + `projetos/Remover`,projeto, super.ObterAuthHeaderJson())
+      .delete(this.urlApi + `projetos/Remover?id=${idProjeto}`, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
 }

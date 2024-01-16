@@ -53,11 +53,22 @@ export class AdicionarProjetoComponent implements OnInit {
   async salvarProjeto() {
 
       if(this.projetoForm.valid){
-        await this.projetosService.CadastrarNovoProjeto(this.projetoForm.value).then(result => {
-          this.toastService.show("success", "Projeto salvo com sucesso!")
-        }, fail => {
-          this.toastService.show("fail", "Erro ao buscar usuários disponíveis! " + fail.error)
-        })
+
+        if(this.idProjeto){
+          await this.projetosService.AtualizarProjeto(this.projetoForm.value).then(result => {
+            this.toastService.show("success", "Projeto salvo com sucesso!")
+          }, fail => {
+            this.toastService.show("fail", "Erro ao buscar usuários disponíveis! " + fail.error)
+          })
+        }
+
+        else{
+          await this.projetosService.CadastrarNovoProjeto(this.projetoForm.value).then(result => {
+            this.toastService.show("success", "Projeto salvo com sucesso!")
+          }, fail => {
+            this.toastService.show("fail", "Erro ao buscar usuários disponíveis! " + fail.error)
+          })
+        }
       }
   }
   async buscarProjeto (){
@@ -72,7 +83,7 @@ export class AdicionarProjetoComponent implements OnInit {
     
   }
   async obterAlunosDisponiveis(){
-    await this.orientacoesService.obterAlunosDisponiveis().then(async result => {
+    await this.orientacoesService.obterAlunos().then(async result => {
       
       this.alunosDisponiveis = result
       
@@ -80,7 +91,7 @@ export class AdicionarProjetoComponent implements OnInit {
       this.toastService.show("fail", "Erro ao buscar usuários disponíveis! " + fail.error)
     })
     
-    if(this.projetoAtual?.idAlunoResponsavel != null){
+    /* if(this.projetoAtual?.idAlunoResponsavel != null){
       await this.usuarioService.obterPorId(this.projetoAtual.idAlunoResponsavel).then(result =>{
         
         this.alunosDisponiveis.push(result)
@@ -89,10 +100,10 @@ export class AdicionarProjetoComponent implements OnInit {
         this.toastService.show("fail", "Falha ao buscar aluno responsavel")
       })
       
-    }
+    } */
   }
 
-  compareAlunos(aluno1: any, aluno2: any): boolean {
+  compareAlunos(aluno1: any, aluno2: any) {
     debugger
     return aluno1 && aluno2 ? aluno1.id === aluno2.id : aluno1 === aluno2;
   }
