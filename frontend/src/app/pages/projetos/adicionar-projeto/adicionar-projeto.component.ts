@@ -36,28 +36,31 @@ export class AdicionarProjetoComponent implements OnInit {
   async ngOnInit() {
     this.usuarioLogado = this.authService.ObterUsuarioLogado();
     await this.buscarProjeto()
-    await this.obterAlunosDisponiveis()
     
-    console.log(this.projetoAtual)
     this.projetoForm = this.fb.group({
         id: [this.projetoAtual?.id | 0],
         nome: [this.projetoAtual?.nome, Validators.required],
+        area: [this.projetoAtual?.area, Validators.required],
         descricao: [this.projetoAtual?.descricao, Validators.required],
         idProfessorResponsavel: [this.usuarioLogado.id],
         idAlunoResponsavel: [this.projetoAtual?.idAlunoResponsavel],
     });
-    debugger
-    
+
+    await this.obterAlunosDisponiveis()
   }
 
   async salvarProjeto() {
-
+      console.log(this.projetoForm)
+      console.log(this.projetoForm.value)
       if(this.projetoForm.valid){
         await this.projetosService.CadastrarNovoProjeto(this.projetoForm.value).then(result => {
           this.toastService.show("success", "Projeto salvo com sucesso!")
         }, fail => {
-          this.toastService.show("fail", "Erro ao buscar usuários disponíveis! " + fail.error)
+          this.toastService.show("fail", "Erro ao salvar projeto! " + fail.error)
         })
+      }
+      else{
+        this.toastService.show("fail", "Erro ao salvar projeto!")
       }
   }
   async buscarProjeto (){
@@ -93,7 +96,6 @@ export class AdicionarProjetoComponent implements OnInit {
   }
 
   compareAlunos(aluno1: any, aluno2: any): boolean {
-    debugger
     return aluno1 && aluno2 ? aluno1.id === aluno2.id : aluno1 === aluno2;
   }
 

@@ -1,0 +1,111 @@
+<div class="app-container">
+    <mat-card class="app-card">
+        <mat-card-header>
+            <mat-card-title>Meus Alunos Orientados</mat-card-title>
+            
+            
+        </mat-card-header>
+        <!-- <div class="button-position-end">
+          <button mat-raised-button color="primary" (click)="adicionarAlunos()">Adicionar alunos</button>
+        </div> -->
+        <mat-card-content *ngIf="pocUrl == 1">
+            <ng-container *ngIf="alunosOrientados.length > 0; else semInformacoes">
+                <mat-table [dataSource]="dataSource" *ngIf="alunosOrientados" class="mat-elevation-z8">
+                    <ng-container matColumnDef="aluno">
+                      <mat-header-cell *matHeaderCellDef>Aluno</mat-header-cell>
+                      <mat-cell class="text-justify" *matCellDef="let alunos">{{ alunos.alunoOrientado.nomeCompleto }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="projeto">
+                      <mat-header-cell *matHeaderCellDef>Projeto</mat-header-cell>
+                      <mat-cell *matCellDef="let alunos">{{ alunos.projeto.nome }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="turma">
+                      <mat-header-cell *matHeaderCellDef>Turma</mat-header-cell>
+                      <mat-cell class="text-justify" *matCellDef="let alunos">{{ alunos.turma.descricao }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="statusAprovacao">
+                      <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                      <mat-cell class="text-justify" *matCellDef="let alunos">{{ obterStatusAprovacao(alunos.statusAprovacao) }}</mat-cell>
+                    </ng-container>
+      
+                    <ng-container matColumnDef="tao">
+                      <mat-header-cell *matHeaderCellDef>TAO</mat-header-cell>
+                      <mat-cell *matCellDef="let alunos">{{ alunos.anexoTAO ?? ' - ' }}</mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="actions">
+                      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                      <mat-cell *matCellDef="let alunos">
+                          <button mat-raised-button class="button-yellow" (click)="editarOrientacao(alunos.id)">Editar</button>
+                      </mat-cell>
+                    </ng-container>
+              
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                  </mat-table>
+
+                  
+            </ng-container>
+            
+            <ng-template #semInformacoes>
+                <app-sem-informacoes></app-sem-informacoes>
+            </ng-template>
+            
+        </mat-card-content>
+        <mat-card-content *ngIf="pocUrl == 2">
+          <ng-container *ngIf="alunosOrientados.length > 0; else semInformacoes">
+              <mat-table [dataSource]="dataSource" *ngIf="alunosOrientados" class="mat-elevation-z8">
+                  <ng-container matColumnDef="aluno">
+                    <mat-header-cell *matHeaderCellDef>Aluno</mat-header-cell>
+                    <mat-cell class="text-justify" *matCellDef="let alunos">{{ alunos.alunoOrientado.nomeCompleto }}</mat-cell>
+                  </ng-container>
+                  
+                  <ng-container matColumnDef="projeto">
+                    <mat-header-cell *matHeaderCellDef>Projeto</mat-header-cell>
+                    <mat-cell *matCellDef="let alunos">{{ alunos.projeto.nome }}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="turma">
+                    <mat-header-cell *matHeaderCellDef>Turma</mat-header-cell>
+                    <mat-cell class="text-justify" *matCellDef="let alunos">{{ alunos.turma.descricao }}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="statusAprovacao">
+                    <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+                    <mat-cell class="text-justify" *matCellDef="let alunos">{{ obterStatusAprovacao(alunos.statusAprovacao) }}</mat-cell>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="resumo">
+                    <mat-header-cell *matHeaderCellDef>Resumo do Trabalho</mat-header-cell>
+                    <mat-cell *matCellDef="let alunos">{{ alunos.anexoResumoTrabalho ?? ' - ' }}</mat-cell>
+                  </ng-container>
+    
+                  <ng-container matColumnDef="local">
+                    <mat-header-cell *matHeaderCellDef>Local de Divulgação</mat-header-cell>
+                    <mat-cell *matCellDef="let alunos">{{ alunos.localDivulgacao ?? ' - ' }}</mat-cell>
+                  </ng-container>
+
+                  <ng-container matColumnDef="actions">
+                    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                    <mat-cell *matCellDef="let alunos">
+                        <button mat-raised-button class="button-yellow" (click)="editarOrientacao(alunos.id)">Editar</button>
+                    </mat-cell>
+                  </ng-container>
+            
+                  <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>
+                  <mat-row *matRowDef="let row; columns: displayedColumns2"></mat-row>
+                </mat-table>
+
+                
+          </ng-container>
+          
+          <ng-template #semInformacoes>
+              <app-sem-informacoes></app-sem-informacoes>
+          </ng-template>
+          
+      </mat-card-content>
+    </mat-card>
+</div>

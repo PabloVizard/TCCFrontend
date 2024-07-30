@@ -1,6 +1,6 @@
 <mat-list-item [routerLink]="'/home'">
     <div class="centered-content">
-        <mat-icon>dashboard</mat-icon><span class="title-menu">{{turmaUsuario?.descricao}}</span>
+        <mat-icon>dashboard</mat-icon><span class="title-menu" *ngIf="turmaUsuario">{{turmaUsuario.descricao}}</span>
     </div>
     
 </mat-list-item>

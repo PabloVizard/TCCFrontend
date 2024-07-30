@@ -8,6 +8,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { ProjetosService } from 'src/app/core/services/projetos.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { AdicionarProjetoComponent } from '../adicionar-projeto/adicionar-projeto.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-projetos-orientador',
@@ -19,13 +20,14 @@ export class ProjetosOrientadorComponent implements OnInit {
   dataSource: any;
   usuarioLogado!: UsuarioModel;
 
-  displayedColumns: string[] = ['nome', 'descricao', 'alunoResponsavel', 'professorResponsavel', 'contato', 'actions']; // Adicione mais colunas aqui conforme necessário
+  displayedColumns: string[] = ['nome', 'descricao', 'area', 'alunoResponsavel', 'professorResponsavel', 'contato', 'actions']; // Adicione mais colunas aqui conforme necessário
   
 
   constructor(private projetosService: ProjetosService,
               private authService: AuthService,
               private toastService: ToastService,
-              private dialog: MatDialog){
+              private dialog: MatDialog,
+              private router: Router){
 
   }
   async ngOnInit() {
@@ -70,6 +72,25 @@ export class ProjetosOrientadorComponent implements OnInit {
       width: '1024px', 
       height: '600px',
       data: idProjeto
+    });
+  }
+
+  excluirProjeto(idProjeto: number): void {
+
+    if (confirm("Deseja realmente excluir o projeto selecionado?")) {
+      this.projetosService.ExcluirProjeto(idProjeto).then(result => {
+        this.toastService.show('success', "Projeto excluído com sucesso!");
+        this.recarregarPagina()
+      }, fail => {
+        this.toastService.show('fail', "Erro ao excluir Projeto!" + fail.error);
+      });
+    }
+  }
+
+  recarregarPagina() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
     });
   }
 }

@@ -21,6 +21,11 @@
                       <mat-cell class="text-justify" *matCellDef="let projeto">{{ projeto.descricao }}</mat-cell>
                     </ng-container>
 
+                    <ng-container matColumnDef="area">
+                      <mat-header-cell *matHeaderCellDef>Área do Projeto</mat-header-cell>
+                      <mat-cell class="text-justify" *matCellDef="let projeto">{{ projeto.area }}</mat-cell>
+                    </ng-container>
+
                     <ng-container matColumnDef="alunoResponsavel">
                       <mat-header-cell *matHeaderCellDef>Aluno Responsável</mat-header-cell>
                       <mat-cell *matCellDef="let projeto">{{ projeto?.alunoResponsavel?.nomeCompleto || '-'  }}</mat-cell>
@@ -41,7 +46,7 @@
                       <mat-cell *matCellDef="let projeto">
                           <button mat-raised-button class="button-yellow" (click)="editarProjeto(projeto.id)">Editar</button>
 
-                          <button mat-raised-button color="warn" (click)="enviarEmail(projeto.professorResponsavel.email, projeto.nome)">Excluir</button>
+                          <button mat-raised-button color="warn" (click)="excluirProjeto(projeto.id)">Excluir</button>
                       </mat-cell>
                     </ng-container>
               

@@ -49,6 +49,11 @@
                     <mat-label>Avaliador</mat-label>
                     <input matInput [(ngModel)]="banca.avaliador02" name="avaliador02" readonly>
                 </mat-form-field>
+
+                <mat-form-field class="form-row" *ngIf="banca.avaliador03 != ''">
+                    <mat-label>Avaliador</mat-label>
+                    <input matInput [(ngModel)]="banca.avaliador03" name="avaliador03" readonly>
+                </mat-form-field>
             </div>
         </ng-container>
 
@@ -62,9 +67,6 @@
                 <p class="sem-informacoes-text">Pendente</p>
             </div>
         </ng-container>
-        
-        
-                    
                 </form>
             </ng-container>
 

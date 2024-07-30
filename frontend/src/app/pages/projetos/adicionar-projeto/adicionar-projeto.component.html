@@ -20,8 +20,16 @@
             </div>
             <div class="form-container">
                 <mat-form-field class="form-row">
+                    <mat-label>Área do Projeto</mat-label>
+                    <input matInput placeholder="Área do Projeto" [value]="projetoAtual?.area" formControlName="area" required>
+                </mat-form-field>
+                
+            </div>
+
+            <div class="form-container">
+                <mat-form-field class="form-row">
                     <mat-label>Descrição</mat-label>
-                    <textarea matInput placeholder="Descrição do Projeto" [value]="projetoAtual?.descricao" formControlName="descricao" cdkTextareaAutosize cdkAutosizeMinRows="10" cdkAutosizeMaxRows="10" required></textarea>
+                    <textarea matInput placeholder="Descrição do Projeto" [value]="projetoAtual?.descricao" formControlName="descricao" cdkTextareaAutosize cdkAutosizeMinRows="8" cdkAutosizeMaxRows="8" required></textarea>
                 </mat-form-field>
             </div>
 

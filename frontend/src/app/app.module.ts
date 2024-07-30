@@ -46,6 +46,8 @@ import { MenuOrientadorComponent } from './shared/pages/sidenav/menu-orientador/
 import { MenuCoordenadorComponent } from './shared/pages/sidenav/menu-coordenador/menu-coordenador.component';
 import { AdicionarProjetoComponent } from './pages/projetos/adicionar-projeto/adicionar-projeto.component';
 import { ProjetosOrientadorComponent } from './pages/projetos/projetos-orientador/projetos-orientador.component';
+import { MeusAlunosComponent } from './pages/orientador/meus-alunos/meus-alunos.component';
+import { EditarAlunosOrientadosComponent } from './pages/orientador/meus-alunos/editar-alunos-orientados/editar-alunos-orientados.component';
 
 
 @NgModule({
@@ -68,6 +70,8 @@ import { ProjetosOrientadorComponent } from './pages/projetos/projetos-orientado
     MenuCoordenadorComponent,
     AdicionarProjetoComponent,
     ProjetosOrientadorComponent,
+    MeusAlunosComponent,
+    EditarAlunosOrientadosComponent,
   ],
   imports: [
     BrowserModule,
