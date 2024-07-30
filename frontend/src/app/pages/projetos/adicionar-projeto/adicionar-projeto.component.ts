@@ -36,7 +36,7 @@ export class AdicionarProjetoComponent implements OnInit {
   async ngOnInit() {
     this.usuarioLogado = this.authService.ObterUsuarioLogado();
     await this.buscarProjeto()
-    
+
     this.projetoForm = this.fb.group({
         id: [this.projetoAtual?.id | 0],
         nome: [this.projetoAtual?.nome, Validators.required],
@@ -53,11 +53,20 @@ export class AdicionarProjetoComponent implements OnInit {
       console.log(this.projetoForm)
       console.log(this.projetoForm.value)
       if(this.projetoForm.valid){
-        await this.projetosService.CadastrarNovoProjeto(this.projetoForm.value).then(result => {
-          this.toastService.show("success", "Projeto salvo com sucesso!")
-        }, fail => {
-          this.toastService.show("fail", "Erro ao salvar projeto! " + fail.error)
-        })
+        if(this.idProjeto){
+          await this.projetosService.AtualizarProjeto(this.projetoForm.value).then(result => {
+            this.toastService.show("success", "Projeto salvo com sucesso!")
+          }, fail => {
+            this.toastService.show("fail", "Erro ao salvar projeto! " + fail.error)
+          })
+        }
+        else{
+          await this.projetosService.CadastrarNovoProjeto(this.projetoForm.value).then(result => {
+            this.toastService.show("success", "Projeto salvo com sucesso!")
+          }, fail => {
+            this.toastService.show("fail", "Erro ao salvar projeto! " + fail.error)
+          })
+        }
       }
       else{
         this.toastService.show("fail", "Erro ao salvar projeto!")
@@ -75,7 +84,7 @@ export class AdicionarProjetoComponent implements OnInit {
     
   }
   async obterAlunosDisponiveis(){
-    await this.orientacoesService.obterAlunosDisponiveis().then(async result => {
+    await this.orientacoesService.obterAlunos().then(async result => {
       
       this.alunosDisponiveis = result
       
@@ -83,7 +92,7 @@ export class AdicionarProjetoComponent implements OnInit {
       this.toastService.show("fail", "Erro ao buscar usuários disponíveis! " + fail.error)
     })
     
-    if(this.projetoAtual?.idAlunoResponsavel != null){
+    /* if(this.projetoAtual?.idAlunoResponsavel != null){
       await this.usuarioService.obterPorId(this.projetoAtual.idAlunoResponsavel).then(result =>{
         
         this.alunosDisponiveis.push(result)
@@ -92,7 +101,7 @@ export class AdicionarProjetoComponent implements OnInit {
         this.toastService.show("fail", "Falha ao buscar aluno responsavel")
       })
       
-    }
+    } */
   }
 
   compareAlunos(aluno1: any, aluno2: any): boolean {
