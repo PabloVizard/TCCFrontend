@@ -11,6 +11,7 @@ import { EnumeratorService } from 'src/app/core/services/enumerator.service';
 import { OrientacoesService } from 'src/app/core/services/orientacoes.service';
 import { ProjetosService } from 'src/app/core/services/projetos.service';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { EditarAlunosOrientadosComponent } from './editar-alunos-orientados/editar-alunos-orientados.component';
 
 @Component({
   selector: 'app-meus-alunos',
@@ -57,10 +58,31 @@ import { ToastService } from 'src/app/core/services/toast.service';
     })
   }
   obterStatusAprovacao(status: number){
-    debugger
     return this.enumeratorService.getStatusAprovacao(status);
   }
   async editarOrientacao(orientacaoId: number){
+    var dialogRef = this.dialog.open(EditarAlunosOrientadosComponent, {
+      width: '1024px', 
+      height: '300px',
+      data: orientacaoId
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.recarregarPagina();
+    });
+  }
+
+  recomendarBanca(alunoid: number){
+
+  }
+
+  recarregarPagina() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
+  }
+  abrirAnexo(anexo:string){
+    window.open(anexo)
   }
 }

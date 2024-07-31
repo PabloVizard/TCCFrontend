@@ -36,4 +36,20 @@ export class OrientacoesService extends BaseService {
       .pipe(catchError(super.serviceError))); 
   }
 
+  async ObterOrientacaoProfessorPorId(orientacaoId: number): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `orientacoes/ObterOrientacaoProfessorPorId?orientacaoid=${orientacaoId}`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError)));
+  }
+  async AtualizarInformacoesPOC1(orientacaoId: number, statusAprovacao: number, anexoTao: string): Promise<any> {
+    return await lastValueFrom(this.http
+      .put(this.urlApi + `orientacoes/AtualizarInformacoesPOC1?orientacaoid=${orientacaoId}&status=${statusAprovacao}&anexoTao=${anexoTao}`, null, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError)));
+  }
+  async AtualizarInformacoesPOC2(orientacaoId: number, statusAprovacao: number, anexoResumoTrabalho: string, localDivulgacao: string): Promise<any> {
+    return await lastValueFrom(this.http
+      .put(this.urlApi + `orientacoes/AtualizarInformacoesPOC2?orientacaoid=${orientacaoId}&status=${statusAprovacao}&anexoResumoTrabalho=${anexoResumoTrabalho}&localDivulgacao=${localDivulgacao}`, null, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError)));
+  }
+
 }

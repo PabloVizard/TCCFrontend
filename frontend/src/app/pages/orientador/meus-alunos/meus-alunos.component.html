@@ -33,7 +33,9 @@
       
                     <ng-container matColumnDef="tao">
                       <mat-header-cell *matHeaderCellDef>TAO</mat-header-cell>
-                      <mat-cell *matCellDef="let alunos">{{ alunos.anexoTAO ?? ' - ' }}</mat-cell>
+                      <mat-cell *matCellDef="let alunos">
+                        <button mat-raised-button color="primary" (click)="abrirAnexo(alunos.anexoTAO)" >Ver Anexo</button>
+                      </mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="actions">
@@ -80,7 +82,10 @@
     
                   <ng-container matColumnDef="resumo">
                     <mat-header-cell *matHeaderCellDef>Resumo do Trabalho</mat-header-cell>
-                    <mat-cell *matCellDef="let alunos">{{ alunos.anexoResumoTrabalho ?? ' - ' }}</mat-cell>
+                    <mat-cell *matCellDef="let alunos">
+                      <button mat-raised-button color="primary" (click)="abrirAnexo(alunos.anexoResumoTrabalho)" >Ver Anexo</button>
+                    </mat-cell>
+                    
                   </ng-container>
     
                   <ng-container matColumnDef="local">
@@ -92,7 +97,9 @@
                     <mat-header-cell *matHeaderCellDef></mat-header-cell>
                     <mat-cell *matCellDef="let alunos">
                         <button mat-raised-button class="button-yellow" (click)="editarOrientacao(alunos.id)">Editar</button>
+                        <button mat-raised-button color="primary" style="width: auto;" (click)="recomendarBanca(alunos.id)">Recomendar</button>
                     </mat-cell>
+                    
                   </ng-container>
             
                   <mat-header-row *matHeaderRowDef="displayedColumns2"></mat-header-row>

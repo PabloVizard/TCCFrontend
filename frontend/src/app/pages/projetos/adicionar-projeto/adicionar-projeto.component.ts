@@ -91,23 +91,9 @@ export class AdicionarProjetoComponent implements OnInit {
     }, fail => {
       this.toastService.show("fail", "Erro ao buscar usuários disponíveis! " + fail.error)
     })
-    
-    /* if(this.projetoAtual?.idAlunoResponsavel != null){
-      await this.usuarioService.obterPorId(this.projetoAtual.idAlunoResponsavel).then(result =>{
-        
-        this.alunosDisponiveis.push(result)
-        console.log(this.alunosDisponiveis)
-      }, fail => {
-        this.toastService.show("fail", "Falha ao buscar aluno responsavel")
-      })
-      
-    } */
   }
 
   compareAlunos(aluno1: any, aluno2: any): boolean {
     return aluno1 && aluno2 ? aluno1.id === aluno2.id : aluno1 === aluno2;
   }
-
-
-
 }

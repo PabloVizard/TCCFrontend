@@ -1,1 +1,49 @@
-<p>editar-alunos-orientados works!</p>
+<mat-toolbar>
+    <div>
+        <span>{{ orientacao.alunoOrientado.nomeCompleto }}</span>
+    </div>
+    <div class="close-button">
+        <button mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<mat-dialog-content>
+    <div class="form-container">
+        <mat-form-field class="form-row">
+            <mat-label>Status</mat-label>
+            <mat-select [(ngModel)]="statusSelecionado" name="statusSelecionado">
+                <mat-option [value]="0">Selecionar</mat-option>
+                <mat-option [value]="1">Em Andamento</mat-option>
+                <mat-option [value]="2">Pode Defender</mat-option>
+                <mat-option [value]="3">Concluído</mat-option>
+                <mat-option [value]="4">Adiado</mat-option>
+                <mat-option [value]="5">Reprovado</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <ng-container *ngIf="orientacao.turma.nPoc == 1">
+            <mat-form-field class="form-row">
+                <mat-label>TAO</mat-label>
+                <input matInput [(ngModel)]="orientacao.anexoTAO" name="anexoTAO">
+            </mat-form-field>
+        </ng-container>
+
+        <ng-container *ngIf="orientacao.turma.nPoc == 2">
+            <mat-form-field class="form-row">
+                <mat-label>Local de Divulgação</mat-label>
+                <input matInput [(ngModel)]="orientacao.localDivulgacao" name="localDivulgacao">
+            </mat-form-field>
+    
+            <mat-form-field class="form-row">
+                <mat-label>Resumo do Trabalho</mat-label>
+                <textarea matInput [(ngModel)]="orientacao.anexoResumoTrabalho" name="anexoResumoTrabalho"></textarea>
+            </mat-form-field>
+        </ng-container>
+    </div>
+    
+    <div class="full-width button-position-end">
+        <button mat-raised-button color="primary" (click)="salvar()">Salvar</button>
+    </div>
+</mat-dialog-content>
