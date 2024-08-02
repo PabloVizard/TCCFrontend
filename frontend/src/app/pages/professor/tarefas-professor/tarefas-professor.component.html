@@ -1,0 +1,48 @@
+<div class="app-container">
+    <mat-card class="app-card">
+        <mat-card-header>
+            <mat-card-title>Tarefas</mat-card-title>
+        </mat-card-header>
+        <div class="button-position-end">
+            <button mat-raised-button color="primary" (click)="adicionarTarefa()">Adicionar Tarefa</button>
+        </div>
+        <mat-card-content>
+            <ng-container *ngIf="tarefas.length > 0; else semInformacoes">
+                <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                    <ng-container matColumnDef="descricao">
+                        <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
+                        <mat-cell *matCellDef="let tarefa">{{ tarefa.descricao }}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="descricaoTurma">
+                        <mat-header-cell *matHeaderCellDef>Turma</mat-header-cell>
+                        <mat-cell *matCellDef="let tarefa">{{ tarefa.turma.descricao }}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="dataLimite">
+                        <mat-header-cell *matHeaderCellDef>Data Limite</mat-header-cell>
+                        <mat-cell *matCellDef="let tarefa">{{ parseDate(tarefa.dataLimite) }}</mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="anexo">
+                        <mat-header-cell *matHeaderCellDef>Anexo</mat-header-cell>
+                        <mat-cell *matCellDef="let tarefa">
+                            <button mat-raised-button [disabled]="!tarefa.anexo" color="primary" (click)="abrirAnexo(tarefa.anexo)">Acessar</button>
+                        </mat-cell>
+                    </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let tarefa">
+                            <button mat-raised-button class="button-yellow" (click)="editarTarefa(tarefa.id)">Editar</button>
+                            <button mat-raised-button color="warn" (click)="excluirTarefa(tarefa.id)">Excluir</button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+                </mat-table>
+            </ng-container>
+
+            <ng-template #semInformacoes>
+                <app-sem-informacoes></app-sem-informacoes>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</div>

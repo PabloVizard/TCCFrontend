@@ -54,6 +54,8 @@ import { AulasProfessorComponent } from './pages/professor/aulas-professor/aulas
 import { CadastrarAulaComponent } from './pages/professor/aulas-professor/cadastrar-aula/cadastrar-aula.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { TarefasProfessorComponent } from './pages/professor/tarefas-professor/tarefas-professor.component';
+import { CadastrarTarefaComponent } from './pages/professor/tarefas-professor/cadastrar-tarefa/cadastrar-tarefa.component';
 
 
 @NgModule({
@@ -82,6 +84,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     BancasOrientadorComponent,
     AulasProfessorComponent,
     CadastrarAulaComponent,
+    TarefasProfessorComponent,
+    CadastrarTarefaComponent,
   ],
   imports: [
     BrowserModule,

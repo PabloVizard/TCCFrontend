@@ -1,0 +1,57 @@
+<mat-toolbar>
+    <div>
+      <span>Adicionar Tarefa</span>
+    </div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  
+  <mat-dialog-content>
+    <form [formGroup]="tarefaForm">
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Descrição</mat-label>
+          <input matInput placeholder="Descrição da Tarefa" formControlName="descricao" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Turma</mat-label>
+          <mat-select formControlName="idTurma" required>
+            <mat-option *ngFor="let turma of turmasDisponiveis" [value]="turma.id">{{ turma.descricao }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Data Limite</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dataLimite" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="form-row">
+          <mat-label>Hora Limite</mat-label>
+          <input matInput type="time" formControlName="horaLimite" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Anexo</mat-label>
+          <input matInput placeholder="Anexo" formControlName="anexo">
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Professor</mat-label>
+          <input matInput [value]="usuarioLogado.nomeCompleto" readonly>
+        </mat-form-field>
+      </div>
+      <div class="full-width button-position-end">
+        <button mat-raised-button color="primary" type="submit" (click)="salvarTarefa()">Salvar</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+  

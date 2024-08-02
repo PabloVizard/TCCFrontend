@@ -13,6 +13,7 @@ import { MeusAlunosComponent } from './pages/orientador/meus-alunos/meus-alunos.
 import { BancasOrientadorComponent } from './pages/orientador/meus-alunos/bancas-orientador/bancas-orientador.component';
 import { AulasAlunoComponent } from './pages/aluno/aulas-aluno/aulas-aluno.component';
 import { AulasProfessorComponent } from './pages/professor/aulas-professor/aulas-professor.component';
+import { TarefasProfessorComponent } from './pages/professor/tarefas-professor/tarefas-professor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'projetosorientador', component: ProjetosOrientadorComponent },
   { path: 'meuprojeto', component: ProjetoAtualComponent },
   { path: 'aulasaluno', component: AulasAlunoComponent },
+  { path: 'tarefasprofessor', component: TarefasProfessorComponent },
   { path: 'aulasprofessor', component: AulasProfessorComponent },
   { path: 'meusalunospoc1', component: MeusAlunosComponent },
   { path: 'meusalunospoc2', component: MeusAlunosComponent },
