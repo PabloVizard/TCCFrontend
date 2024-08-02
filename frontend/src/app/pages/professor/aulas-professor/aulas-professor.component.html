@@ -3,6 +3,9 @@
         <mat-card-header>
             <mat-card-title>Aulas</mat-card-title>
         </mat-card-header>
+        <div class="button-position-end">
+            <button mat-raised-button color="primary" (click)="adicionarAula()">Adicionar Aula</button>
+          </div>
   
         <mat-card-content>
             <ng-container *ngIf="aulas.length > 0; else semInformacoes">
@@ -33,6 +36,14 @@
                             <button mat-raised-button [disabled]="!aula.link" color="primary" (click)="acessarLink(aula.link)">Acessar</button>
                         </mat-cell>
                     </ng-container>
+                    <ng-container matColumnDef="actions">
+                        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                        <mat-cell *matCellDef="let aula">
+                            <button mat-raised-button class="button-yellow" (click)="editarAula(aula.id)">Editar</button>
+  
+                            <button mat-raised-button color="warn" (click)="excluirAula(aula.id)">Excluir</button>
+                        </mat-cell>
+                      </ng-container>
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>

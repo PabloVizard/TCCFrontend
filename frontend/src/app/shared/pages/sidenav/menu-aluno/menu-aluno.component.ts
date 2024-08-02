@@ -22,18 +22,7 @@ export class MenuAlunoComponent implements OnInit {
   }
   async ngOnInit() {
     this.usuarioLogado = this.authService.ObterUsuarioLogado();
-    await this.obterTurmaUsuario();
   }
-
-  async obterTurmaUsuario(){
-    await this.turmaService.obterTurmaDoUsuario(this.usuarioLogado.id).then(result => {
-      this.turmaUsuario = result;
-      localStorage.setItem("turmaUsuario", this.turmaUsuario.id.toString())
-    }, fail => {
-      this.toastService.show('fail', "Erro ao buscar turma do usuário!");
-    })
-  }
-
 
   tipoUsuarioString(tipoUsuario: number){
     return TipoUsuarioEnumerator[tipoUsuario];

@@ -16,15 +16,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSelectModule } from '@angular/material/select';
-import { MatOptionModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpLoadingInterceptor } from './core/interceptor/http-request-interceptor';
 import { RealizarCadastroComponent } from './pages/login/realizar-cadastro/realizar-cadastro.component';
 import { CommonModule } from '@angular/common';
-import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { HomeComponent } from './pages/home/home.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
@@ -51,6 +51,9 @@ import { RecomendarBancaComponent } from './pages/orientador/meus-alunos/recomen
 import { BancasOrientadorComponent } from './pages/orientador/meus-alunos/bancas-orientador/bancas-orientador.component';
 import { AulasAlunoComponent } from './pages/aluno/aulas-aluno/aulas-aluno.component';
 import { AulasProfessorComponent } from './pages/professor/aulas-professor/aulas-professor.component';
+import { CadastrarAulaComponent } from './pages/professor/aulas-professor/cadastrar-aula/cadastrar-aula.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 
 @NgModule({
@@ -78,6 +81,7 @@ import { AulasProfessorComponent } from './pages/professor/aulas-professor/aulas
     RecomendarBancaComponent,
     BancasOrientadorComponent,
     AulasProfessorComponent,
+    CadastrarAulaComponent,
   ],
   imports: [
     BrowserModule,
@@ -85,6 +89,7 @@ import { AulasProfessorComponent } from './pages/professor/aulas-professor/aulas
     BrowserAnimationsModule,
     FlexLayoutModule,
     FormsModule,
+    ReactiveFormsModule,
     MatToolbarModule,
     MatInputModule,
     MatCardModule,
@@ -99,22 +104,21 @@ import { AulasProfessorComponent } from './pages/professor/aulas-professor/aulas
     MatSnackBarModule,
     MatProgressSpinnerModule,
     CommonModule, 
-    ReactiveFormsModule,
-    NgxMaskDirective,
-    NgxMaskPipe,
     MatSidenavModule,
     MatDividerModule,
     MatListModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    NgxMaterialTimepickerModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: HttpLoadingInterceptor,
-    multi: true,
-  },
-  provideNgxMask(),
-  AuthService],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpLoadingInterceptor, multi: true },
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
+    provideNgxMask(),
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

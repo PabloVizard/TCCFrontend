@@ -12,9 +12,14 @@ export class TurmaService extends BaseService {
     super();
   }
 
-  async obterTurmaDoUsuario(idUsuario: number): Promise<any> {
+  async ObterTurmasProfessor(): Promise<any> {
     return await lastValueFrom(this.http
-      .get(this.urlApi + `UsuarioTurma/ObterTurmaPorUsuarioId?idUsuario=${idUsuario}`, super.ObterAuthHeaderJson())
+      .get(this.urlApi + `UsuarioTurma/ObterTurmasProfessor`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+  async ObterTurmaAluno(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `UsuarioTurma/ObterTurmaAluno`, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
 

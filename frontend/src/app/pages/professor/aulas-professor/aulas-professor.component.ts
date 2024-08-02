@@ -6,6 +6,9 @@ import { UsuarioModel } from 'src/app/core/models/usuario-model';
 import { AulasService } from 'src/app/core/services/aulas.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { CadastrarAulaComponent } from './cadastrar-aula/cadastrar-aula.component';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-aulas-professor',
@@ -17,11 +20,13 @@ export class AulasProfessorComponent implements OnInit {
   dataSource: any;
   usuarioLogado!: UsuarioModel;
 
-  displayedColumns: string[] = ['descricao', 'nomeProfessor', 'turma', 'dataAula', 'local', 'link'];
+  displayedColumns: string[] = ['descricao', 'nomeProfessor', 'turma', 'dataAula', 'local', 'link', 'actions'];
 
   constructor(private aulasService: AulasService,
               private authService: AuthService,
-              private toastService: ToastService) {}
+              private toastService: ToastService,
+              private dialog: MatDialog,
+              private router: Router) {}
 
   async ngOnInit() {
     this.usuarioLogado = this.authService.ObterUsuarioLogado();
@@ -44,5 +49,39 @@ export class AulasProfessorComponent implements OnInit {
 
   acessarLink(link: string) {
     window.open(link, '_blank');
+  }
+
+  adicionarAula(): void {
+    this.dialog.open(CadastrarAulaComponent, {
+      width: '1024px', 
+      height: '600px',
+    });
+  }
+  editarAula(aulaId: number): void {
+
+    this.dialog.open(CadastrarAulaComponent, {
+      width: '1024px', 
+      height: '600px',
+      data: aulaId
+    });
+  }
+
+  excluirAula(aulaId: number): void {
+
+    if (confirm("Deseja realmente excluir a aula selecionada?")) {
+      this.aulasService.ExcluirAula(aulaId).then(result => {
+        this.toastService.show('success', "Aula excluída com sucesso!");
+        this.recarregarPagina()
+      }, fail => {
+        this.toastService.show('fail', "Erro ao excluir Aula!" + fail.error);
+      });
+    }
+  }
+
+  recarregarPagina() {
+    const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate([currentUrl]);
+    });
   }
 }
