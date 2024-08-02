@@ -10,6 +10,7 @@ import { ProjetoAtualComponent } from './pages/projetos/projeto-atual/projeto-at
 import { CompromissosAlunoComponent } from './pages/aluno/compromissos-aluno/compromissos-aluno.component';
 import { ProjetosOrientadorComponent } from './pages/projetos/projetos-orientador/projetos-orientador.component';
 import { MeusAlunosComponent } from './pages/orientador/meus-alunos/meus-alunos.component';
+import { BancasOrientadorComponent } from './pages/orientador/meus-alunos/bancas-orientador/bancas-orientador.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -24,6 +25,7 @@ const routes: Routes = [
   { path: 'compromissosaluno', component: CompromissosAlunoComponent },
   { path: 'meusalunospoc1', component: MeusAlunosComponent },
   { path: 'meusalunospoc2', component: MeusAlunosComponent },
+  { path: 'bancasorientador', component: BancasOrientadorComponent },
   { path: '**', redirectTo: '/home' },
 ];
 @NgModule({

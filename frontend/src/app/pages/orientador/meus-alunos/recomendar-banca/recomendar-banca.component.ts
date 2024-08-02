@@ -88,6 +88,7 @@ export class RecomendarBancaComponent implements OnInit {
       var banca = new BancasModel();
 
       banca = {
+        idProjeto: this.orientacao.projeto.id,
         idProfessorOrientador: this.orientacao.professorOrientador.id,
         idAlunoOrientado: this.orientacao.alunoOrientado.id,
         idAvaliador01: this.professor1Selecionado,

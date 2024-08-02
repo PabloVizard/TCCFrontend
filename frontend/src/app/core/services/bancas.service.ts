@@ -23,4 +23,9 @@ export class BancasService extends BaseService {
       .post(this.urlApi + `bancas/Registrar`, banca, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
+  async obterBancaPorOrientadorId(orientadorId: number): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `bancas/ObterBancaPorOrientadorId?orientadorId=${orientadorId}`,super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
 }
