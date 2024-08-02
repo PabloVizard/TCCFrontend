@@ -59,7 +59,7 @@ export class ProjetoAtualComponent implements OnInit {
     window.open(url, '_blank');
   }
   obterBanca(){
-    this.bancasService.obterBancaAluno().then(result => {
+    this.bancasService.obterBancaAluno(this.authService.ObterUsuarioLogado().id).then(result => {
       this.banca = result
     }, fail => {
       this.toastService.show("fail", "Erro ao obter banca do aluno.")

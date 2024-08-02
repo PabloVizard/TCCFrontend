@@ -1,12 +1,25 @@
+import { UsuarioLightModel } from "./usuario-model";
+
 export class BancasModel{
-    id!: number;
-    professorOrientador!: string;
-    nomeAlunoOrientado!: string;
-    idAlunoOrientado!: string;
-    nomeProjeto!: string;
-    avaliador01!: string;
-    avaliador02!: string;
-    avaliador03!: string;
+    id?: number;
+    idProfessorOrientador!: number;
+    idAlunoOrientado!: number;
+    idAvaliador01!: number;
+    idAvaliador02?: number;
     ano!: number;
     semestre!: number;
+    bancaConfirmada!: boolean;
+    dataDefesa?: Date;
+}
+
+export class BancasFullModel{
+    id?: number;
+    professorOrientador!: UsuarioLightModel;
+    alunoOrientado!: UsuarioLightModel;
+    avaliador01!: UsuarioLightModel;
+    avaliador02?: UsuarioLightModel;
+    ano!: number;
+    semestre!: number;
+    bancaConfirmada!: boolean;
+    dataDefesa?: Date;
 }

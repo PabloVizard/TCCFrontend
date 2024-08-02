@@ -1,0 +1,53 @@
+<mat-toolbar>
+    <div>
+      <span>{{ orientacao.alunoOrientado.nomeCompleto }}</span>
+    </div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  
+  <mat-dialog-content>
+    <div class="form-container" *ngIf="!banca || banca.bancaConfirmada === false">
+      <mat-form-field class="form-row">
+        <mat-label class="required">Professor 1</mat-label>
+        <mat-select [(ngModel)]="professor1Selecionado" name="professor1Selecionado" required>
+          <mat-option [value]="null">Nenhum</mat-option>
+          <mat-option *ngFor="let professor of professores" [value]="professor.id">
+            {{ professor.nomeCompleto }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="professor1Selecionado === null">
+          Professor 1 é obrigatório
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field class="form-row">
+        <mat-label>Professor 2</mat-label>
+        <mat-select [(ngModel)]="professor2Selecionado" name="professor2Selecionado">
+          <mat-option [value]="null">Nenhum</mat-option>
+          <mat-option *ngFor="let professor of professores" [value]="professor.id">
+            {{ professor.nomeCompleto }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  
+    <div class="full-width button-position-end">
+      <button mat-raised-button color="primary" (click)="salvar()" 
+              [disabled]="banca || !professor1Selecionado">
+        Enviar
+      </button>
+    </div>
+  
+    <div *ngIf="banca && !banca.bancaConfirmada">
+      <p>Sua sugestão de banca já foi enviada, em caso de dúvidas, entre em contato com o Coordenador da disciplina.</p>
+    </div>
+
+    <div *ngIf="banca && banca.bancaConfirmada">
+        <p>A banca do aluno já foi confirmada, em caso de dúvidas, entre em contato com o Coordenador da disciplina.</p>
+      </div>
+  </mat-dialog-content>
+  

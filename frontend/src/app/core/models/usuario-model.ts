@@ -5,6 +5,7 @@ export class UsuarioModel{
     nomeCompleto!: string;
     senha!: string;
     tipoUsuario!: number;
+    matricula!: number
 } 
 
 export class UsuarioLightModel{
@@ -12,4 +13,5 @@ export class UsuarioLightModel{
     email!: string;
     nomeCompleto!: string;
     tipoUsuario!: number;
+    matricula!: number;
 }

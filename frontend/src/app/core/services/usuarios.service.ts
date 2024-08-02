@@ -19,4 +19,9 @@ export class UsuariosService extends BaseService {
       .get(this.urlApi + `usuarios/ObterPorId?id=${id}`, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
+  async obterProfessores(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `usuarios/ObterProfessores`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
 }

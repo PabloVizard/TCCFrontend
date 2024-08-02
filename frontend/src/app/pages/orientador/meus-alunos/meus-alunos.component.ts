@@ -12,6 +12,7 @@ import { OrientacoesService } from 'src/app/core/services/orientacoes.service';
 import { ProjetosService } from 'src/app/core/services/projetos.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { EditarAlunosOrientadosComponent } from './editar-alunos-orientados/editar-alunos-orientados.component';
+import { RecomendarBancaComponent } from './recomendar-banca/recomendar-banca.component';
 
 @Component({
   selector: 'app-meus-alunos',
@@ -72,8 +73,16 @@ import { EditarAlunosOrientadosComponent } from './editar-alunos-orientados/edit
     });
   }
 
-  recomendarBanca(alunoid: number){
+  recomendarBanca(orientacaoId: number){
+    var dialogRef = this.dialog.open(RecomendarBancaComponent, {
+      width: '1024px', 
+      height: '280px',
+      data: orientacaoId
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      this.recarregarPagina();
+    });
   }
 
   recarregarPagina() {

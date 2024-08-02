@@ -49,6 +49,7 @@ import { ProjetosOrientadorComponent } from './pages/projetos/projetos-orientado
 import { MeusAlunosComponent } from './pages/orientador/meus-alunos/meus-alunos.component';
 import { EditarAlunosOrientadosComponent } from './pages/orientador/meus-alunos/editar-alunos-orientados/editar-alunos-orientados.component';
 import { RecomendarBancaComponent } from './pages/orientador/meus-alunos/recomendar-banca/recomendar-banca.component';
+import { BancasOrientadorComponent } from './pages/orientador/meus-alunos/bancas-orientador/bancas-orientador.component';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { RecomendarBancaComponent } from './pages/orientador/meus-alunos/recomen
     MeusAlunosComponent,
     EditarAlunosOrientadosComponent,
     RecomendarBancaComponent,
+    BancasOrientadorComponent,
   ],
   imports: [
     BrowserModule,

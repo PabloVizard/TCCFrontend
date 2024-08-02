@@ -38,21 +38,16 @@
             <div class="form-container">
                 <mat-form-field class="form-row">
                     <mat-label>Professor Orientador</mat-label>
-                    <input matInput [(ngModel)]="banca.professorOrientador" name="professorOrientador" readonly>
+                    <input matInput [(ngModel)]="banca.idProfessorOrientador" name="professorOrientador" readonly>
                 </mat-form-field>
                 <mat-form-field class="form-row">
                     <mat-label>Avaliador</mat-label>
-                    <input matInput [(ngModel)]="banca.avaliador01" name="avaliador01" readonly>
+                    <input matInput [(ngModel)]="banca.idAvaliador01" name="avaliador01" readonly>
                 </mat-form-field>
 
                 <mat-form-field class="form-row">
                     <mat-label>Avaliador</mat-label>
-                    <input matInput [(ngModel)]="banca.avaliador02" name="avaliador02" readonly>
-                </mat-form-field>
-
-                <mat-form-field class="form-row" *ngIf="banca.avaliador03 != ''">
-                    <mat-label>Avaliador</mat-label>
-                    <input matInput [(ngModel)]="banca.avaliador03" name="avaliador03" readonly>
+                    <input matInput [(ngModel)]="banca.idAvaliador02" name="avaliador02" readonly>
                 </mat-form-field>
             </div>
         </ng-container>
