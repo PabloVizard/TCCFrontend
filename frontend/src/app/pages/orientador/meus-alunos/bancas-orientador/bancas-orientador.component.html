@@ -21,21 +21,21 @@
   
             <ng-container matColumnDef="professorOrientador">
               <mat-header-cell *matHeaderCellDef>Professor Orientador</mat-header-cell>
-              <mat-cell *matCellDef="let banca" [ngClass]="{'red-text': banca.professorOrientador.id === usuarioLogado?.id}">
+              <mat-cell *matCellDef="let banca" [ngClass]="{'blue-text': banca.professorOrientador.id === usuarioLogado?.id}">
                 {{ banca.professorOrientador.nomeCompleto }}
               </mat-cell>
             </ng-container>
   
             <ng-container matColumnDef="avaliador1">
               <mat-header-cell *matHeaderCellDef>Avaliador 01</mat-header-cell>
-              <mat-cell *matCellDef="let banca" [ngClass]="{'red-text': banca.avaliador01.id === usuarioLogado?.id}">
+              <mat-cell *matCellDef="let banca" [ngClass]="{'blue-text': banca.avaliador01.id === usuarioLogado?.id}">
                 {{ banca.avaliador01.nomeCompleto }}
               </mat-cell>
             </ng-container>
   
             <ng-container matColumnDef="avaliador2">
               <mat-header-cell *matHeaderCellDef>Avaliador 02</mat-header-cell>
-              <mat-cell *matCellDef="let banca" [ngClass]="{'red-text': banca.avaliador02?.id === usuarioLogado?.id}">
+              <mat-cell *matCellDef="let banca" [ngClass]="{'blue-text': banca.avaliador02?.id === usuarioLogado?.id}">
                 {{ banca?.avaliador02?.nomeCompleto ?? ' - ' }}
               </mat-cell>
             </ng-container>
@@ -52,7 +52,9 @@
   
             <ng-container matColumnDef="statusConfirmada">
               <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-              <mat-cell *matCellDef="let banca">{{ banca.statusConfirmada ? 'Confirmada' : 'Não Confirmada' }}</mat-cell>
+              <mat-cell *matCellDef="let banca" [ngClass]="banca.statusConfirmada ? 'confirmed-status' : 'unconfirmed-status'">
+                {{ banca.statusConfirmada ? 'Confirmada' : 'Não Confirmada' }}
+              </mat-cell>
             </ng-container>
   
             <ng-container matColumnDef="dataDefesa">
