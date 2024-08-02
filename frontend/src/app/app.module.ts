@@ -50,6 +50,7 @@ import { EditarAlunosOrientadosComponent } from './pages/orientador/meus-alunos/
 import { RecomendarBancaComponent } from './pages/orientador/meus-alunos/recomendar-banca/recomendar-banca.component';
 import { BancasOrientadorComponent } from './pages/orientador/meus-alunos/bancas-orientador/bancas-orientador.component';
 import { AulasAlunoComponent } from './pages/aluno/aulas-aluno/aulas-aluno.component';
+import { AulasProfessorComponent } from './pages/professor/aulas-professor/aulas-professor.component';
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import { AulasAlunoComponent } from './pages/aluno/aulas-aluno/aulas-aluno.compo
     EditarAlunosOrientadosComponent,
     RecomendarBancaComponent,
     BancasOrientadorComponent,
+    AulasProfessorComponent,
   ],
   imports: [
     BrowserModule,
