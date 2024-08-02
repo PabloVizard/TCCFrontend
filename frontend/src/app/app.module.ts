@@ -39,7 +39,6 @@ import { MenuAlunoComponent } from './shared/pages/sidenav/menu-aluno/menu-aluno
 import { ProjetosComponent } from './pages/projetos/projetos.component';
 import { ProjetoAtualComponent } from './pages/projetos/projeto-atual/projeto-atual.component';
 import { SemInformacoesComponent } from './shared/pages/sem-informacoes/sem-informacoes.component';
-import { CompromissosAlunoComponent } from './pages/aluno/compromissos-aluno/compromissos-aluno.component';
 import { EnviarTarefaAlunoComponent } from './pages/aluno/tarefa-aluno/enviar-tarefa-aluno/enviar-tarefa-aluno.component';
 import { MenuProfessorComponent } from './shared/pages/sidenav/menu-professor/menu-professor.component';
 import { MenuOrientadorComponent } from './shared/pages/sidenav/menu-orientador/menu-orientador.component';
@@ -50,6 +49,7 @@ import { MeusAlunosComponent } from './pages/orientador/meus-alunos/meus-alunos.
 import { EditarAlunosOrientadosComponent } from './pages/orientador/meus-alunos/editar-alunos-orientados/editar-alunos-orientados.component';
 import { RecomendarBancaComponent } from './pages/orientador/meus-alunos/recomendar-banca/recomendar-banca.component';
 import { BancasOrientadorComponent } from './pages/orientador/meus-alunos/bancas-orientador/bancas-orientador.component';
+import { AulasAlunoComponent } from './pages/aluno/aulas-aluno/aulas-aluno.component';
 
 
 @NgModule({
@@ -65,7 +65,7 @@ import { BancasOrientadorComponent } from './pages/orientador/meus-alunos/bancas
     ProjetosComponent,
     ProjetoAtualComponent,
     SemInformacoesComponent,
-    CompromissosAlunoComponent,
+    AulasAlunoComponent,
     EnviarTarefaAlunoComponent,
     MenuProfessorComponent,
     MenuOrientadorComponent,

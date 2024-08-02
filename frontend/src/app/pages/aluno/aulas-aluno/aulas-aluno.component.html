@@ -1,21 +1,16 @@
 <div class="app-container">
     <mat-card class="app-card">
         <mat-card-header>
-            <mat-card-title>Compromissos</mat-card-title>
+            <mat-card-title>Aulas</mat-card-title>
         </mat-card-header>
   
         <mat-card-content>
-            <ng-container *ngIf="compromissos.length > 0; else semInformacoes">
+            <ng-container *ngIf="aulas.length > 0; else semInformacoes">
                 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                     <ng-container matColumnDef="descricao">
                         <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
                         <mat-cell *matCellDef="let compromisso">{{ compromisso.descricao }}</mat-cell>
                     </ng-container>
-                    <ng-container matColumnDef="tipoCompromisso">
-                        <mat-header-cell *matHeaderCellDef>Tipo Compromisso</mat-header-cell>
-                        <mat-cell *matCellDef="let compromisso">{{ obterTextoTipoCompromisso(compromisso.tipoCompromisso) }}</mat-cell>
-                    </ng-container>
-
                     <ng-container matColumnDef="professorOrientador">
                         <mat-header-cell *matHeaderCellDef>Professor</mat-header-cell>
                         <mat-cell *matCellDef="let compromisso">{{ compromisso.professorOrientador.nomeCompleto }}</mat-cell>

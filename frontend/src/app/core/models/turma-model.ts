@@ -4,4 +4,5 @@ export class TurmaModel{
     ano!: number;
     semestre!: number;
     nPoc!: number;
+    ativo!: boolean
 }

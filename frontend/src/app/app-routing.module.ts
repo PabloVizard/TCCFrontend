@@ -7,10 +7,11 @@ import { MinhaContaComponent } from './pages/configuracoes/minha-conta/minha-con
 import { TarefaAlunoComponent } from './pages/aluno/tarefa-aluno/tarefa-aluno.component';
 import { ProjetosComponent } from './pages/projetos/projetos.component';
 import { ProjetoAtualComponent } from './pages/projetos/projeto-atual/projeto-atual.component';
-import { CompromissosAlunoComponent } from './pages/aluno/compromissos-aluno/compromissos-aluno.component';
+
 import { ProjetosOrientadorComponent } from './pages/projetos/projetos-orientador/projetos-orientador.component';
 import { MeusAlunosComponent } from './pages/orientador/meus-alunos/meus-alunos.component';
 import { BancasOrientadorComponent } from './pages/orientador/meus-alunos/bancas-orientador/bancas-orientador.component';
+import { AulasAlunoComponent } from './pages/aluno/aulas-aluno/aulas-aluno.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'projetosdisponiveis', component: ProjetosComponent },
   { path: 'projetosorientador', component: ProjetosOrientadorComponent },
   { path: 'meuprojeto', component: ProjetoAtualComponent },
-  { path: 'compromissosaluno', component: CompromissosAlunoComponent },
+  { path: 'aulasaluno', component: AulasAlunoComponent },
   { path: 'meusalunospoc1', component: MeusAlunosComponent },
   { path: 'meusalunospoc2', component: MeusAlunosComponent },
   { path: 'bancasorientador', component: BancasOrientadorComponent },

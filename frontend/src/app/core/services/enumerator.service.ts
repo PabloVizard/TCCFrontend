@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { lastValueFrom, catchError } from 'rxjs';
 import { BaseService } from './base.service';
 import { StatusAprovacaoEnumerator } from '../enumerators/status-aprovacao.enumerator';
-import { TipoCompromissoEnumerator } from '../enumerators/tipo-compromisso';
 import { TipoUsuarioEnumerator } from '../enumerators/usuario.enumerator';
 
 @Injectable({
@@ -29,19 +28,6 @@ export class EnumeratorService {
             return "Reprovado";
         default:
             return "Status desconhecido";
-    }
-}
-
-getTipoCompromisso(key: TipoCompromissoEnumerator): string {
-    switch (key) {
-        case TipoCompromissoEnumerator.Aula:
-            return "Aula";
-        case TipoCompromissoEnumerator.Reunião:
-            return "Reunião";
-        case TipoCompromissoEnumerator.DefesaPoc:
-            return "Defesa POC";
-        default:
-            return "Tipo de compromisso desconhecido";
     }
 }
 

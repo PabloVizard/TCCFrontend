@@ -6,20 +6,20 @@ import { BaseService } from './base.service';
 @Injectable({
   providedIn: 'root'
 })
-export class CompromissosService extends BaseService {
+export class AulasService extends BaseService {
 
   constructor(private http: HttpClient) {
     super();
   }
 
-  async ObterCompromissosAluno(): Promise<any> {
+  async ObterAulasAluno(): Promise<any> {
     return await lastValueFrom(this.http
-      .get(this.urlApi + `compromissos/ObterCompromissosAluno`, super.ObterAuthHeaderJson())
+      .get(this.urlApi + `aulas/ObterAulasAluno`, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
-  async ObterCompromissosProfessor(): Promise<any> {
+  async ObterAulasProfessor(): Promise<any> {
     return await lastValueFrom(this.http
-      .get(this.urlApi + `compromissos/ObterCompromissosProfessor`, super.ObterAuthHeaderJson())
+      .get(this.urlApi + `aulas/ObterAulasProfessor`, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
 }
