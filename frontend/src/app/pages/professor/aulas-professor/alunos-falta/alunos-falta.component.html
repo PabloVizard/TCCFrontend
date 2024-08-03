@@ -1,0 +1,37 @@
+<mat-toolbar>
+    <div>
+        <span>Faltas dos Alunos</span>
+    </div>
+    <div class="close-button">
+        <button mat-icon-button mat-dialog-close aria-label="Fechar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<mat-dialog-content>
+    <div *ngIf="alunos.length > 0; else noAlunos">
+        <mat-card *ngFor="let aluno of alunos" class="aluno-card">
+            <mat-card-header>
+                <mat-card-title>{{ aluno.usuario.nomeCompleto }}</mat-card-title>
+                <mat-card-subtitle>Matrícula: {{ aluno.usuario.matricula }}</mat-card-subtitle>
+                <mat-card-subtitle>Quantidade de Faltas: {{ aluno.quantidadeFaltas }}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+                <button mat-raised-button color="warn" *ngIf="!aluno.faltaAula" (click)="lancarFalta(aluno.usuario.id)">
+                    Lançar Falta
+                </button>
+                <button mat-raised-button color="primary" *ngIf="aluno.faltaAula" (click)="removerFalta(aluno.idFalta)">
+                    Remover Falta
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <ng-template #noAlunos>
+        <mat-card>
+            <mat-card-content>
+                <p>Não há alunos para esta turma.</p>
+            </mat-card-content>
+        </mat-card>
+    </ng-template>
+</mat-dialog-content>

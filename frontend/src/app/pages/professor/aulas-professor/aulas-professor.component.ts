@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { format } from 'date-fns';
 import { AulasModel, AulasFullModel } from 'src/app/core/models/aulas-model';
-import { UsuarioModel } from 'src/app/core/models/usuario-model';
+import { UsuarioLightModel, UsuarioModel } from 'src/app/core/models/usuario-model';
 import { AulasService } from 'src/app/core/services/aulas.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { CadastrarAulaComponent } from './cadastrar-aula/cadastrar-aula.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { AlunosFaltaComponent } from './alunos-falta/alunos-falta.component';
 
 @Component({
   selector: 'app-aulas-professor',
@@ -19,8 +20,9 @@ export class AulasProfessorComponent implements OnInit {
   aulas: Array<AulasFullModel> = new Array<AulasFullModel>();
   dataSource: any;
   usuarioLogado!: UsuarioModel;
+  alunosAula: UsuarioLightModel[] = [];
 
-  displayedColumns: string[] = ['descricao', 'nomeProfessor', 'turma', 'dataAula', 'local', 'link', 'actions'];
+  displayedColumns: string[] = ['descricao', 'nomeProfessor', 'turma', 'dataAula', 'local', 'link', 'alunos', 'actions'];
 
   constructor(private aulasService: AulasService,
               private authService: AuthService,
@@ -30,15 +32,23 @@ export class AulasProfessorComponent implements OnInit {
 
   async ngOnInit() {
     this.usuarioLogado = this.authService.ObterUsuarioLogado();
-    await this.obterAulasAluno();
+    await this.obterAulasProfessor();
     this.dataSource = new MatTableDataSource(this.aulas);
   }
 
-  async obterAulasAluno(){
+  async obterAulasProfessor(){
     await this.aulasService.ObterAulasProfessor().then(result => {
       this.aulas = result;
     }, fail => {
       this.toastService.show('fail', "Erro ao obter aulas!" + fail.error);
+    });
+  }
+  
+  mostrarAlunos(turmaId: number, aulaId: number){
+    this.dialog.open(AlunosFaltaComponent, {
+      width: '800px', 
+      height: '900px',
+      data: { turmaId, aulaId }
     });
   }
 
