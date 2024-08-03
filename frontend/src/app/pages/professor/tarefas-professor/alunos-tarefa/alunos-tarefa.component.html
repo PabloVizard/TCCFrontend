@@ -1,0 +1,34 @@
+<mat-toolbar>
+    <div>
+        <span>Tarefas dos Alunos</span>
+    </div>
+    <div class="close-button">
+        <button mat-icon-button mat-dialog-close aria-label="Fechar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
+
+<mat-dialog-content>
+    <div *ngIf="alunosTarefa.length > 0; else noTarefas">
+        <mat-card *ngFor="let tarefa of alunosTarefa" class="tarefa-card">
+            <mat-card-header>
+                <mat-card-title>{{ tarefa.aluno.nomeCompleto }}</mat-card-title>
+                <mat-card-subtitle>Matrícula: {{ tarefa.aluno.matricula }}</mat-card-subtitle>
+                <mat-card-subtitle>Data de Entrega: {{ (tarefa.dataEntrega | date:'dd/MM/yyyy')  || ' - '}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+                <button mat-raised-button color="primary" (click)="verAnexo(tarefa.anexo)" [disabled]="!tarefa.anexo">
+                    Ver Anexo
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <ng-template #noTarefas>
+        <mat-card>
+            <mat-card-content>
+                <p>Não há tarefas para esta turma.</p>
+            </mat-card-content>
+        </mat-card>
+    </ng-template>
+</mat-dialog-content>

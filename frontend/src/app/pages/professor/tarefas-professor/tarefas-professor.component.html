@@ -27,6 +27,12 @@
                             <button mat-raised-button [disabled]="!tarefa.anexo" color="primary" (click)="abrirAnexo(tarefa.anexo)">Acessar</button>
                         </mat-cell>
                     </ng-container>
+                    <ng-container matColumnDef="alunos">
+                        <mat-header-cell *matHeaderCellDef>Alunos</mat-header-cell>
+                        <mat-cell *matCellDef="let tarefa">
+                            <button mat-raised-button color="primary" (click)="mostrarAlunos(tarefa.turma.id, tarefa.id)">Ver Todos</button>
+                        </mat-cell>
+                    </ng-container>
                     <ng-container matColumnDef="actions">
                         <mat-header-cell *matHeaderCellDef></mat-header-cell>
                         <mat-cell *matCellDef="let tarefa">

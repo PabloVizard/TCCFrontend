@@ -58,5 +58,9 @@ export class TarefasService extends BaseService {
       .put(this.urlApi + `tarefas/atualizar`, tarefa, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
-
+  async ObterAlunosTarefaPorTurma(idTurma: number, idTarefa: number): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `tarefas/ObterAlunosTarefaPorTurma?idTurma=${idTurma}&idTarefa=${idTarefa}`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
 }

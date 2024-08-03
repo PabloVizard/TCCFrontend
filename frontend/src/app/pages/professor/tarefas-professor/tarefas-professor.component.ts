@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { CadastrarTarefaComponent } from '../tarefas-professor/cadastrar-tarefa/cadastrar-tarefa.component';
 import { TarefaFullModel } from 'src/app/core/models/tarefa-model';
+import { AlunosTarefaComponent } from './alunos-tarefa/alunos-tarefa.component';
 
 @Component({
   selector: 'app-tarefas-professor',
@@ -22,7 +23,7 @@ export class TarefasProfessorComponent implements OnInit {
   dataSource: any;
   usuarioLogado!: UsuarioModel;
 
-  displayedColumns: string[] = ['descricao', 'descricaoTurma', 'dataLimite', 'anexo', 'actions'];
+  displayedColumns: string[] = ['descricao', 'descricaoTurma', 'dataLimite', 'anexo', 'alunos', 'actions'];
 
   constructor(private tarefasService: TarefasService,
               private authService: AuthService,
@@ -73,6 +74,14 @@ export class TarefasProfessorComponent implements OnInit {
         this.toastService.show('fail', "Erro ao excluir tarefa!" + fail.error);
       });
     }
+  }
+
+  mostrarAlunos(turmaId: number, tarefaId: number){
+    this.dialog.open(AlunosTarefaComponent, {
+      width: '800px', 
+      height: '900px',
+      data: { turmaId, tarefaId }
+    });
   }
 
   recarregarPagina() {

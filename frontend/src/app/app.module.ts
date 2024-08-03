@@ -57,6 +57,7 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { TarefasProfessorComponent } from './pages/professor/tarefas-professor/tarefas-professor.component';
 import { CadastrarTarefaComponent } from './pages/professor/tarefas-professor/cadastrar-tarefa/cadastrar-tarefa.component';
 import { AlunosFaltaComponent } from './pages/professor/aulas-professor/alunos-falta/alunos-falta.component';
+import { AlunosTarefaComponent } from './pages/professor/tarefas-professor/alunos-tarefa/alunos-tarefa.component';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { AlunosFaltaComponent } from './pages/professor/aulas-professor/alunos-f
     TarefasProfessorComponent,
     CadastrarTarefaComponent,
     AlunosFaltaComponent,
+    AlunosTarefaComponent,
   ],
   imports: [
     BrowserModule,
