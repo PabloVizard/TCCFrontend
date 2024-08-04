@@ -45,6 +45,10 @@ export class CadastrarAulaComponent implements OnInit {
     await this.carregarDados();
   }
 
+  compareTurmas(turma1: number, turma2: number): boolean {
+    return turma1 && turma2 ? turma1 === turma2 : turma1 === turma2;
+  }
+
   async carregarDados() {
     await this.obterTurmasDisponiveis();
     if (this.idAula) {
