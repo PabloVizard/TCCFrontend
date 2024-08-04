@@ -18,7 +18,7 @@ import { ToastService } from 'src/app/core/services/toast.service';
 })
 export class ProjetoAtualComponent implements OnInit {
   orientacao!: OrientacoesModel;
-  banca!: BancasModel;
+  banca!: any;
   usuarioLogado!: UsuarioModel;
   statusAprovacao!: string;
   

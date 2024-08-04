@@ -16,18 +16,20 @@ export class AulasAlunoComponent implements OnInit {
   aulas: Array<AulasModel> = new Array<AulasModel>();
   dataSource: any;
   usuarioLogado!: UsuarioModel;
+  totalFaltas: number = 0;
 
-  displayedColumns: string[] = ['descricao', 'professor','turma', 'dataAula', 'local', 'link'];
+  displayedColumns: string[] = ['descricao', 'professor', 'turma', 'dataAula', 'local', 'link', 'falta'];
 
   constructor(
     private aulasService: AulasService,
     private authService: AuthService,
-    private toastService: ToastService
+    private toastService: ToastService,
   ) {}
 
   async ngOnInit() {
     this.usuarioLogado = this.authService.ObterUsuarioLogado();
     await this.obterAulasAluno();
+    await this.obterTotaldeFaltasAluno();
     this.dataSource = new MatTableDataSource(this.aulas);
   }
 
@@ -46,5 +48,17 @@ export class AulasAlunoComponent implements OnInit {
 
   acessarLink(link: string) {
     window.open(link, '_blank');
+  }
+
+  isAulaPassada(dataAula: string): boolean {
+    return new Date(dataAula) < new Date();
+  }
+
+  async obterTotaldeFaltasAluno() {
+    await this.aulasService.ObterFaltasAluno().then(result => {
+      this.totalFaltas = result.length;
+    }, fail => {
+      this.toastService.show('fail', "Erro ao obter faltas!" + fail.error);
+    });
   }
 }

@@ -11,7 +11,7 @@
 </mat-toolbar>
   
   <mat-dialog-content>
-    <ng-container *ngIf="dados; else semInformacoesForm">
+    <ng-container *ngIf="tarefaAluno; else semInformacoesForm">
       <form>
         <div >
           <mat-form-field class="full-width">
@@ -23,7 +23,7 @@
   
           <mat-form-field class="full-width">
             <mat-label>Data Limite</mat-label>
-            <input matInput [value]="parseDate(tarefaAluno.dataLimite.toString())" name="dataLimite" readonly>
+            <input matInput [value]="parseDate(data.dataLimite.toString())" name="dataLimite" readonly>
           </mat-form-field>
 
 

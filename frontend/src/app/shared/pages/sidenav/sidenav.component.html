@@ -42,11 +42,11 @@
                 <app-menu-coordenador></app-menu-coordenador>
             </ng-container>
 
-            <ng-container *ngIf="usuarioLogado?.tipoUsuario == 2 || usuarioLogado?.tipoUsuario == 4">
+            <ng-container *ngIf="usuarioLogado?.tipoUsuario == 2 || usuarioLogado?.tipoUsuario == 4 || usuarioLogado?.tipoUsuario == 5">
                 <app-menu-professor></app-menu-professor>
             </ng-container>
 
-            <ng-container *ngIf="usuarioLogado?.tipoUsuario == 3 || usuarioLogado?.tipoUsuario == 4">
+            <ng-container *ngIf="usuarioLogado?.tipoUsuario == 3 || usuarioLogado?.tipoUsuario == 4 || usuarioLogado?.tipoUsuario == 5">
                 <app-menu-orientador></app-menu-orientador>
             </ng-container>
 

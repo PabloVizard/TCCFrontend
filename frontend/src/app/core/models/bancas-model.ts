@@ -12,6 +12,7 @@ export class BancasModel{
     semestre!: number;
     bancaConfirmada!: boolean;
     dataDefesa?: Date;
+    status?: boolean;
 }
 
 export class BancasFullModel{
@@ -25,4 +26,5 @@ export class BancasFullModel{
     semestre!: number;
     bancaConfirmada!: boolean;
     dataDefesa?: Date;
+    status?: boolean;
 }

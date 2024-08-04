@@ -14,23 +14,25 @@ import { ToastService } from 'src/app/core/services/toast.service';
 export class EnviarTarefaAlunoComponent implements OnInit {
 
   tarefaAluno!: TarefaAlunoModel;
-  constructor(@Inject(MAT_DIALOG_DATA) public dados: any,
+  dataLimite!: any;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private tarefaService: TarefasService,
               private toastService: ToastService,
               private authService: AuthService){
     
   }
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
 
-    this.tarefaAluno = {
-      id: undefined!,
-      anexo: '',
-      dataEntrega: this.dados.dataEntrega,
-      dataLimite: this.dados.dataLimite,
-      idAluno: this.authService.ObterUsuarioLogado().id,
-      idTarefa: this.dados.id
-    }
+    await this.buscarTarefaAluno()
 
+  }
+  async buscarTarefaAluno(){
+    this.tarefaService.obterTarefaAluno(this.data.tarefaId).then(result => {
+      this.tarefaAluno = result;
+      //window.location.reload()
+    },fail => {
+      this.toastService.show('fail', "Erro ao enviar resposta da tarefa.")
+    })
   }
 
   parseDate(dateString: string): string  {

@@ -20,3 +20,14 @@ export class TarefaFullModel{
     entregue!: boolean;
     anexoEntregua!: string 
 }
+
+export class TarefaAlunoFullModel {
+    id!: number;
+    descricao!: string;
+    aluno!: UsuarioLightModel;
+    professor!: UsuarioLightModel;
+    dataLimite!: Date;
+    dataEntrega?: Date;
+    anexo?: string;
+    anexoEntrega?: string;
+}

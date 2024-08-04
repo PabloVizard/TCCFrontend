@@ -43,4 +43,9 @@ export class AulasService extends BaseService {
       .post(this.urlApi + `aulas/Registrar`, aula, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
+  async ObterFaltasAluno(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `aulas/ObterFaltasAluno`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
 }

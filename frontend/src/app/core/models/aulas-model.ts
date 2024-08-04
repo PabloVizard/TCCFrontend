@@ -9,6 +9,7 @@ export class AulasModel {
     dataAula!: Date;
     local?: string;
     link?: string;
+    falta?: boolean;
 }
 
 export class AulasFullModel {

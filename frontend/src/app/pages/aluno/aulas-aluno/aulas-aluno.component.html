@@ -5,6 +5,9 @@
         </mat-card-header>
 
         <mat-card-content>
+            <div class="faltas-info">
+                <p>Total de Faltas: {{ totalFaltas }}</p>
+            </div>
             <ng-container *ngIf="aulas.length > 0; else semInformacoes">
                 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                     <ng-container matColumnDef="descricao">
@@ -36,6 +39,17 @@
                         <mat-header-cell *matHeaderCellDef>Link</mat-header-cell>
                         <mat-cell *matCellDef="let aula">
                             <button mat-raised-button [disabled]="!aula.link" color="primary" (click)="acessarLink(aula.link)">Acessar</button>
+                        </mat-cell>
+                    </ng-container>
+
+                    <ng-container matColumnDef="falta">
+                        <mat-header-cell *matHeaderCellDef>Presença</mat-header-cell>
+                        <mat-cell *matCellDef="let aula">
+                            <span *ngIf="isAulaPassada(aula.dataAula)">
+                                <span *ngIf="aula.falta" class="falta">Falta</span>
+                                <span *ngIf="!aula.falta" class="presente">Presente</span>
+                            </span>
+                            <span *ngIf="!isAulaPassada(aula.dataAula)">-</span>
                         </mat-cell>
                     </ng-container>
 

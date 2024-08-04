@@ -38,17 +38,44 @@
             <div class="form-container">
                 <mat-form-field class="form-row">
                     <mat-label>Professor Orientador</mat-label>
-                    <input matInput [(ngModel)]="banca.idProfessorOrientador" name="professorOrientador" readonly>
+                    <input matInput [(ngModel)]="banca.professorOrientador.nomeCompleto" name="professorOrientador" readonly>
                 </mat-form-field>
                 <mat-form-field class="form-row">
-                    <mat-label>Avaliador</mat-label>
-                    <input matInput [(ngModel)]="banca.idAvaliador01" name="avaliador01" readonly>
+                    <mat-label>Avaliador 01</mat-label>
+                    <input matInput [(ngModel)]="banca.avaliador01.nomeCompleto" name="avaliador01" readonly>
+                </mat-form-field>
+
+                <mat-form-field class="form-row" *ngIf="banca.avaliador02 != null">
+                    <mat-label>Avaliador 02</mat-label>
+                    <input matInput [(ngModel)]="banca.avaliador02.nomeCompleto" name="avaliador02" readonly>
                 </mat-form-field>
 
                 <mat-form-field class="form-row">
-                    <mat-label>Avaliador</mat-label>
-                    <input matInput [(ngModel)]="banca.idAvaliador02" name="avaliador02" readonly>
-                </mat-form-field>
+                    <mat-label>Status Banca</mat-label>
+                    <input matInput 
+                           [value]="banca.bancaConfirmada ? 'Confirmada' : 'Pendente'" 
+                           name="statusBanca" 
+                           readonly>
+                  </mat-form-field>
+
+                  <mat-form-field class="form-row">
+                    <mat-label>Data de Defesa</mat-label>
+                    <input matInput 
+                           [value]="banca.dataDefesa != null ? banca.dataDefesa : ' - '" 
+                           name="dataDefesa" 
+                           readonly>
+                  </mat-form-field>
+
+                  <mat-form-field class="form-row">
+                    <mat-label>Resultado</mat-label>
+                    <input matInput 
+                           [value]="banca.status === null ? ' - ' : (banca.status ? 'Aprovado' : 'Reprovado')" 
+                           name="statusBanca" 
+                           readonly >
+                  </mat-form-field>
+                  
+                  
+
             </div>
         </ng-container>
 
