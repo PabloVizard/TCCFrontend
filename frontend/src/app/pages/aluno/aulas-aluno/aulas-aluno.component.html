@@ -3,46 +3,41 @@
         <mat-card-header>
             <mat-card-title>Aulas</mat-card-title>
         </mat-card-header>
-  
+
         <mat-card-content>
             <ng-container *ngIf="aulas.length > 0; else semInformacoes">
                 <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
                     <ng-container matColumnDef="descricao">
                         <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
-                        <mat-cell *matCellDef="let compromisso">{{ compromisso.descricao }}</mat-cell>
-                    </ng-container>
-                    <ng-container matColumnDef="professorOrientador">
-                        <mat-header-cell *matHeaderCellDef>Professor</mat-header-cell>
-                        <mat-cell *matCellDef="let compromisso">{{ compromisso.professorOrientador.nomeCompleto }}</mat-cell>
+                        <mat-cell *matCellDef="let aula">{{ aula.descricao }}</mat-cell>
                     </ng-container>
 
-                    <ng-container matColumnDef="alunoOrientado">
-                        <mat-header-cell *matHeaderCellDef>Aluno</mat-header-cell>
-                        <mat-cell *matCellDef="let compromisso">{{ compromisso.alunoOrientado?.nomeCompleto || '-' }}</mat-cell>
+                    <ng-container matColumnDef="professor">
+                        <mat-header-cell *matHeaderCellDef>Professor</mat-header-cell>
+                        <mat-cell *matCellDef="let aula">{{ aula.professor.nomeCompleto }}</mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="turma">
                         <mat-header-cell *matHeaderCellDef>Turma</mat-header-cell>
-                        <mat-cell *matCellDef="let compromisso">{{ compromisso.turma?.descricao || '-' }}</mat-cell>
+                        <mat-cell *matCellDef="let aula">{{ aula.turma?.descricao || '-' }}</mat-cell>
                     </ng-container>
 
-                    <ng-container matColumnDef="dataCompromisso">
-                        <mat-header-cell *matHeaderCellDef>Data Compromisso</mat-header-cell>
-                        <mat-cell *matCellDef="let compromisso">{{ parseDate(compromisso.dataCompromisso) }}</mat-cell>
+                    <ng-container matColumnDef="dataAula">
+                        <mat-header-cell *matHeaderCellDef>Data da Aula</mat-header-cell>
+                        <mat-cell *matCellDef="let aula">{{ parseDate(aula.dataAula) }}</mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="local">
                         <mat-header-cell *matHeaderCellDef>Local</mat-header-cell>
-                        <mat-cell *matCellDef="let compromisso">{{ compromisso.local || '-' }}</mat-cell>
+                        <mat-cell *matCellDef="let aula">{{ aula.local || '-' }}</mat-cell>
                     </ng-container>
 
                     <ng-container matColumnDef="link">
                         <mat-header-cell *matHeaderCellDef>Link</mat-header-cell>
-                        <mat-cell *matCellDef="let compromisso">
-                            <button mat-raised-button [disabled]="compromisso?.link == null" color="primary" (click)="acessarLink(compromisso?.link)" >Acessar</button>
+                        <mat-cell *matCellDef="let aula">
+                            <button mat-raised-button [disabled]="!aula.link" color="primary" (click)="acessarLink(aula.link)">Acessar</button>
                         </mat-cell>
                     </ng-container>
-                    
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                     <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>

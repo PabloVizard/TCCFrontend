@@ -22,7 +22,7 @@ export class AulasProfessorComponent implements OnInit {
   usuarioLogado!: UsuarioModel;
   alunosAula: UsuarioLightModel[] = [];
 
-  displayedColumns: string[] = ['descricao', 'nomeProfessor', 'turma', 'dataAula', 'local', 'link', 'alunos', 'actions'];
+  displayedColumns: string[] = ['descricao', 'nomeProfessor', 'turma', 'dataAula', 'local', 'link', 'alunos'];
 
   constructor(private aulasService: AulasService,
               private authService: AuthService,
