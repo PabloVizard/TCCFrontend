@@ -15,5 +15,5 @@ export class ProjetoRetornoModel{
     descricao!: string;
     area!: string;
     idProfessorResponsavel!: number;
-    idAlunoResponsavel!: number;
+    idAlunoResponsavel?: number;
 }
