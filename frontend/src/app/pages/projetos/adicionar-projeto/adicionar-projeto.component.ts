@@ -36,7 +36,7 @@ export class AdicionarProjetoComponent implements OnInit {
       area: ['', Validators.required],
       descricao: ['', Validators.required],
       idProfessorResponsavel: [this.usuarioLogado.id],
-      idAlunoResponsavel: [null, Validators.required],
+      idAlunoResponsavel: [null],
     });
 
     await this.carregarDados();
@@ -81,6 +81,7 @@ export class AdicionarProjetoComponent implements OnInit {
   }
 
   async salvarProjeto() {
+    console.log(this.projetoForm.value)
     if (this.projetoForm.valid) {
       if (this.idProjeto) {
         await this.projetosService.AtualizarProjeto(this.projetoForm.value).then(result => {
