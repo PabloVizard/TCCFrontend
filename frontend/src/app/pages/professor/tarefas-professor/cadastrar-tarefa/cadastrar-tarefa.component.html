@@ -19,9 +19,9 @@
       </div>
       <div class="form-container">
         <mat-form-field class="form-row">
-          <mat-label>Turma</mat-label>
-          <mat-select formControlName="idTurma" required>
-            <mat-option *ngFor="let turma of turmasDisponiveis" [value]="turma.id">{{ turma.descricao }}</mat-option>
+          <mat-label>Aluno</mat-label>
+          <mat-select formControlName="idAluno" required>
+            <mat-option *ngFor="let aluno of alunosProfessor" [value]="aluno.id">{{ aluno.nomeCompleto }}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

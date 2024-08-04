@@ -3,8 +3,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TarefaModel } from 'src/app/core/models/tarefa-model';
 import { TurmaModel } from 'src/app/core/models/turma-model';
-import { UsuarioModel } from 'src/app/core/models/usuario-model';
+import { UsuarioLightModel, UsuarioModel } from 'src/app/core/models/usuario-model';
 import { AuthService } from 'src/app/core/services/auth.service';
+import { OrientacoesService } from 'src/app/core/services/orientacoes.service';
 import { TarefasService } from 'src/app/core/services/tarefas.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { TurmaService } from 'src/app/core/services/turma.service';
@@ -16,7 +17,7 @@ import { TurmaService } from 'src/app/core/services/turma.service';
 })
 export class CadastrarTarefaComponent implements OnInit {
   usuarioLogado: UsuarioModel = new UsuarioModel();
-  turmasDisponiveis: Array<TurmaModel> = new Array<TurmaModel>();
+  alunosProfessor: Array<UsuarioLightModel> = new Array<UsuarioLightModel>();
   tarefaForm!: FormGroup;
   tarefaAtual!: TarefaModel;
 
@@ -25,7 +26,7 @@ export class CadastrarTarefaComponent implements OnInit {
     private fb: FormBuilder,
     private authService: AuthService,
     private tarefaService: TarefasService,
-    private turmasService: TurmaService,
+    private orientacoesService: OrientacoesService,
     private toastService: ToastService
   ) {}
 
@@ -34,7 +35,7 @@ export class CadastrarTarefaComponent implements OnInit {
     this.tarefaForm = this.fb.group({
       id: [0],
       descricao: ['', Validators.required],
-      idTurma: [null, Validators.required],
+      idAluno: [null, Validators.required],
       dataLimite: [null, Validators.required],
       horaLimite: [null, Validators.required],
       anexo: [''],
@@ -45,7 +46,7 @@ export class CadastrarTarefaComponent implements OnInit {
   }
 
   async carregarDados() {
-    await this.obterTurmasDisponiveis();
+    await this.obterAlunosProfessor();
     if (this.idTarefa) {
       await this.buscarTarefa();
     }
@@ -64,9 +65,9 @@ export class CadastrarTarefaComponent implements OnInit {
     }
   }
 
-  async obterTurmasDisponiveis() {
-    await this.turmasService.ObterTurmasProfessor().then(result => {
-      this.turmasDisponiveis = result;
+  async obterAlunosProfessor() {
+    await this.orientacoesService.obterAlunosProfessor().then(result => {
+      this.alunosProfessor = result;
     }, fail => {
       this.toastService.show("fail", "Erro ao buscar turmas disponíveis! " + fail.error);
     });
@@ -78,7 +79,7 @@ export class CadastrarTarefaComponent implements OnInit {
       this.tarefaForm.patchValue({
         id: this.tarefaAtual.id,
         descricao: this.tarefaAtual.descricao,
-        idTurma: this.tarefaAtual.idTurma,
+        idAluno: this.tarefaAtual.idAluno,
         dataLimite: this.tarefaAtual.dataLimite ? dataHora.toISOString().split('T')[0] : null,
         horaLimite: this.tarefaAtual.dataLimite ? dataHora.toTimeString().substring(0, 5) : null,
         anexo: this.tarefaAtual.anexo,

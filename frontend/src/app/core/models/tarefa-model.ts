@@ -4,7 +4,7 @@ import { UsuarioLightModel, UsuarioModel } from "./usuario-model";
 export class TarefaModel{
     id!: number;
     descricao!: number;
-    idTurma!: number;
+    idAluno!: number;
     idProfessor!: number;
     dataLimite!: Date;
     anexo!: string;
@@ -13,8 +13,10 @@ export class TarefaModel{
 export class TarefaFullModel{
     id!: number;
     descricao!: number;
-    turma!: TurmaModel;
+    aluno!: UsuarioLightModel;
     professor!: UsuarioLightModel;
     dataLimite!: Date;
     anexo!: string;
+    entregue!: boolean;
+    anexoEntregua!: string 
 }

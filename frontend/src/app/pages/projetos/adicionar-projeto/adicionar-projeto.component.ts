@@ -63,7 +63,7 @@ export class AdicionarProjetoComponent implements OnInit {
   }
 
   async obterAlunosDisponiveis() {
-    await this.orientacoesService.obterAlunos().then(result => {
+    await this.orientacoesService.obterAlunosDisponiveis().then(result => {
       this.alunosDisponiveis = result;
     }, fail => {
       this.toastService.show("fail", "Erro ao buscar usuários disponíveis! " + fail.error);

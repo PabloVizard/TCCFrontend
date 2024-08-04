@@ -14,8 +14,8 @@
                         <mat-cell *matCellDef="let tarefa">{{ tarefa.descricao }}</mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="descricaoTurma">
-                        <mat-header-cell *matHeaderCellDef>Turma</mat-header-cell>
-                        <mat-cell *matCellDef="let tarefa">{{ tarefa.turma.descricao }}</mat-cell>
+                        <mat-header-cell *matHeaderCellDef>Aluno</mat-header-cell>
+                        <mat-cell *matCellDef="let tarefa">{{ tarefa.aluno.nomeCompleto }}</mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="dataLimite">
                         <mat-header-cell *matHeaderCellDef>Data Limite</mat-header-cell>
@@ -27,10 +27,16 @@
                             <button mat-raised-button [disabled]="!tarefa.anexo" color="primary" (click)="abrirAnexo(tarefa.anexo)">Acessar</button>
                         </mat-cell>
                     </ng-container>
-                    <ng-container matColumnDef="alunos">
-                        <mat-header-cell *matHeaderCellDef>Alunos</mat-header-cell>
+                    <ng-container matColumnDef="status">
+                        <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
                         <mat-cell *matCellDef="let tarefa">
-                            <button mat-raised-button color="primary" (click)="mostrarAlunos(tarefa.turma.id, tarefa.id)">Ver Todos</button>
+                            <ng-container *ngIf="tarefa.anexo; else noAnexo">
+                                <button mat-raised-button color="primary" *ngIf="tarefa.entregue" (click)="abrirAnexo(tarefa.anexoEntrega)">Ver Entrega</button>
+                                <button mat-raised-button color="warn" disabled *ngIf="!tarefa.entregue">Não entregue</button>
+                            </ng-container>
+                            <ng-template #noAnexo>
+                                <button mat-raised-button color="warn" disabled>Sem Anexo</button>
+                            </ng-template>
                         </mat-cell>
                     </ng-container>
                     <ng-container matColumnDef="actions">

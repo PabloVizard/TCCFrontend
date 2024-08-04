@@ -23,7 +23,7 @@ export class TarefasProfessorComponent implements OnInit {
   dataSource: any;
   usuarioLogado!: UsuarioModel;
 
-  displayedColumns: string[] = ['descricao', 'descricaoTurma', 'dataLimite', 'anexo', 'alunos', 'actions'];
+  displayedColumns: string[] = ['descricao', 'descricaoTurma', 'dataLimite', 'anexo', 'status', 'actions'];
 
   constructor(private tarefasService: TarefasService,
               private authService: AuthService,

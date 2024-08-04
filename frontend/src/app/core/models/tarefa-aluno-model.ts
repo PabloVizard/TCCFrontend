@@ -15,7 +15,6 @@ export class TarefaAlunoTurmaFullModel{
     id!: number;
     aluno!: UsuarioLightModel;
     tarefa!: TarefaModel;
-    turma!: TurmaModel;
     dataEntrega!: Date;
     anexo!: string;
 }
