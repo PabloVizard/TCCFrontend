@@ -14,6 +14,7 @@ import { BancasOrientadorComponent } from './pages/orientador/meus-alunos/bancas
 import { AulasAlunoComponent } from './pages/aluno/aulas-aluno/aulas-aluno.component';
 import { AulasProfessorComponent } from './pages/professor/aulas-professor/aulas-professor.component';
 import { TarefasProfessorComponent } from './pages/professor/tarefas-professor/tarefas-professor.component';
+import { CadastroUsuariosComponent } from './pages/coordenador/cadastros/cadastro-usuarios/cadastro-usuarios.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'meusalunospoc1', component: MeusAlunosComponent },
   { path: 'meusalunospoc2', component: MeusAlunosComponent },
   { path: 'bancasorientador', component: BancasOrientadorComponent },
+  { path: 'cadastrousuarios', component: CadastroUsuariosComponent },
   { path: '**', redirectTo: '/home' },
 ];
 @NgModule({

@@ -39,5 +39,10 @@ export class TurmaService extends BaseService {
       .delete(this.urlApi + `Faltas/Remover?id=${idFalta}`, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
+  async ObterTurmasAtivas(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `turmas/ObterTurmasAtivas`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
 
 }

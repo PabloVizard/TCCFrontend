@@ -58,6 +58,8 @@ import { TarefasProfessorComponent } from './pages/professor/tarefas-professor/t
 import { CadastrarTarefaComponent } from './pages/professor/tarefas-professor/cadastrar-tarefa/cadastrar-tarefa.component';
 import { AlunosFaltaComponent } from './pages/professor/aulas-professor/alunos-falta/alunos-falta.component';
 import { AlunosTarefaComponent } from './pages/professor/tarefas-professor/alunos-tarefa/alunos-tarefa.component';
+import { CadastroUsuariosComponent } from './pages/coordenador/cadastros/cadastro-usuarios/cadastro-usuarios.component';
+import { EditarUsuariosComponent } from './pages/coordenador/cadastros/cadastro-usuarios/editar-usuarios/editar-usuarios.component';
 
 
 @NgModule({
@@ -90,6 +92,8 @@ import { AlunosTarefaComponent } from './pages/professor/tarefas-professor/aluno
     CadastrarTarefaComponent,
     AlunosFaltaComponent,
     AlunosTarefaComponent,
+    CadastroUsuariosComponent,
+    EditarUsuariosComponent,
   ],
   imports: [
     BrowserModule,

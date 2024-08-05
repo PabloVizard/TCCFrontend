@@ -1,0 +1,47 @@
+<mat-toolbar>
+    <div>
+      <span>{{ usuarioAtual?.usuario ? 'Editar Aluno' : 'Adicionar Aluno' }}</span>
+    </div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  
+  <mat-dialog-content>
+    <form [formGroup]="usuarioForm">
+      <div class="form-container" *ngIf="data.tipo === 'usuario'">
+        <mat-form-field class="form-row">
+          <mat-label>Nome Completo</mat-label>
+          <input matInput placeholder="Nome Completo" formControlName="nomeCompleto" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>CPF</mat-label>
+          <input matInput placeholder="CPF" formControlName="cpf" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Matrícula</mat-label>
+          <input matInput placeholder="Matrícula" formControlName="matricula" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Turma</mat-label>
+          <mat-select formControlName="turma" required>
+            <mat-option *ngFor="let turma of turmasDisponiveis" [value]="turma.id">
+              {{ turma.descricao }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="full-width button-position-end">
+        <button mat-raised-button color="primary" type="submit" (click)="salvarUsuario()">Salvar</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+  
