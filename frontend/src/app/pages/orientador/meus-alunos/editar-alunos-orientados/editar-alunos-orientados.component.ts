@@ -30,7 +30,6 @@ export class EditarAlunosOrientadosComponent implements OnInit {
     }
 
     async buscarOrientacaoPorId(){
-      debugger
       await this.orientacoesService.ObterOrientacaoProfessorPorId(this.orientacaoId).then(result => {
         this.orientacao = result;
         

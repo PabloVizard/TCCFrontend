@@ -77,7 +77,6 @@ export class EditarUsuariosComponent implements OnInit {
   }
 
   async salvarUsuario() {
-    debugger
     console.log(this.usuarioForm)
     
     if (this.usuarioForm.valid) {
