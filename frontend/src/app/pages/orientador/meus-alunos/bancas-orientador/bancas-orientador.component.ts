@@ -17,7 +17,7 @@ import { UsuarioModel } from 'src/app/core/models/usuario-model';
 export class BancasOrientadorComponent implements OnInit {
   usuarioLogado: UsuarioModel | undefined;
   dataSource!: MatTableDataSource<BancasFullModel>;
-  displayedColumns: string[] = ['aluno', 'projeto', 'professorOrientador', 'avaliador1', 'avaliador2', 'ano', 'semestre', 'statusConfirmada', 'dataDefesa'];
+  displayedColumns: string[] = ['aluno', 'projeto', 'professorOrientador', 'avaliador1', 'avaliador2', 'ano', 'semestre', 'statusConfirmada', 'dataDefesa', 'status'];
   bancasOrientador: BancasFullModel[] = [];
   
   constructor(

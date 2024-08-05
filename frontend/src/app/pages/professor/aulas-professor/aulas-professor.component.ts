@@ -47,7 +47,7 @@ export class AulasProfessorComponent implements OnInit {
   mostrarAlunos(turmaId: number, aulaId: number){
     this.dialog.open(AlunosFaltaComponent, {
       width: '800px', 
-      height: '900px',
+      height: '700px',
       data: { turmaId, aulaId }
     });
   }

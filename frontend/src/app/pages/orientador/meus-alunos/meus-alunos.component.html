@@ -34,7 +34,7 @@
                     <ng-container matColumnDef="tao">
                       <mat-header-cell *matHeaderCellDef>TAO</mat-header-cell>
                       <mat-cell *matCellDef="let alunos">
-                        <button mat-raised-button color="primary" (click)="abrirAnexo(alunos.anexoTAO)" >Ver Anexo</button>
+                        <button mat-raised-button color="primary" [disabled]="alunos.anexoTato == null" (click)="abrirAnexo(alunos.anexoTAO)" >Ver Anexo</button>
                       </mat-cell>
                     </ng-container>
 
