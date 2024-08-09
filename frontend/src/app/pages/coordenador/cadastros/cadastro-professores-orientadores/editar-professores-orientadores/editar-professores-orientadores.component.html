@@ -1,6 +1,6 @@
 <mat-toolbar>
     <div>
-      <span>{{ usuarioAtual?.usuario ? 'Editar Aluno' : 'Adicionar Aluno' }}</span>
+      <span>{{ professorAtual?.id ? 'Editar Professor/Orientador' : 'Adicionar Professor/Orientador' }}</span>
     </div>
     <div class="close-button">
       <button mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
@@ -10,8 +10,8 @@
   </mat-toolbar>
   
   <mat-dialog-content>
-    <form [formGroup]="usuarioForm">
-      <div class="form-container" *ngIf="data.tipo === 'usuario'">
+    <form [formGroup]="professorForm">
+      <div class="form-container">
         <mat-form-field class="form-row">
           <mat-label>Nome Completo</mat-label>
           <input matInput placeholder="Nome Completo" formControlName="nomeCompleto" required>
@@ -25,22 +25,28 @@
       </div>
       <div class="form-container">
         <mat-form-field class="form-row">
-          <mat-label>Matrícula</mat-label>
-          <input matInput placeholder="Matrícula" formControlName="matricula" required>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="Email" formControlName="email" required>
         </mat-form-field>
       </div>
       <div class="form-container">
         <mat-form-field class="form-row">
-          <mat-label>Turma</mat-label>
-          <mat-select formControlName="turma" required>
-            <mat-option *ngFor="let turma of turmasDisponiveis" [value]="turma.id">
-              {{ turma.descricao }}
-            </mat-option>
+          <mat-label>Matrícula</mat-label>
+          <input matInput placeholder="Matrícula" formControlName="matricula" type="number" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Tipo de Usuário</mat-label>
+          <mat-select formControlName="tipoUsuario" required>
+            <mat-option [value]="2">Professor</mat-option>
+            <mat-option [value]="3">Orientador</mat-option>
+            <mat-option [value]="4">Professor e Orientador</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
       <div class="full-width button-position-end">
-        <button mat-raised-button color="primary" type="submit" (click)="salvarUsuario()">Salvar</button>
+        <button mat-raised-button color="primary" type="submit" (click)="salvarProfessor()">Salvar</button>
       </div>
     </form>
   </mat-dialog-content>

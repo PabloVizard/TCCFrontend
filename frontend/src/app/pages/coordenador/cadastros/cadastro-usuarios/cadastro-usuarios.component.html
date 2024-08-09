@@ -10,32 +10,47 @@
   
       <mat-card-content>
         <ng-container *ngIf="usuarios.length > 0; else semInformacoes">
-          <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <mat-table [dataSource]="usuarios" class="mat-elevation-z8" matSort>
             <ng-container matColumnDef="nomeCompleto">
-              <mat-header-cell *matHeaderCellDef>Nome</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Nome</mat-header-cell>
               <mat-cell *matCellDef="let usuario">{{ usuario?.usuario?.nomeCompleto || ' - ' }}</mat-cell>
             </ng-container>
-  
+          
             <ng-container matColumnDef="cpf">
-              <mat-header-cell *matHeaderCellDef>CPF</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>CPF</mat-header-cell>
               <mat-cell *matCellDef="let usuario">{{ usuario?.usuario?.cpf || usuario?.preRegistro?.cpf }}</mat-cell>
             </ng-container>
-  
+          
             <ng-container matColumnDef="matricula">
-              <mat-header-cell *matHeaderCellDef>Matrícula</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Matrícula</mat-header-cell>
               <mat-cell *matCellDef="let usuario">{{ usuario?.usuario?.matricula || usuario?.preRegistro?.matricula }}</mat-cell>
             </ng-container>
-  
+          
             <ng-container matColumnDef="turma">
-              <mat-header-cell *matHeaderCellDef>Turma</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Turma</mat-header-cell>
               <mat-cell *matCellDef="let usuario">{{ usuario?.turmaAluno?.descricao || ' - ' }}</mat-cell>
             </ng-container>
-  
+          
+            <ng-container matColumnDef="projeto">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Projeto</mat-header-cell>
+              <mat-cell *matCellDef="let usuario">{{ usuario?.projetos?.nome || ' - ' }}</mat-cell>
+            </ng-container>
+          
+            <ng-container matColumnDef="orientador">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Orientador</mat-header-cell>
+              <mat-cell *matCellDef="let usuario">{{ usuario?.projetos?.professorResponsavel?.nomeCompleto || ' - ' }}</mat-cell>
+            </ng-container>
+          
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+              <mat-cell *matCellDef="let usuario">{{ obterStatusAprovacao(usuario?.orientacoes?.statusAprovacao) || ' - ' }}</mat-cell>
+            </ng-container>
+          
             <ng-container matColumnDef="cadastrado">
-              <mat-header-cell *matHeaderCellDef>Cadastrado</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Cadastrado</mat-header-cell>
               <mat-cell *matCellDef="let usuario">{{ usuario?.preRegistro?.cadastrado != null ? (usuario?.preRegistro?.cadastrado ? 'Sim' : 'Não') : 'Sim' }}</mat-cell>
             </ng-container>
-  
+          
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef></mat-header-cell>
               <mat-cell *matCellDef="let usuario">
@@ -43,10 +58,10 @@
                 <button mat-raised-button color="warn" (click)="excluirUsuario(usuario?.usuario?.matricula || usuario?.preRegistro?.matricula)">Excluir</button>
               </mat-cell>
             </ng-container>
-  
+          
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
-          </mat-table>
+          </mat-table>          
         </ng-container>
   
         <ng-template #semInformacoes>

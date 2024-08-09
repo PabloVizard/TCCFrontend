@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from './base.service';
 import { catchError, lastValueFrom } from 'rxjs';
 import { FaltaModel } from '../models/falta-model';
+import { TurmaModel } from '../models/turma-model';
 
 @Injectable({
   providedIn: 'root'
@@ -42,6 +43,27 @@ export class TurmaService extends BaseService {
   async ObterTurmasAtivas(): Promise<any> {
     return await lastValueFrom(this.http
       .get(this.urlApi + `turmas/ObterTurmasAtivas`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+  async ObterTodasTurmas(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `turmas/ObterTodasTurmas`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+
+  async ExcluirTurma(turmaId: number): Promise<any> {
+    return await lastValueFrom(this.http
+      .delete(this.urlApi + `turmas/Remover?id=${turmaId}`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+  async CadastrarTurma(turma: TurmaModel): Promise<any> {
+    return await lastValueFrom(this.http
+      .post(this.urlApi + `turmas/Registrar`, turma, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+  async AtualizarTurma(turma: TurmaModel): Promise<any> {
+    return await lastValueFrom(this.http
+      .put(this.urlApi + `turmas/Atualizar`, turma, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
 

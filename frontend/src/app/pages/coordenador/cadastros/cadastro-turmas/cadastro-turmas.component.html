@@ -1,0 +1,57 @@
+<div class="app-container">
+    <mat-card class="app-card">
+      <mat-card-header>
+        <mat-card-title>Turmas</mat-card-title>
+      </mat-card-header>
+      <div class="button-position-end">
+        <button mat-raised-button color="primary" (click)="adicionarTurma()">Adicionar Turma</button>
+        <button mat-raised-button color="primary" (click)="gerarRelatorio()">Gerar relatório de turmas</button>
+      </div>
+  
+      <mat-card-content>
+        <ng-container *ngIf="turmas.length > 0; else semInformacoes">
+          <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="descricao">
+              <mat-header-cell *matHeaderCellDef>Descrição</mat-header-cell>
+              <mat-cell *matCellDef="let turma">{{ turma?.descricao || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="ano">
+              <mat-header-cell *matHeaderCellDef>Ano</mat-header-cell>
+              <mat-cell *matCellDef="let turma">{{ turma?.ano || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="semestre">
+              <mat-header-cell *matHeaderCellDef>Semestre</mat-header-cell>
+              <mat-cell *matCellDef="let turma">{{ turma?.semestre || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="nPoc">
+              <mat-header-cell *matHeaderCellDef>Nº POC</mat-header-cell>
+              <mat-cell *matCellDef="let turma">{{ turma?.nPoc || ' - ' }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="ativo">
+              <mat-header-cell *matHeaderCellDef>Ativo</mat-header-cell>
+              <mat-cell *matCellDef="let turma">{{ obterAtivo(turma?.ativo) || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let turma">
+                <button mat-raised-button color="primary" (click)="editarTurma(turma)">Editar</button>
+                <button mat-raised-button color="warn" (click)="excluirTurma(turma?.id)">Excluir</button>
+              </mat-cell>
+            </ng-container>
+  
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+        </ng-container>
+  
+        <ng-template #semInformacoes>
+          <app-sem-informacoes></app-sem-informacoes>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+</div>

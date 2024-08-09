@@ -24,7 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { HttpLoadingInterceptor } from './core/interceptor/http-request-interceptor';
 import { RealizarCadastroComponent } from './pages/login/realizar-cadastro/realizar-cadastro.component';
 import { CommonModule } from '@angular/common';
-import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
+import { NgxMaskDirective, provideEnvironmentNgxMask, provideNgxMask } from 'ngx-mask';
 import { HomeComponent } from './pages/home/home.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
@@ -60,6 +60,13 @@ import { AlunosFaltaComponent } from './pages/professor/aulas-professor/alunos-f
 import { AlunosTarefaComponent } from './pages/professor/tarefas-professor/alunos-tarefa/alunos-tarefa.component';
 import { CadastroUsuariosComponent } from './pages/coordenador/cadastros/cadastro-usuarios/cadastro-usuarios.component';
 import { EditarUsuariosComponent } from './pages/coordenador/cadastros/cadastro-usuarios/editar-usuarios/editar-usuarios.component';
+import { CadastroProfessoresOrientadoresComponent } from './pages/coordenador/cadastros/cadastro-professores-orientadores/cadastro-professores-orientadores.component';
+import { EditarProfessoresOrientadoresComponent } from './pages/coordenador/cadastros/cadastro-professores-orientadores/editar-professores-orientadores/editar-professores-orientadores.component';
+import { BancaDefesaComponent } from './pages/coordenador/relatorios/banca-defesa/banca-defesa.component';
+import { AlunosComponent } from './pages/coordenador/relatorios/alunos/alunos.component';
+import { CadastroTurmasComponent } from './pages/coordenador/cadastros/cadastro-turmas/cadastro-turmas.component';
+import { EditarTurmasComponent } from './pages/coordenador/cadastros/cadastro-turmas/editar-turmas/editar-turmas.component';
+import { MatSortModule } from '@angular/material/sort';
 
 
 @NgModule({
@@ -94,6 +101,12 @@ import { EditarUsuariosComponent } from './pages/coordenador/cadastros/cadastro-
     AlunosTarefaComponent,
     CadastroUsuariosComponent,
     EditarUsuariosComponent,
+    CadastroProfessoresOrientadoresComponent,
+    EditarProfessoresOrientadoresComponent,
+    BancaDefesaComponent,
+    AlunosComponent,
+    CadastroTurmasComponent,
+    EditarTurmasComponent,
   ],
   imports: [
     BrowserModule,
@@ -123,13 +136,16 @@ import { EditarUsuariosComponent } from './pages/coordenador/cadastros/cadastro-
     MatDialogModule,
     MatNativeDateModule,
     MatDatepickerModule,
-    NgxMaterialTimepickerModule
+    NgxMaterialTimepickerModule,
+    NgxMaskDirective,
+    MatSortModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpLoadingInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     provideNgxMask(),
-    AuthService
+    AuthService,
+    provideEnvironmentNgxMask()
   ],
   bootstrap: [AppComponent]
 })

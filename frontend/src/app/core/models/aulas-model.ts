@@ -12,6 +12,8 @@ export class AulasModel {
     falta?: boolean;
 }
 
+
+
 export class AulasFullModel {
     id!: number;
     descricao!: string;

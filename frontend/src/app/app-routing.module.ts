@@ -15,6 +15,9 @@ import { AulasAlunoComponent } from './pages/aluno/aulas-aluno/aulas-aluno.compo
 import { AulasProfessorComponent } from './pages/professor/aulas-professor/aulas-professor.component';
 import { TarefasProfessorComponent } from './pages/professor/tarefas-professor/tarefas-professor.component';
 import { CadastroUsuariosComponent } from './pages/coordenador/cadastros/cadastro-usuarios/cadastro-usuarios.component';
+import { BancaDefesaComponent } from './pages/coordenador/relatorios/banca-defesa/banca-defesa.component';
+import { CadastroTurmasComponent } from './pages/coordenador/cadastros/cadastro-turmas/cadastro-turmas.component';
+import { CadastroProfessoresOrientadoresComponent } from './pages/coordenador/cadastros/cadastro-professores-orientadores/cadastro-professores-orientadores.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -33,6 +36,9 @@ const routes: Routes = [
   { path: 'meusalunospoc2', component: MeusAlunosComponent },
   { path: 'bancasorientador', component: BancasOrientadorComponent },
   { path: 'cadastrousuarios', component: CadastroUsuariosComponent },
+  { path: 'cadastroturmas', component: CadastroTurmasComponent },
+  { path: 'cadastroprofessororientador', component: CadastroProfessoresOrientadoresComponent },
+  { path: 'relatorios/bancadefesa', component: BancaDefesaComponent },
   { path: '**', redirectTo: '/home' },
 ];
 @NgModule({

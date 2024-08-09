@@ -40,7 +40,7 @@ getTipoUsuario(key: number): string {
         case TipoUsuarioEnumerator.Orientador:
             return "Orientador";
         case TipoUsuarioEnumerator.ProfessorOrientador:
-            return "Professor Orientador";
+            return "Professor e Orientador";
         case TipoUsuarioEnumerator.Coordenador:
             return "Coordenador";
         default:

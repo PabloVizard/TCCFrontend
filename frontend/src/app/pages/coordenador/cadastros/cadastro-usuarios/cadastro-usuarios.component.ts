@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { PreRegistroModel } from 'src/app/core/models/pre-registro-model';
@@ -6,6 +6,9 @@ import { UsuariosFullModel } from 'src/app/core/models/usuario-model';
 import { UsuariosService } from 'src/app/core/services/usuarios.service';
 import { MatDialog } from '@angular/material/dialog';
 import { EditarUsuariosComponent } from './editar-usuarios/editar-usuarios.component';
+import { EnumeratorService } from 'src/app/core/services/enumerator.service';
+import { ToastService } from 'src/app/core/services/toast.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-cadastro-usuarios',
@@ -15,20 +18,27 @@ import { EditarUsuariosComponent } from './editar-usuarios/editar-usuarios.compo
 export class CadastroUsuariosComponent implements OnInit {
   usuarios: Array<UsuariosFullModel> = new Array<UsuariosFullModel>();
   dataSource: any;
-  displayedColumns: string[] = ['nomeCompleto', 'cpf', 'matricula', 'turma', 'cadastrado', 'actions'];
+  displayedColumns: string[] = ['nomeCompleto', 'cpf', 'matricula', 'turma', 'projeto', 'orientador', 'status', 'cadastrado', 'actions'];
 
-  constructor(private usuarioService: UsuariosService, private router: Router, private dialog: MatDialog) {}
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private usuarioService: UsuariosService,
+              private router: Router,
+              private dialog: MatDialog,
+              private enumerator: EnumeratorService,
+              private toastService: ToastService) {}
 
   async ngOnInit() {
     await this.obterPreRegistros();
     this.dataSource = new MatTableDataSource(this.usuarios);
+    this.dataSource.sort = this.sort;
   }
 
   async obterPreRegistros() {
     await this.usuarioService.ObterTodosAlunos().then(result => {
       this.usuarios = result;
     }, fail => {
-      console.error('Erro ao obter pré-registros:', fail.error);
+      this.toastService.show("fail", "Falha ao obter alunos! " + fail.error);
     });
   }
 
@@ -52,9 +62,20 @@ export class CadastroUsuariosComponent implements OnInit {
     // Implementar lógica de geração de relatório
   }
 
-  excluirUsuario(matricula: number){
+  async excluirUsuario(matricula: number){
     if (confirm("Deseja realmente remover o aluno selecionado?")){
-      // Implementar lógica de exclusão de usuário
+      await this.usuarioService.Remover(matricula).then(result => {
+        this.toastService.show("success", "Aluno excluído com sucesso! ");
+      }, fail => {
+        this.toastService.show("fail", "Falha ao excluir aluno! " + fail.error);
+      });
     }
+  }
+
+  obterStatusAprovacao(status: number){
+    if(status == null){
+      return null;
+    }
+    return this.enumerator.getStatusAprovacao(status)
   }
 }

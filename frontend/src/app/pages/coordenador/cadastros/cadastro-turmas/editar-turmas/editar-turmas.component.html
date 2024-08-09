@@ -1,0 +1,52 @@
+<mat-toolbar>
+    <div>
+      <span>{{ turmaAtual?.id ? 'Editar Turma' : 'Adicionar Turma' }}</span>
+    </div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  
+  <mat-dialog-content>
+    <form [formGroup]="turmaForm">
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Descrição</mat-label>
+          <input matInput placeholder="Descrição" formControlName="descricao" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Ano</mat-label>
+          <input matInput placeholder="Ano" formControlName="ano" type="number" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Semestre</mat-label>
+          <input matInput placeholder="Semestre" formControlName="semestre" type="number" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Nº POC</mat-label>
+          <input matInput placeholder="Nº POC" formControlName="nPoc" type="number" required>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Ativo</mat-label>
+          <mat-select formControlName="ativo" required>
+            <mat-option [value]="true">Sim</mat-option>
+            <mat-option [value]="false">Não</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="full-width button-position-end">
+        <button mat-raised-button color="primary" type="submit" (click)="salvarTurma()">Salvar</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+  
