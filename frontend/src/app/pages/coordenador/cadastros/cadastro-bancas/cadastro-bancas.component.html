@@ -1,0 +1,76 @@
+<div class="app-container">
+    <mat-card class="app-card">
+      <mat-card-header>
+        <mat-card-title>Bancas</mat-card-title>
+      </mat-card-header>
+      <div class="button-position-end">
+        <button mat-raised-button color="primary" (click)="balancearBancas()">Balancear Bancas</button>
+      </div>
+  
+      <mat-card-content>
+        <ng-container *ngIf="bancas.length > 0; else semInformacoes">
+          <mat-table [dataSource]="bancas" class="mat-elevation-z8" matSort>
+            <ng-container matColumnDef="projeto">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Projeto</mat-header-cell>
+              <mat-cell *matCellDef="let banca">{{ banca.projeto?.nome || ' - ' }}</mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="semestre">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Semestre</mat-header-cell>
+                <mat-cell *matCellDef="let banca">{{ banca.ano }}/{{banca.semestre}}</mat-cell>
+              </ng-container>
+  
+            <ng-container matColumnDef="professorOrientador">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Professor Orientador</mat-header-cell>
+              <mat-cell *matCellDef="let banca">{{ banca.professorOrientador?.nomeCompleto || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="alunoOrientado">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Aluno Orientado</mat-header-cell>
+              <mat-cell *matCellDef="let banca">{{ banca.alunoOrientado?.nomeCompleto || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="avaliador01">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Avaliador 01</mat-header-cell>
+              <mat-cell *matCellDef="let banca">{{ banca.avaliador01?.nomeCompleto || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="avaliador02">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Avaliador 02</mat-header-cell>
+              <mat-cell *matCellDef="let banca">{{ banca.avaliador02?.nomeCompleto || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="bancaConfirmada">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Banca Confirmada</mat-header-cell>
+              <mat-cell *matCellDef="let banca">{{ banca.bancaConfirmada ? 'Sim' : 'Não' }}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="dataDefesa">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Data da Defesa</mat-header-cell>
+                <mat-cell *matCellDef="let banca">{{ formatarData(banca?.dataDefesa) || ' - ' }}</mat-cell>
+              </ng-container>
+  
+            <ng-container matColumnDef="status">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+              <mat-cell *matCellDef="let banca">{{ banca.status || ' - '  }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let banca">
+                <button mat-raised-button color="primary" (click)="editarBanca(banca)">Editar</button>
+                <button mat-raised-button color="warn" (click)="excluirBanca(banca.id)">Excluir</button>
+              </mat-cell>
+            </ng-container>
+  
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>
+        </ng-container>
+  
+        <ng-template #semInformacoes>
+          <app-sem-informacoes></app-sem-informacoes>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

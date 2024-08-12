@@ -58,7 +58,7 @@ export class CadastroProfessoresOrientadoresComponent implements OnInit {
     // Implementar lógica de geração de relatório
   }
 
-  async excluirProfessor(matricula: number){
+  async excluirProfessor(matricula: string){
     if (confirm("Deseja realmente remover o professor selecionado?")){
       await this.usuarioService.Remover(matricula).then(result => {
         this.toastService.show("success", "Professor excluído com sucesso! ");

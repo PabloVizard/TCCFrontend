@@ -51,9 +51,9 @@ export class UsuariosService extends BaseService {
       .post(this.urlApi + `preregistro/Registrar`, preRegistro, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
-  async Remover(matricula: number): Promise<any> {
+  async Remover(matricula: string): Promise<any> {
     return await lastValueFrom(this.http
-      .delete(this.urlApi + `usuarios/Remover?matricula=${matricula}`, super.ObterAuthHeaderJson())
+      .delete(this.urlApi + `usuarios/RemoverUsuario?matricula=${matricula}`, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
   async CadastrarProfessor(usuario: UsuarioLightModel): Promise<any> {

@@ -1,0 +1,106 @@
+<mat-toolbar>
+    <div>
+      <span>{{ bancaAtual?.id ? 'Editar Banca' : 'Adicionar Banca' }}</span>
+    </div>
+    <div class="close-button">
+      <button mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+  
+  <mat-dialog-content *ngIf="bancaForm">
+    <form [formGroup]="bancaForm" (ngSubmit)="salvarBanca()">
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Projeto</mat-label>
+          <input matInput [value]="bancaAtual?.projeto?.nome" [disabled]="true">
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Aluno Orientado</mat-label>
+          <input matInput [value]="bancaAtual?.alunoOrientado?.nomeCompleto" [disabled]="true">
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Professor Orientador</mat-label>
+          <input matInput [value]="bancaAtual?.professorOrientador?.nomeCompleto" [disabled]="true">
+        </mat-form-field>
+      </div>
+
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Avaliador 01</mat-label>
+          <mat-select formControlName="avaliador01" required>
+            <mat-option *ngFor="let avaliador of avaliadoresDisponiveis" [value]="avaliador.id">
+              {{ avaliador.nomeCompleto }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Avaliador 02</mat-label>
+          <mat-select formControlName="avaliador02">
+            <mat-option [value]="null">Nenhum</mat-option>
+            <mat-option *ngFor="let avaliador of avaliadoresDisponiveis" [value]="avaliador.id">
+              {{ avaliador.nomeCompleto }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Ano</mat-label>
+          <input matInput [value]="bancaAtual?.ano" [disabled]="true">
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Semestre</mat-label>
+          <input matInput [value]="bancaAtual?.semestre" [disabled]="true">
+        </mat-form-field>
+      </div>
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Data da Defesa</mat-label>
+          <input matInput [matDatepicker]="datePicker" formControlName="dataDefesa" required>
+          <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+          <mat-datepicker #datePicker></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="form-row">
+          <mat-label>Hora da Defesa</mat-label>
+          <input matInput type="time" formControlName="horaDefesa" required>
+        </mat-form-field>
+      </div>
+      
+      
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Banca Confirmada</mat-label>
+          <mat-select formControlName="bancaConfirmada">
+            <mat-option [value]="true">Sim</mat-option>
+            <mat-option [value]="false">Não</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      
+      <div class="form-container">
+        <mat-form-field class="form-row">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option [value]="null">Selecione...</mat-option>
+            <mat-option [value]="true">Aprovado</mat-option>
+            <mat-option [value]="false">Reprovado</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>      
+      <div class="full-width button-position-end">
+        <button mat-raised-button color="primary" type="submit">Salvar</button>
+      </div>
+    </form>
+  </mat-dialog-content>
+  

@@ -23,9 +23,24 @@ export class BancasService extends BaseService {
       .post(this.urlApi + `bancas/Registrar`, banca, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
+  async AtualizarBanca(banca: BancasModel): Promise<any> {
+    return await lastValueFrom(this.http
+      .put(this.urlApi + `bancas/Atualizar`, banca, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
   async obterBancaPorOrientadorId(orientadorId: number): Promise<any> {
     return await lastValueFrom(this.http
       .get(this.urlApi + `bancas/ObterBancaPorOrientadorId?orientadorId=${orientadorId}`,super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+  async ObterTodasBancas(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `bancas/ObterTodasBancas`,super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+  async ExcluirBanca(bancaId: number): Promise<any> {
+    return await lastValueFrom(this.http
+      .delete(this.urlApi + `bancas/Remover?id=${bancaId}`,super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
 }

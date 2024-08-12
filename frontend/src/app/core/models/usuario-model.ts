@@ -13,7 +13,7 @@ export class UsuarioModel{
     nomeCompleto!: string;
     senha?: string;
     tipoUsuario!: number;
-    matricula!: number
+    matricula!: string
 } 
 
 export class UsuarioLightModel{
@@ -22,7 +22,7 @@ export class UsuarioLightModel{
     cpf!: string;
     nomeCompleto!: string;
     tipoUsuario!: number;
-    matricula!: number;
+    matricula!: string;
 }
 
 export interface UsuariosFullModel {

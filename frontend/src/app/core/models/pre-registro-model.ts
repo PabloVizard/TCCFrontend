@@ -4,5 +4,5 @@ export class PreRegistroModel {
     tipoUsuario!: number;
     cadastrado!: boolean;
     idTurma!: number;
-    matricula!: number;
+    matricula!: string;
 }

@@ -23,3 +23,13 @@ export class AulasFullModel {
     local?: string;
     link?: string;
 }
+
+export class AulasModelApi {
+    id!: number;
+    descricao!: string;
+    idProfessor!: number;
+    idTurma!: number;
+    dataAula!: Date;
+    local?: string;
+    link?: string;
+}

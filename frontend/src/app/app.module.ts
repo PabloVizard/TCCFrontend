@@ -67,6 +67,10 @@ import { AlunosComponent } from './pages/coordenador/relatorios/alunos/alunos.co
 import { CadastroTurmasComponent } from './pages/coordenador/cadastros/cadastro-turmas/cadastro-turmas.component';
 import { EditarTurmasComponent } from './pages/coordenador/cadastros/cadastro-turmas/editar-turmas/editar-turmas.component';
 import { MatSortModule } from '@angular/material/sort';
+import { CadastroAulasComponent } from './pages/coordenador/cadastros/cadastro-aulas/cadastro-aulas.component';
+import { EditarAulasComponent } from './pages/coordenador/cadastros/cadastro-aulas/editar-aulas/editar-aulas.component';
+import { CadastroBancasComponent } from './pages/coordenador/cadastros/cadastro-bancas/cadastro-bancas.component';
+import {EditarBancasComponent} from './pages/coordenador/cadastros/cadastro-bancas/editar-bancas/editar-bancas.component';
 
 
 @NgModule({
@@ -107,6 +111,10 @@ import { MatSortModule } from '@angular/material/sort';
     AlunosComponent,
     CadastroTurmasComponent,
     EditarTurmasComponent,
+    CadastroAulasComponent,
+    EditarAulasComponent,
+    CadastroBancasComponent,
+    EditarBancasComponent,
   ],
   imports: [
     BrowserModule,

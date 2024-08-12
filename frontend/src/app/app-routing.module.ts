@@ -18,6 +18,9 @@ import { CadastroUsuariosComponent } from './pages/coordenador/cadastros/cadastr
 import { BancaDefesaComponent } from './pages/coordenador/relatorios/banca-defesa/banca-defesa.component';
 import { CadastroTurmasComponent } from './pages/coordenador/cadastros/cadastro-turmas/cadastro-turmas.component';
 import { CadastroProfessoresOrientadoresComponent } from './pages/coordenador/cadastros/cadastro-professores-orientadores/cadastro-professores-orientadores.component';
+import { CadastrarAulaComponent } from './pages/professor/aulas-professor/cadastrar-aula/cadastrar-aula.component';
+import { CadastroAulasComponent } from './pages/coordenador/cadastros/cadastro-aulas/cadastro-aulas.component';
+import { CadastroBancasComponent } from './pages/coordenador/cadastros/cadastro-bancas/cadastro-bancas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -38,7 +41,8 @@ const routes: Routes = [
   { path: 'cadastrousuarios', component: CadastroUsuariosComponent },
   { path: 'cadastroturmas', component: CadastroTurmasComponent },
   { path: 'cadastroprofessororientador', component: CadastroProfessoresOrientadoresComponent },
-  { path: 'relatorios/bancadefesa', component: BancaDefesaComponent },
+  { path: 'cadastroaulas', component: CadastroAulasComponent },
+  { path: 'cadastrobancas', component: CadastroBancasComponent },
   { path: '**', redirectTo: '/home' },
 ];
 @NgModule({

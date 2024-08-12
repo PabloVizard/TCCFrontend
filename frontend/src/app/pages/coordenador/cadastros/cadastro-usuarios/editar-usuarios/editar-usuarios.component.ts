@@ -34,7 +34,7 @@ export class EditarUsuariosComponent implements OnInit {
     await this.obterTurmasDisponiveis();
     this.usuarioForm = this.fb.group({
       nomeCompleto: [''],
-      cpf: [{value: '', disabled: this.data.tipo == 'usuario' }, Validators.required],
+      cpf: [{value: ''}, Validators.required],
       matricula: ['', Validators.required],
       turma: ['', Validators.required]
     });
@@ -55,7 +55,7 @@ export class EditarUsuariosComponent implements OnInit {
           matricula: this.usuarioAtual.usuario.matricula,
           turma: this.usuarioAtual.turmaAluno?.id
         });
-        this.usuarioForm.controls['cpf'].disable();
+        
       } else if (this.usuarioAtual.preRegistro) {
         this.usuarioForm.patchValue({
           nomeCompleto: '',

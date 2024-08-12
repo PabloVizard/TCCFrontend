@@ -1,0 +1,64 @@
+<div class="app-container">
+    <mat-card class="app-card">
+      <mat-card-header>
+        <mat-card-title>Aulas</mat-card-title>
+      </mat-card-header>
+      <div class="button-position-end">
+        <button mat-raised-button color="primary" (click)="adicionarAula()">Adicionar Aula</button>
+      </div>
+  
+      <mat-card-content>
+        <ng-container *ngIf="aulas.length > 0; else semInformacoes">
+          <mat-table [dataSource]="aulas" class="mat-elevation-z8" matSort>
+            <ng-container matColumnDef="descricao">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Descrição</mat-header-cell>
+              <mat-cell *matCellDef="let aula">{{ aula.descricao || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="professor">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Professor</mat-header-cell>
+              <mat-cell *matCellDef="let aula">{{ aula.professor?.nomeCompleto || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="turma">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Turma</mat-header-cell>
+              <mat-cell *matCellDef="let aula">{{ aula.turma?.descricao || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="dataAula">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Data da Aula</mat-header-cell>
+              <mat-cell *matCellDef="let aula">{{ formatarData(aula.dataAula) || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="local">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Local</mat-header-cell>
+              <mat-cell *matCellDef="let aula">{{ aula.local || ' - ' }}</mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="link">
+              <mat-header-cell *matHeaderCellDef mat-sort-header>Link</mat-header-cell>
+              <mat-cell *matCellDef="let aula">
+                <button mat-raised-button [disabled]="!aula.link" color="primary" (click)="acessarLink(aula.link)">Acessar</button>
+              </mat-cell>
+            </ng-container>
+  
+            <ng-container matColumnDef="actions">
+              <mat-header-cell *matHeaderCellDef></mat-header-cell>
+              <mat-cell *matCellDef="let aula">
+                <button mat-raised-button color="primary" (click)="editarAula(aula)">Editar</button>
+                <button mat-raised-button color="warn" (click)="excluirAula(aula.id)">Excluir</button>
+              </mat-cell>
+            </ng-container>
+  
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+          </mat-table>          
+        </ng-container>
+  
+        <ng-template #semInformacoes>
+          <app-sem-informacoes></app-sem-informacoes>
+        </ng-template>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  

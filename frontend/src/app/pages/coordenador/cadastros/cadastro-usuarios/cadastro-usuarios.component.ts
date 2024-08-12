@@ -62,7 +62,7 @@ export class CadastroUsuariosComponent implements OnInit {
     // Implementar lógica de geração de relatório
   }
 
-  async excluirUsuario(matricula: number){
+  async excluirUsuario(matricula: string){
     if (confirm("Deseja realmente remover o aluno selecionado?")){
       await this.usuarioService.Remover(matricula).then(result => {
         this.toastService.show("success", "Aluno excluído com sucesso! ");

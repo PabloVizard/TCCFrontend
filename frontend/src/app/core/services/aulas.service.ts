@@ -28,6 +28,11 @@ export class AulasService extends BaseService {
       .get(this.urlApi + `aulas/ObterAulasProfessor`, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
+  async ObterTodasAulas(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `aulas/ObterTodasAulas`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
   async ExcluirAula(aulaId: number): Promise<any> {
     return await lastValueFrom(this.http
       .delete(this.urlApi + `aulas/Remover?id=${aulaId}`, super.ObterAuthHeaderJson())
