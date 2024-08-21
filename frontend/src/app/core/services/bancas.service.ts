@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, catchError } from 'rxjs';
 import { BaseService } from './base.service';
-import { BancasModel } from '../models/bancas-model';
+import { BancasFullModel, BancasModel } from '../models/bancas-model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,4 +43,21 @@ export class BancasService extends BaseService {
       .delete(this.urlApi + `bancas/Remover?id=${bancaId}`,super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError))); 
   }
+
+  async ObterBancasNaoConfirmadas(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `bancas/ObterBancasNaoConfirmadas`, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+  async BalancearBancas(): Promise<any> {
+    return await lastValueFrom(this.http
+      .get(this.urlApi + `bancas/BalancearBancas`,super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+  async ConfirmarSugestao(banca: BancasModel): Promise<any> {
+    return await lastValueFrom(this.http
+      .put(this.urlApi + `bancas/atualizar`, banca,super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError))); 
+  }
+
 }

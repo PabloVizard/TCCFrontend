@@ -9,6 +9,8 @@ import { EditarUsuariosComponent } from './editar-usuarios/editar-usuarios.compo
 import { EnumeratorService } from 'src/app/core/services/enumerator.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { TurmaService } from 'src/app/core/services/turma.service';
 
 @Component({
   selector: 'app-cadastro-usuarios',
@@ -16,33 +18,54 @@ import { MatSort } from '@angular/material/sort';
   styleUrls: ['./cadastro-usuarios.component.scss']
 })
 export class CadastroUsuariosComponent implements OnInit {
-  usuarios: Array<UsuariosFullModel> = new Array<UsuariosFullModel>();
-  dataSource: any;
+  usuarios: Array<UsuariosFullModel> = [];
+  turmas: Array<any> = [];
+  selectedTurma: string = '';
+  dataSource: MatTableDataSource<UsuariosFullModel> = new MatTableDataSource();
   displayedColumns: string[] = ['nomeCompleto', 'cpf', 'matricula', 'turma', 'projeto', 'orientador', 'status', 'cadastrado', 'actions'];
+  pageSlice: Array<UsuariosFullModel> = new Array<UsuariosFullModel>();
 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private usuarioService: UsuariosService,
               private router: Router,
               private dialog: MatDialog,
               private enumerator: EnumeratorService,
-              private toastService: ToastService) {}
+              private toastService: ToastService,
+              private turmasService: TurmaService) {}
 
-  async ngOnInit() {
-    await this.obterPreRegistros();
-    this.dataSource = new MatTableDataSource(this.usuarios);
+async ngOnInit() {
+  await this.obterTurmas();
+  await this.obterPreRegistros();
+
+  this.dataSource = new MatTableDataSource(this.usuarios);
+
+  setTimeout(() => {
+    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  });
+}
+
+
+  async obterTurmas() {
+    await this.turmasService.ObterTodasTurmas().then(result => {
+      this.turmas = result;
+    }, fail => {
+      this.toastService.show("fail", "Falha ao obter turmas! " + fail.error);
+    });
   }
 
   async obterPreRegistros() {
     await this.usuarioService.ObterTodosAlunos().then(result => {
       this.usuarios = result;
+      this.dataSource.data = this.usuarios;  // Atualize o dataSource novamente após obter os dados
     }, fail => {
       this.toastService.show("fail", "Falha ao obter alunos! " + fail.error);
     });
   }
 
-  editarusuario(usuario: UsuariosFullModel){
+  editarusuario(usuario: UsuariosFullModel) {
     this.dialog.open(EditarUsuariosComponent, {
       width: '1024px', 
       height: '600px',
@@ -50,7 +73,7 @@ export class CadastroUsuariosComponent implements OnInit {
     });
   }
 
-  adicionarAluno(){
+  adicionarAluno() {
     this.dialog.open(EditarUsuariosComponent, {
       width: '1024px', 
       height: '600px',
@@ -58,24 +81,46 @@ export class CadastroUsuariosComponent implements OnInit {
     });
   }
 
-  gerarRelatorio(){
+  gerarRelatorio() {
     // Implementar lógica de geração de relatório
   }
 
-  async excluirUsuario(matricula: string){
-    if (confirm("Deseja realmente remover o aluno selecionado?")){
+  async excluirUsuario(matricula: string) {
+    if (confirm("Deseja realmente remover o aluno selecionado?")) {
       await this.usuarioService.Remover(matricula).then(result => {
         this.toastService.show("success", "Aluno excluído com sucesso! ");
+        this.obterPreRegistros();  // Atualize a lista após a exclusão
       }, fail => {
         this.toastService.show("fail", "Falha ao excluir aluno! " + fail.error);
       });
     }
   }
 
-  obterStatusAprovacao(status: number){
-    if(status == null){
+  obterStatusAprovacao(status: number) {
+    if (status == null) {
       return null;
     }
-    return this.enumerator.getStatusAprovacao(status)
+    return this.enumerator.getStatusAprovacao(status);
+  }
+
+  applyFilter(filterValue: string) {
+    if (!filterValue) {
+      this.dataSource.filter = ''; // Remove o filtro se não houver seleção
+      return;
+    }
+
+    this.dataSource.filterPredicate = (data: UsuariosFullModel, filter: string) => {
+      return data?.turmaAluno?.descricao.trim().toLowerCase() === filter.trim().toLowerCase();
+    };
+
+    this.dataSource.filter = filterValue;
+  }
+  OnPageChange(event: PageEvent){
+    const startIndex = event.pageIndex * event.pageSize;
+    let endIndex = startIndex + event.pageSize;
+    if(endIndex > this.usuarios.length){
+      endIndex = this.usuarios.length
+    }
+    this.pageSlice = this.usuarios.slice(startIndex, endIndex)
   }
 }

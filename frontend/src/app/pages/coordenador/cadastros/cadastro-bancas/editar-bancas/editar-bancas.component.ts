@@ -38,7 +38,7 @@ export class EditarBancasComponent implements OnInit {
       bancaConfirmada: [false, Validators.required],
       dataDefesa: [''],
       horaDefesa: ['', Validators.required],
-      status: [false]
+      status: []
     });
 
     if (this.data?.data) {
@@ -108,7 +108,7 @@ export class EditarBancasComponent implements OnInit {
       if (this.bancaAtual) {
         await this.bancaService.AtualizarBanca(bancaModel).then(result => {
           this.toastService.show("success", "Banca atualizada com sucesso!");
-          window.location.reload();
+          //window.location.reload();
         }, fail => {
           this.toastService.show("fail", "Erro ao atualizar banca! " + fail.error);
         });

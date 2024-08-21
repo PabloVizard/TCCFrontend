@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom, catchError } from 'rxjs';
 import { BaseService } from './base.service';
+import { OrientacoesModelApi } from '../models/orientacoes-model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +50,12 @@ export class OrientacoesService extends BaseService {
   async AtualizarInformacoesPOC2(orientacaoId: number, statusAprovacao: number, anexoResumoTrabalho: string, localDivulgacao: string): Promise<any> {
     return await lastValueFrom(this.http
       .put(this.urlApi + `orientacoes/AtualizarInformacoesPOC2?orientacaoid=${orientacaoId}&status=${statusAprovacao}&anexoResumoTrabalho=${anexoResumoTrabalho}&localDivulgacao=${localDivulgacao}`, null, super.ObterAuthHeaderJson())
+      .pipe(catchError(super.serviceError)));
+  }
+
+  async Atualizar(orientacao: OrientacoesModelApi): Promise<any> {
+    return await lastValueFrom(this.http
+      .put(this.urlApi + `orientacoes/Atualizar`, orientacao, super.ObterAuthHeaderJson())
       .pipe(catchError(super.serviceError)));
   }
 

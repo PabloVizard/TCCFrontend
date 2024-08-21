@@ -1,0 +1,64 @@
+<div class="app-container">
+  <mat-card class="app-card">
+    <mat-card-header>
+      <mat-card-title>Balancear Bancas</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <ng-container *ngIf="sugestoes.length > 0; else semInformacoes">
+        <mat-table [dataSource]="sugestoes" class="mat-elevation-z8">
+          <!-- Checkbox Column -->
+          <ng-container matColumnDef="select">
+            <mat-header-cell *matHeaderCellDef class="checkbox-column">
+              <mat-checkbox
+                (change)="$event ? masterToggle() : null"
+                [checked]="isAllSelected()"
+                [indeterminate]="isSomeSelected()">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let banca" class="checkbox-column">
+              <mat-checkbox (click)="$event.stopPropagation()" (change)="toggleSelection(banca)" [checked]="isSelected(banca)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+
+          <!-- Other Columns -->
+          <ng-container matColumnDef="projeto">
+            <mat-header-cell *matHeaderCellDef class="coluna-projeto"> Projeto</mat-header-cell>
+            <mat-cell *matCellDef="let banca" class="coluna-projeto">{{ banca.projeto?.nome || ' - ' }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="semestre">
+            <mat-header-cell *matHeaderCellDef>Semestre</mat-header-cell>
+            <mat-cell *matCellDef="let banca">{{ banca.ano }}/{{ banca.semestre }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="alunoOrientado">
+            <mat-header-cell *matHeaderCellDef>Aluno Orientado</mat-header-cell>
+            <mat-cell *matCellDef="let banca">{{ banca.alunoOrientado.nomeCompleto }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="professorOrientador">
+            <mat-header-cell *matHeaderCellDef>Professor Orientador</mat-header-cell>
+            <mat-cell *matCellDef="let banca">{{ banca.professorOrientador.nomeCompleto }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="avaliador01">
+            <mat-header-cell *matHeaderCellDef>Avaliador 01</mat-header-cell>
+            <mat-cell *matCellDef="let banca">{{ banca.avaliador01.nomeCompleto }}</mat-cell>
+          </ng-container>
+
+          <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        </mat-table>
+
+        <div class="button-position-end">
+          <button mat-raised-button color="primary" (click)="confirmarSugestoes()">Confirmar Sugestões</button>
+        </div>
+        
+      </ng-container>
+      <ng-template #semInformacoes>
+        <p>Não há bancas não confirmadas para balancear.</p>
+      </ng-template>
+    </mat-card-content>
+  </mat-card>
+</div>

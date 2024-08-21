@@ -6,7 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { MatSort } from '@angular/material/sort';
 import { BancasFullModel } from 'src/app/core/models/bancas-model';
-import {EditarBancasComponent} from './editar-bancas/editar-bancas.component';
+import { EditarBancasComponent } from './editar-bancas/editar-bancas.component';
+import { GerarDocumentoComponent } from './gerar-documento/gerar-documento.component';
+import { BalancearBancasComponent } from './balancear-bancas/balancear-bancas.component';
 
 @Component({
   selector: 'app-cadastro-bancas',
@@ -14,10 +16,11 @@ import {EditarBancasComponent} from './editar-bancas/editar-bancas.component';
   styleUrls: ['./cadastro-bancas.component.scss']
 })
 export class CadastroBancasComponent implements OnInit {
-  bancas: Array<BancasFullModel> = new Array<BancasFullModel>();
-  dataSource: any;
-  displayedColumns: string[] = ['projeto','semestre', 'professorOrientador', 'alunoOrientado', 'avaliador01', 'avaliador02', 'bancaConfirmada', 'dataDefesa', 'status', 'actions'];
-
+  bancas: Array<BancasFullModel> = [];
+  dataSource: MatTableDataSource<BancasFullModel> = new MatTableDataSource<BancasFullModel>();
+  displayedColumns: string[] = ['projeto', 'semestre', 'alunoOrientado', 'professorOrientador', 'avaliador01', 'avaliador02', 'bancaConfirmada', 'dataDefesa', 'status', 'actions'];
+  anoSemestreOptions: Array<{ label: string, value: string }> = [];
+  
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private bancasService: BancasService,
@@ -27,16 +30,58 @@ export class CadastroBancasComponent implements OnInit {
 
   async ngOnInit() {
     await this.obterBancas();
-    this.dataSource = new MatTableDataSource(this.bancas);
     this.dataSource.sort = this.sort;
   }
 
   async obterBancas() {
-    await this.bancasService.ObterTodasBancas().then(result => {
+    try {
+      const result = await this.bancasService.ObterTodasBancas();
       this.bancas = result;
-    }, fail => {
-      this.toastService.show("fail", "Falha ao obter bancas! " + fail.error);
+      this.dataSource.data = this.bancas;
+      this.populateAnoSemestreOptions();
+    } catch (error) {
+      this.toastService.show("fail", "Falha ao obter bancas! " + error);
+    }
+  }
+
+  balancearBancas() {
+    this.dialog.open(BalancearBancasComponent, {
+      width: '1024px', 
+      height: '700px',
+      data: {} // Envie qualquer dado necessário para o componente, se houver
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.obterBancas(); // Recarrega as bancas após a confirmação
+      }
     });
+  }
+  
+
+  populateAnoSemestreOptions() {
+    const uniqueAnoSemestre = new Set<string>();
+    this.bancas.forEach(banca => {
+      const anoSemestre = `${banca.ano}/${banca.semestre}`;
+      uniqueAnoSemestre.add(anoSemestre);
+    });
+
+    this.anoSemestreOptions = [
+      { label: 'Todos', value: '' }, // Adiciona a opção de "Todos"
+      ...Array.from(uniqueAnoSemestre).map(anoSemestre => ({
+        label: anoSemestre,
+        value: anoSemestre.toLowerCase()
+      }))
+    ];
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filterPredicate = (data: BancasFullModel, filter: string) => {
+      if (filter === '') {
+        return true; // Mostra todas as bancas se o filtro for vazio
+      }
+      const semestre = `${data.ano}/${data.semestre}`;
+      return semestre.toLowerCase().includes(filter);
+    };
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   editarBanca(banca: BancasFullModel) {
@@ -47,26 +92,26 @@ export class CadastroBancasComponent implements OnInit {
     });
   }
 
-  balancearBancas() {
-    this.dialog.open(EditarBancasComponent, {
-      width: '1024px', 
-      height: '700px',
-      data: {}
+
+  gerarDocumento(banca: BancasFullModel) {
+    this.dialog.open(GerarDocumentoComponent, {
+      width: '800px', 
+      data: { banca }
     });
   }
 
   async excluirBanca(id: number) {
     if (confirm("Deseja realmente remover a banca selecionada?")) {
-      await this.bancasService.ExcluirBanca(id).then(result => {
+      try {
+        await this.bancasService.ExcluirBanca(id);
         this.toastService.show("success", "Banca excluída com sucesso! ");
-      }, fail => {
-        this.toastService.show("fail", "Falha ao excluir banca! " + fail.error);
-      });
+      } catch (error) {
+        this.toastService.show("fail", "Falha ao excluir banca! " + error);
+      }
+      await this.obterBancas();
     }
-    await this.obterBancas();
-    this.dataSource = new MatTableDataSource(this.bancas);
-    this.dataSource.sort = this.sort;
   }
+
   formatarData(data: any) {
     if (data == null) {
       return ' - ';
@@ -85,5 +130,4 @@ export class CadastroBancasComponent implements OnInit {
   
     return `${dataFormatada} ${horaFormatada}`;
   }
-  
 }

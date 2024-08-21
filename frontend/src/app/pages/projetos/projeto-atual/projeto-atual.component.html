@@ -24,11 +24,14 @@
                             <mat-label>Nome</mat-label>
                             <input matInput [(ngModel)]="orientacao.projeto.nome" name="nome" readonly>
                         </mat-form-field>
+                    </div>
+                    <div class="form-container">
                         <mat-form-field class="form-row">
                             <mat-label>Status</mat-label>
                             <input matInput [(ngModel)]="statusAprovacao" name="status" readonly>
                         </mat-form-field>
                     </div>
+                    
                     
         <ng-container *ngIf="banca != null">
             <mat-card-header>
@@ -97,6 +100,9 @@
             </ng-template>
         </mat-card-content>
         <div class="button-position-end" *ngIf="orientacao">
+            <button mat-raised-button color="primary" *ngIf="orientacao.turma?.nPoc == 1" disabled="orientacao?.anexoTao" (click)="openEnviarTaoDialog()">
+                Enviar TAO
+            </button>
             <button mat-raised-button color="primary" (click)="enviarEmail(orientacao.professorOrientador.email, orientacao.projeto.nome)">
                 Entrar em Contato
             </button>

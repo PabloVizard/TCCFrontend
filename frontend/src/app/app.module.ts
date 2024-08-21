@@ -71,7 +71,11 @@ import { CadastroAulasComponent } from './pages/coordenador/cadastros/cadastro-a
 import { EditarAulasComponent } from './pages/coordenador/cadastros/cadastro-aulas/editar-aulas/editar-aulas.component';
 import { CadastroBancasComponent } from './pages/coordenador/cadastros/cadastro-bancas/cadastro-bancas.component';
 import {EditarBancasComponent} from './pages/coordenador/cadastros/cadastro-bancas/editar-bancas/editar-bancas.component';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { GerarDocumentoComponent } from './pages/coordenador/cadastros/cadastro-bancas/gerar-documento/gerar-documento.component';
+import { BalancearBancasComponent } from './pages/coordenador/cadastros/cadastro-bancas/balancear-bancas/balancear-bancas.component';
+import { EnviarTaoDialogComponent } from './pages/projetos/projeto-atual/enviar-tao-dialog/enviar-tao-dialog.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -115,6 +119,10 @@ import {EditarBancasComponent} from './pages/coordenador/cadastros/cadastro-banc
     EditarAulasComponent,
     CadastroBancasComponent,
     EditarBancasComponent,
+    GerarDocumentoComponent,
+    BalancearBancasComponent,
+    EnviarTaoDialogComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -146,14 +154,17 @@ import {EditarBancasComponent} from './pages/coordenador/cadastros/cadastro-banc
     MatDatepickerModule,
     NgxMaterialTimepickerModule,
     NgxMaskDirective,
-    MatSortModule
+    MatSortModule,
+    MatPaginatorModule,
+    MatCheckboxModule
+    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpLoadingInterceptor, multi: true },
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     provideNgxMask(),
     AuthService,
-    provideEnvironmentNgxMask()
+    provideEnvironmentNgxMask(),
   ],
   bootstrap: [AppComponent]
 })

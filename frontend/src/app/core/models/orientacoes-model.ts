@@ -16,3 +16,15 @@ export class OrientacoesModel {
     anexoTAO?: string;
     localDivulgacao?: string;
   }
+
+  export class OrientacoesModelApi {
+    id!: number;
+    idProfessorOrientador!: number;
+    idAlunoOrientado!: number;
+    idProjeto!: number;
+    idTurma!: number;
+    statusAprovacao!: number;
+    anexoResumoTrabalho?: string;
+    anexoTAO?: string;
+    localDivulgacao?: string;
+  }

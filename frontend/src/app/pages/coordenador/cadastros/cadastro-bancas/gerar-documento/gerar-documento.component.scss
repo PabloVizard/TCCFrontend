@@ -10,21 +10,8 @@
   .mat-card-content {
     overflow-wrap: break-word; /* Quebra palavras longas para evitar overflow */
   }
+  .documento-texto {
+    overflow-wrap: break-word; /* Quebra palavras longas para ajustar ao contêiner */
+    white-space: pre-wrap; /* Mantém quebras de linha e espaços no texto */
+  }
   
-  .coluna-semestre {
-    width: 80px !important;
-    min-width: 80px !important;
-    max-width: 80px !important;
-  }
-
-  .coluna-projeto {
-    width: 300px !important;
-    min-width: 300px !important;
-    max-width: 300px !important;
-  }
-
-  .coluna-acoes {
-    width: 200px !important;
-    min-width: 200px !important;
-    max-width: 200px !important;
-  }

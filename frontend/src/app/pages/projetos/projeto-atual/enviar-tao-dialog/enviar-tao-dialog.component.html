@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Enviar TAO</h1>
+<div mat-dialog-content>
+  <p>Data de Envio: {{ dataEnvioFormatada }}</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Link do TAO</mat-label>
+    <input matInput [(ngModel)]="linkTao">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-raised-button color="primary" (click)="onSave()">Salvar</button>
+</div>
