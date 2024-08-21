@@ -79,51 +79,59 @@ export class EditarAulasComponent implements OnInit {
   }
 
   async salvarAula() {
-    console.log(this.aulaForm)
     if (this.aulaForm.valid) {
       const formValue = this.aulaForm.value;
-
-      const dataLimite: Date = formValue.dataLimite;
-      const horaLimite: string = formValue.horaLimite;
-      if (dataLimite && horaLimite) {
-        const formattedDate = this.formatDateToISO(new Date(dataLimite));
-        const dataHoraStr = `${formattedDate}T${horaLimite}`;
+  
+      // Garantindo que dataAula e horaAula estejam presentes
+      const dataAula: Date = new Date(formValue.dataAula);
+      const horaAula: string = formValue.horaAula;
+  
+      if (dataAula && horaAula) {
+        // Formatar a data e hora para o formato ISO 8601
+        const formattedDate = this.formatDateToISO(dataAula);
+        const dataHoraStr = `${formattedDate}T${horaAula}`;
         const dataHora = new Date(dataHoraStr);
-
+  
         if (!isNaN(dataHora.getTime())) {
-          formValue.dataLimite = dataHora.toISOString();
-
-      const aulaModel: AulasModelApi = {
-        id: this.aulaAtual ? this.aulaAtual.id : 0,
-        descricao: formValue.descricao,
-        idProfessor: formValue.professor,
-        idTurma: formValue.turma,
-        dataAula: formValue.dataLimite,
-        local: formValue.local,
-        link: formValue.link
-      };
-
-      if (this.aulaAtual) {
-        await this.aulasService.AtualizarAula(aulaModel).then(result => {
-          this.toastService.show("success", "Aula atualizada com sucesso!");
-          window.location.reload();
-        }, fail => {
-          this.toastService.show("fail", "Erro ao atualizar aula! " + fail.error);
-        });
+          // Criar o objeto com os dados formatados
+          const aulaModel: AulasModelApi = {
+            id: this.aulaAtual ? this.aulaAtual.id : 0,
+            descricao: formValue.descricao,
+            idProfessor: formValue.professor,
+            idTurma: formValue.turma,
+            dataAula: dataHora, // Usar a data e hora combinadas em formato ISO
+            local: formValue.local,
+            link: formValue.link
+          };
+  
+          if (this.aulaAtual) {
+            // Atualizar aula existente
+            await this.aulasService.AtualizarAula(aulaModel).then(result => {
+              this.toastService.show("success", "Aula atualizada com sucesso!");
+              // Atualizar a lista ou estado conforme necessário
+            }, fail => {
+              this.toastService.show("fail", "Erro ao atualizar aula! " + fail.error);
+            });
+          } else {
+            // Cadastrar nova aula
+            await this.aulasService.CadastrarNovaAula(aulaModel).then(result => {
+              this.toastService.show("success", "Aula cadastrada com sucesso!");
+              // Atualizar a lista ou estado conforme necessário
+            }, fail => {
+              this.toastService.show("fail", "Erro ao cadastrar aula! " + fail.error);
+            });
+          }
+        } else {
+          this.toastService.show("fail", "Data e hora inválidos!");
+        }
       } else {
-        await this.aulasService.CadastrarNovaAula(aulaModel).then(result => {
-          this.toastService.show("success", "Aula cadastrada com sucesso!");
-          window.location.reload();
-        }, fail => {
-          this.toastService.show("fail", "Erro ao cadastrar aula! " + fail.error);
-        });
+        this.toastService.show("fail", "Data ou hora não informada!");
       }
     } else {
-      this.toastService.show("fail", "Erro ao salvar aula!");
-    }    
+      this.toastService.show("fail", "Preencha todos os campos obrigatórios!");
+    }
   }
-}
-}
+  
 
   formatDateToISO(date: Date): string {
     const year = date.getFullYear();

@@ -52,8 +52,8 @@
   
             <ng-container matColumnDef="statusConfirmada">
               <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
-              <mat-cell *matCellDef="let banca" [ngClass]="banca.statusConfirmada ? 'confirmed-status' : 'unconfirmed-status'">
-                {{ banca.statusConfirmada ? 'Confirmada' : 'Não Confirmada' }}
+              <mat-cell *matCellDef="let banca" [ngClass]="banca.bancaConfirmada ? 'confirmed-status' : 'unconfirmed-status'">
+                {{ banca.bancaConfirmada ? 'Confirmada' : 'Não Confirmada' }}
               </mat-cell>
             </ng-container>
   
