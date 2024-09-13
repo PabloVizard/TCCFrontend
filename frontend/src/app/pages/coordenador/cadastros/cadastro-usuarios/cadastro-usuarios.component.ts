@@ -11,6 +11,8 @@ import { ToastService } from 'src/app/core/services/toast.service';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { TurmaService } from 'src/app/core/services/turma.service';
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-cadastro-usuarios',
@@ -22,7 +24,7 @@ export class CadastroUsuariosComponent implements OnInit {
   turmas: Array<any> = [];
   selectedTurma: string = '';
   dataSource: MatTableDataSource<UsuariosFullModel> = new MatTableDataSource();
-  displayedColumns: string[] = ['nomeCompleto', 'cpf', 'matricula', 'turma', 'projeto', 'orientador', 'status', 'cadastrado', 'actions'];
+  displayedColumns: string[] = ['nomeCompleto', 'cpf', 'matricula', 'turma', 'faltas', 'projeto', 'orientador', 'status', 'cadastrado', 'actions'];
   pageSlice: Array<UsuariosFullModel> = new Array<UsuariosFullModel>();
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -122,5 +124,26 @@ async ngOnInit() {
       endIndex = this.usuarios.length
     }
     this.pageSlice = this.usuarios.slice(startIndex, endIndex)
+  }
+  gerarRelatorioDeFaltas() {
+    const dados = this.usuarios.map(usuario => ({
+      Nome: usuario?.usuario?.nomeCompleto || ' - ',
+      Matricula: usuario?.usuario?.matricula || usuario?.preRegistro?.matricula || ' - ',
+      Turma: usuario?.turmaAluno?.descricao || ' - ',
+      Faltas: usuario?.faltas?.length || 0
+    }));
+
+    // Cria a planilha
+    const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(dados);
+    const workbook: XLSX.WorkBook = { Sheets: { 'Relatorio de Faltas': worksheet }, SheetNames: ['Relatorio de Faltas'] };
+
+    // Gera o arquivo Excel e salva
+    const excelBuffer: any = XLSX.write(workbook, { bookType: 'xlsx', type: 'array' });
+    this.salvarArquivoExcel(excelBuffer, 'Relatorio_Faltas');
+  }
+
+  salvarArquivoExcel(buffer: any, nomeArquivo: string) {
+    const data: Blob = new Blob([buffer], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    saveAs(data, nomeArquivo + '.xlsx');
   }
 }

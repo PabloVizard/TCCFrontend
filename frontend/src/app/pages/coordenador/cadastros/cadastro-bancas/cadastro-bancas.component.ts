@@ -9,6 +9,9 @@ import { BancasFullModel } from 'src/app/core/models/bancas-model';
 import { EditarBancasComponent } from './editar-bancas/editar-bancas.component';
 import { GerarDocumentoComponent } from './gerar-documento/gerar-documento.component';
 import { BalancearBancasComponent } from './balancear-bancas/balancear-bancas.component';
+import { Document, Paragraph, TextRun, Packer } from 'docx';
+import { BancaDefesaComponent } from '../../relatorios/banca-defesa/banca-defesa.component';
+
 
 @Component({
   selector: 'app-cadastro-bancas',
@@ -18,7 +21,7 @@ import { BalancearBancasComponent } from './balancear-bancas/balancear-bancas.co
 export class CadastroBancasComponent implements OnInit {
   bancas: Array<BancasFullModel> = [];
   dataSource: MatTableDataSource<BancasFullModel> = new MatTableDataSource<BancasFullModel>();
-  displayedColumns: string[] = ['projeto', 'semestre', 'alunoOrientado', 'professorOrientador', 'avaliador01', 'avaliador02', 'bancaConfirmada', 'dataDefesa', 'status', 'actions'];
+  displayedColumns: string[] = ['numero','projeto', 'semestre', 'alunoOrientado', 'professorOrientador', 'avaliador01', 'avaliador02', 'bancaConfirmada', 'dataDefesa', 'localDefesa', 'status', 'actions'];
   anoSemestreOptions: Array<{ label: string, value: string }> = [];
   
   @ViewChild(MatSort) sort!: MatSort;
@@ -26,7 +29,7 @@ export class CadastroBancasComponent implements OnInit {
   constructor(private bancasService: BancasService,
               private router: Router,
               private dialog: MatDialog,
-              private toastService: ToastService) {}
+              private toastService: ToastService,) {}
 
   async ngOnInit() {
     await this.obterBancas();
@@ -112,22 +115,51 @@ export class CadastroBancasComponent implements OnInit {
     }
   }
 
-  formatarData(data: any) {
+  formatarData(data: any): string {
     if (data == null) {
       return ' - ';
     }
+    const dataObj = new Date(data);
     const dataFormatada = new Intl.DateTimeFormat('pt-BR', {
       day: '2-digit',
       month: '2-digit',
-      year: 'numeric',
-    }).format(new Date(data));
-  
-    const horaFormatada = new Intl.DateTimeFormat('pt-BR', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    }).format(new Date(data));
-  
-    return `${dataFormatada} ${horaFormatada}`;
+      year: '2-digit',
+    }).format(dataObj);
+    
+    return dataFormatada;
   }
+  
+  formatarHora(data: any): string {
+    if (data == null) {
+      return ' - ';
+    }
+    const dataObj = new Date(data);
+    const horas = dataObj.getHours().toString().padStart(2, '0');
+    const minutos = dataObj.getMinutes().toString().padStart(2, '0');
+    return `${horas}h`;
+  }
+  
+  gerarRelatorio(): void {
+    const documentos = this.bancas
+      .filter(banca => banca.ano === 2024 && banca.semestre === 1) // Filtra por semestre atual
+      .map((banca) => {
+        const alunoNome = banca.alunoOrientado?.nomeCompleto.toUpperCase() || ' - ';
+        const professorNome = banca.professorOrientador?.nomeCompleto || ' - ';
+        const projetoNome = banca.projeto?.nome || ' - ';
+        const localDefesa = banca.localDefesa || ' - ';
+  
+        return `${banca.numeroDefesa} – O Trabalho de Conclusão de Curso do(a) aluno(a) ${alunoNome},  Matrícula ${banca.alunoOrientado?.matricula}, intitulado "${projetoNome}", sob orientação do(a) professor(a) ${professorNome}, será apresentado no dia ${this.formatarData(banca.dataDefesa)}  às ${this.formatarHora(banca.dataDefesa)} no(a) ${localDefesa}.`;
+      }).join('\n\n');
+  
+    const textoCompleto = `${documentos}`;
+    this.openDialog(textoCompleto);
+  }
+  
+  openDialog(texto: string): void {
+    this.dialog.open(BancaDefesaComponent, {
+      width: '850px',
+      data: { texto }
+    });
+  }
+  
 }

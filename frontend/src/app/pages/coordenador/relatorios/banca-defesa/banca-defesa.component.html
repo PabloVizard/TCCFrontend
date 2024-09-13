@@ -1,19 +1,14 @@
-<div>
-    <button (click)="gerarPDF()">Gerar PDF</button>
-  </div>
-  
-<div #content>
-    <p style="padding-left: 214pt;text-indent: 0pt;text-align: left;">
-      Ofício nº {{ numeroOficio }}/{{ ano }}/IEF
-    </p>
-    <p style="padding-left: 352pt;text-indent: 0pt;text-align: left;">
-      Florestal, {{ dataAtual }}
-    </p>
-    <p style="padding-left: 82pt;text-indent: 0pt;text-align: left;">
-      Senhor {{ destinatario }},
-    </p>
-    <p style="padding-left: 11pt;text-indent: 70pt;text-align: justify;">
-      Solicito, por gentileza, o ato de nomeação da banca do Trabalho de Conclusão de Curso de {{ nomeAluno }} (matrícula {{ matriculaAluno }}), estudante do Curso de Ciência da Computação, intitulado "{{ tituloProjeto }}" na área {{ area }}. A banca foi realizada no dia {{ dataDefesa }}, sendo presidida pelo professor orientador {{ nomeOrientador }} (matrícula {{ matriculaOrientador }}) e composta pela professora {{ nomeProfessora }} (matrícula {{ matriculaProfessora }}).
-    </p>
-  </div>
-
+<mat-toolbar>
+    <div>
+        <span>Relatório de Bancas</span>
+    </div>
+    <div class="close-button">
+        <button  mat-icon-button mat-dialog-close class="ml-auto" aria-label="Fechar">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    
+</mat-toolbar>
+<div mat-dialog-content class="dialog-content">
+  <pre class="dialog-texto">{{ data.texto }}</pre>
+</div>

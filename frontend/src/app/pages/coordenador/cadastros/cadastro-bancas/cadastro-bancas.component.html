@@ -5,6 +5,7 @@
     </mat-card-header>
     <div class="button-position-end">
       <button mat-raised-button color="primary" (click)="balancearBancas()">Balancear Bancas</button>
+      <button mat-raised-button color="accent" (click)="gerarRelatorio()">Gerar Relatório de Bancas</button>
     </div>
 
     <mat-form-field appearance="fill">
@@ -19,6 +20,10 @@
     <mat-card-content>
       <ng-container *ngIf="bancas.length > 0; else semInformacoes">
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+          <ng-container matColumnDef="numero">
+            <mat-header-cell *matHeaderCellDef mat-sort-header >Número</mat-header-cell>
+            <mat-cell *matCellDef="let banca">{{ banca?.numeroDefesa || ' - ' }}</mat-cell>
+          </ng-container>
           <ng-container matColumnDef="projeto">
             <mat-header-cell *matHeaderCellDef mat-sort-header class="coluna-projeto">Projeto</mat-header-cell>
             <mat-cell *matCellDef="let banca" class="coluna-projeto">{{ banca.projeto?.nome || ' - ' }}</mat-cell>
@@ -52,6 +57,10 @@
           <ng-container matColumnDef="dataDefesa">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Data da Defesa</mat-header-cell>
             <mat-cell *matCellDef="let banca">{{ formatarData(banca?.dataDefesa) || ' - ' }}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="localDefesa">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Local da Defesa</mat-header-cell>
+            <mat-cell *matCellDef="let banca">{{ banca?.localDefesa || ' - ' }}</mat-cell>
           </ng-container>
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>

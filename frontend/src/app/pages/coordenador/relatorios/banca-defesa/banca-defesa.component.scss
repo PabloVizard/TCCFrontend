@@ -1,0 +1,20 @@
+/* Estilo para o conteúdo do modal */
+.mat-dialog-content {
+    width: 100%; /* Largura total do conteúdo do modal */
+    max-width: 100%; /* Largura máxima do conteúdo do modal */
+    overflow: hidden; /* Evita overflow horizontal */
+  }
+  
+  /* Estilo para o texto dentro do modal */
+  .dialog-texto {
+    text-align: justify; /* Justifica o texto */
+    margin: 0; /* Remove margens extras */
+    padding: 0; /* Remove padding extra */
+    word-break: break-word; /* Quebra palavras longas para evitar overflow */
+    overflow-wrap: break-word; /* Garante que o texto quebre se for muito longo */
+    white-space: pre-wrap; /* Preserva espaços e quebras de linha, mas permite quebra de linha automática */
+  }
+  .close-button {
+    width: 100%;
+    text-align: end;
+  }

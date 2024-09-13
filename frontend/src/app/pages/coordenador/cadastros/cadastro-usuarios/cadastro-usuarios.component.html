@@ -5,6 +5,7 @@
     </mat-card-header>
     <div class="button-position-end">
       <button mat-raised-button color="primary" (click)="adicionarAluno()">Adicionar Aluno</button>
+      <button mat-raised-button color="accent" (click)="gerarRelatorioDeFaltas()">Relatório de Faltas</button>
     </div>
 
     <!-- Filtro de Turmas -->
@@ -39,6 +40,11 @@
           <ng-container matColumnDef="turma">
             <mat-header-cell *matHeaderCellDef mat-sort-header>Turma</mat-header-cell>
             <mat-cell *matCellDef="let usuario">{{ usuario?.turmaAluno?.descricao || ' - ' }}</mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="faltas">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Faltas</mat-header-cell>
+            <mat-cell *matCellDef="let usuario">{{ usuario?.faltas?.length || ' - ' }}</mat-cell>
           </ng-container>
           
           <ng-container matColumnDef="projeto">

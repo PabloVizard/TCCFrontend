@@ -13,6 +13,8 @@ export class BancasModel{
     bancaConfirmada!: boolean;
     dataDefesa?: Date;
     status?: boolean;
+    numeroDefesa?: boolean;
+    localDefesa?: string;
 }
 
 export class BancasFullModel{
@@ -27,4 +29,6 @@ export class BancasFullModel{
     bancaConfirmada!: boolean;
     dataDefesa?: Date;
     status?: boolean;
+    numeroDefesa?: boolean;
+    localDefesa?: string;
 }

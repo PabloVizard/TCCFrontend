@@ -38,8 +38,10 @@ export class EditarBancasComponent implements OnInit {
       bancaConfirmada: [false, Validators.required],
       dataDefesa: [''],
       horaDefesa: ['', Validators.required],
-      status: []
+      status: [],
+      localDefesa: ['']  // Novo campo
     });
+    
 
     if (this.data?.data) {
       this.bancaAtual = this.data.data;
@@ -58,7 +60,8 @@ export class EditarBancasComponent implements OnInit {
         dataDefesa: dataDefesa ? dataDefesa.toISOString().split('T')[0] : '',
         // Formata a hora para o formato HH:mm
         horaDefesa: dataDefesa ? dataDefesa.toTimeString().substring(0, 5) : '',
-        status: this.bancaAtual.status
+        status: this.bancaAtual.status,
+        localDefesa: this.bancaAtual.localDefesa || '' // Novo campo
       });
     }
   }
@@ -102,7 +105,8 @@ export class EditarBancasComponent implements OnInit {
         semestre: this.bancaAtual.semestre,
         bancaConfirmada: formValue.bancaConfirmada,
         dataDefesa: dataHoraDefesa ? new Date(dataHoraDefesa) : undefined,
-        status: formValue.status
+        status: formValue.status,
+        localDefesa: formValue.localDefesa // Novo campo
       };
   
       if (this.bancaAtual) {

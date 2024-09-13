@@ -31,7 +31,7 @@ export interface UsuariosFullModel {
     projetos?: ProjetoModel;
     orientacoes?: OrientacoesModel;
     bancas?: BancasModel;
-    faltas?: FaltaModel;
+    faltas?: Array<FaltaModel>;
     tarefaAluno?: TarefaAlunoModel;
     turmaAluno?: TurmaModel;
   }
